@@ -1,0 +1,2 @@
+#Will stop the auto-generated __pycache__ files from being added to git
+__pycache__
