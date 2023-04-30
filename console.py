@@ -22,3 +22,10 @@ country_cuba = Country("Cuba")
 
 #t_c_repo.save(traveller_marco, country_iceland, '2002-02-02')
 #t_c_repo.save(traveller_neil, country_cuba, '2005-05-05') 
+
+all_countries = country_repo.select_all()
+print(f'ALL COUNTRIES = {all_countries}')
+
+returned_country = country_repo.select_one(3)
+
+print(f'SINGLE COUNTRY = {returned_country}')
