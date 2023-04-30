@@ -6,7 +6,7 @@ from models.country import Country
 from models.traveller import Traveller
 
 def save (input_traveller: Traveller, input_country: Country, input_date):
-    sql = 'INSERT INTO travellers_countries (traveller_id, country_id, date_visited) VALUES (%s, %s, %s)'
+    sql = 'INSERT INTO holidays (traveller_id, country_id, date_visited) VALUES (%s, %s, %s)'
     values = (input_traveller.id, input_country.id, input_date)
     run_sql(sql, values)
     return #print('SAVE SUCCESSFUL')

@@ -1,4 +1,4 @@
-# w4_project
+# Project - Travel Tracker
 run the following command on the terminal to create the sql database.
 
     createdb travel_tracker

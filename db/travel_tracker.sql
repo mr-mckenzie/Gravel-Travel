@@ -1,6 +1,6 @@
 -- Set up tables, firstly by dropping any old tables that exist.
--- travellers_countries is a join table so it must be dropped first as it depends on the other tables.
-DROP TABLE IF EXISTS travellers_countries;
+-- holidays is a join table so it must be dropped first as it depends on the other tables.
+DROP TABLE IF EXISTS holidays;
 DROP TABLE IF EXISTS travellers;
 DROP TABLE IF EXISTS countries;
 
@@ -19,7 +19,7 @@ CREATE TABLE countries (
 
 -- a join table to link travellers with countries visited
 -- note that traveller_id and country_id must be NOT NULL because this stops instances of Traveller and Country classes without ids from being saved
-CREATE TABLE travellers_countries (
+CREATE TABLE holidays (
     id              SERIAL PRIMARY KEY NOT NULL,
     traveller_id    INT REFERENCES travellers(id) NOT NULL,
     country_id      INT REFERENCES countries(id) NOT NULL,
@@ -53,14 +53,14 @@ INSERT INTO countries (name)
 VALUES ('Ecuador');
 
 -- add table rows linking travellers to countries
-INSERT INTO travellers_countries (traveller_id, country_id, date_visited)
+INSERT INTO holidays (traveller_id, country_id, date_visited)
 VALUES (1, 2, '2015-09-07');
 
-INSERT INTO travellers_countries (traveller_id, country_id, date_visited)
+INSERT INTO holidays (traveller_id, country_id, date_visited)
 VALUES (1, 4, '2023-03-27');
 
-INSERT INTO travellers_countries (traveller_id, country_id, date_visited)
+INSERT INTO holidays (traveller_id, country_id, date_visited)
 VALUES (2, 3, '2004-12-08');
 
-INSERT INTO travellers_countries (traveller_id, country_id, date_visited)
+INSERT INTO holidays (traveller_id, country_id, date_visited)
 VALUES (2, 2, '2004-07-14');
