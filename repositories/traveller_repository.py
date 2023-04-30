@@ -1,6 +1,6 @@
 # import run_sql function
 from db.run_sql import run_sql
-# import traveller class
+# import Traveller class
 from models.traveller import Traveller
 
 def save (traveller: Traveller):

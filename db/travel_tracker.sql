@@ -18,10 +18,11 @@ CREATE TABLE countries (
 );
 
 -- a join table to link travellers with countries visited
+-- note that traveller_id and country_id must be NOT NULL because this stops instances of Traveller and Country classes without ids from being saved
 CREATE TABLE travellers_countries (
     id              SERIAL PRIMARY KEY NOT NULL,
-    traveller_id    INT REFERENCES travellers(id),
-    country_id      INT REFERENCES countries(id),
+    traveller_id    INT REFERENCES travellers(id) NOT NULL,
+    country_id      INT REFERENCES countries(id) NOT NULL,
     date_visited    DATE
 );
 
