@@ -10,7 +10,7 @@ def run_sql(sql, values = None):
 
     try:
         #creates a new connection to 'travel_tracker' database
-        conn = psycopg2.connect("dbname = 'travel_tracker")
+        conn = psycopg2.connect(database = 'travel_tracker')
         #creates a cursor
         cur = conn.cursor(cursor_factory=extras.DictCursor)
         #execute SQL command/query with the cursor
