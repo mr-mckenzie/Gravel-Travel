@@ -26,6 +26,11 @@ country_cuba = Country("Cuba")
 all_countries = country_repo.select_all()
 print(f'ALL COUNTRIES = {all_countries}')
 
-returned_country = country_repo.select_one(3)
+one_country = country_repo.select_one(3)
+print(f'SINGLE COUNTRY = {one_country}')
 
-print(f'SINGLE COUNTRY = {returned_country}')
+all_travellers = traveller_repo.select_all()
+print(f'ALL TRAVELLERS = {all_travellers}')
+
+one_traveller = traveller_repo.select_one(2)
+print(f'SINGLE TRAVELLER = {one_traveller}')
