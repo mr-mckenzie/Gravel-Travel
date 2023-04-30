@@ -10,3 +10,15 @@ def save (input_traveller: Traveller, input_country: Country, input_date):
     values = (input_traveller.id, input_country.id, input_date)
     run_sql(sql, values)
     return #print('SAVE SUCCESSFUL')
+
+def select_all():
+    sql = 'SELECT * FROM holidays'
+    all_holidays = run_sql(sql)
+    #for row in all_holidays:
+    #    print(row)
+    return all_holidays
+
+def select_one(input_holiday_id):
+    sql = 'SELECT * FROM holidays WHERE id = %s'
+    value = str(input_holiday_id)
+    return run_sql(sql, value)[0]

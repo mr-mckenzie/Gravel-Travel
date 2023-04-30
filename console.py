@@ -34,3 +34,9 @@ print(f'ALL TRAVELLERS = {all_travellers}')
 
 one_traveller = traveller_repo.select_one(2)
 print(f'SINGLE TRAVELLER = {one_traveller}')
+
+all_holidays = holiday_repo.select_all()
+print(f'ALL HOLIDAYS = {all_holidays}')
+
+one_holiday = holiday_repo.select_one(4)
+print(f'SINGLE HOLIDAY = {one_holiday}')
