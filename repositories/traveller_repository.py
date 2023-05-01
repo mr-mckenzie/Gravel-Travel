@@ -14,12 +14,16 @@ def save (traveller: Traveller):
 def select_all():
     sql = 'SELECT * FROM travellers'
     all_travellers = run_sql(sql)
-    #for row in all_travellers:
+    list_of_travellers = []
+    for row in all_travellers:
+        list_of_travellers.append(Traveller(row[1], row[2], row[0]))
     #    print(row)
-    return all_travellers
+    return list_of_travellers
 
 def select_one(input_traveller_id):
     sql = 'SELECT * FROM travellers WHERE id = %s'
     value = str(input_traveller_id)
-    single_traveller = run_sql(sql, value)
-    return single_traveller[0]
+    single_traveller = run_sql(sql, value)[0]
+    #print(single_traveller)
+    traveller_instance = Traveller(single_traveller[1], single_traveller[2], single_traveller[0])
+    return traveller_instance
