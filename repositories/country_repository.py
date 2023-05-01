@@ -2,6 +2,7 @@
 from db.run_sql import run_sql
 # import Country class
 from models.country import Country
+from models.location import Location
 
 # a function to save instances of country classes into the 'countries' db
 def save(input_country: Country):
@@ -31,3 +32,17 @@ def select_one(input_country_id):
     country_instance = Country(selected_country[1], int(selected_country[0]))
     #returns selected country as list
     return country_instance
+
+def get_locations(input_country_id):
+    sql = 'SELECT * FROM locations WHERE country_id = %s'
+    locations = run_sql(sql, str(input_country_id))
+    list_of_locations_in_country = [ ]
+    #print("THIS IS THE GET LOCATIONS LIST:")
+    for row in locations:
+
+        list_of_locations_in_country.append(Location(row[1], select_one(input_country_id), int(row[0])))
+
+        #print(row)
+    #print(list_of_locations_in_country)
+    return list_of_locations_in_country
+

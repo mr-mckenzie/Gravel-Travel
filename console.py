@@ -48,8 +48,8 @@ print(f'SINGLE TRAVELLER = {one_traveller}')
 #all_holidays = holiday_repo.select_all()
 #print(f'ALL HOLIDAYS = {all_holidays}')
 
-#one_holiday = holiday_repo.select_one(4)
-#print(f'SINGLE HOLIDAY = {one_holiday}')
+one_holiday = holiday_repo.select_one(4)
+print(f'SINGLE HOLIDAY = {one_holiday}')
 
 all_locations = location_repo.select_all()
 print(f'ALL LOCATIONS: {all_locations}')
@@ -58,3 +58,8 @@ print(f'ALL LOCATIONS: {all_locations}')
 
 one_location = location_repo.select_one(5)
 print(f'SINGLE LOCATION: {one_location.__dict__}')
+
+locations_in_country = country_repo.get_locations(2)
+print("LOCATIONS IN COUNTRY: ")
+for location in locations_in_country:
+    print(location.__dict__)

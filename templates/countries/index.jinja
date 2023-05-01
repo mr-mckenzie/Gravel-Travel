@@ -1,0 +1,14 @@
+{% extends 'base.jinja'%}
+
+{% block content %}
+<h1>Location</h1>
+
+<p>Here are the countries:</p>
+
+{% for country in input_countries %}
+
+<p> <a href="/countries/{{country.id}}">{{ country.name }}</a> </p>
+
+{% endfor %}
+
+{% endblock %}

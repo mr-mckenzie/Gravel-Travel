@@ -7,7 +7,7 @@
 
 {% for location in input_locations %}
 
-<p> {{ location.name }}, {{location.country.name}} </p>
+<p> <a href="/locations/{{location.id}}">{{ location.name }}</a>, <a href="/countries/{{location.country.id}}">{{location.country.name}}</a> </p>
 
 {% endfor %}
 

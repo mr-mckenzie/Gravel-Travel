@@ -11,6 +11,8 @@ def save (input_traveller: Traveller, input_location: Location, input_date):
     run_sql(sql, values)
     return #print('SAVE SUCCESSFUL')
 
+# XXXXXXXX   STILL TO UPDATE XXXXXXX
+# XXXXXXXX  BELOW  XXXXXXXX
 def select_all():
     sql = 'SELECT * FROM holidays'
     all_holidays = run_sql(sql)
