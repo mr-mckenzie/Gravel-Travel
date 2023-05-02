@@ -12,14 +12,14 @@
 {% for holiday in input_all_holidays %}
     {% if holiday[0].id == location.id%}
     {# CHANGE THIS TO BE A TOGGLE-ABLE ELEMENT #}
-    <p> BEEN THERE!! </p>
+    <p> **VISITED** </p>
     {% endif %}
 {% endfor %}
 
 {% for wish_location in input_wishlist %}
     {% if wish_location.id == location.id%}
     {# CHANGE THIS TO BE A TOGGLE-ABLE ELEMENT #}
-    <p> WANT TO GO THERE!! </p>
+    <p> **ON WISHLIST** </p>
     {% endif %}
 {% endfor %}
 

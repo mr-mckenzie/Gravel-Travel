@@ -15,15 +15,14 @@
 
 {% if on_wishlist == True%}
 {# CHANGE THIS TO BE A TOGGLE-ABLE ELEMENT #}
-<p> WANT TO GO!! </p>
+<p> On wishlist </p>
 {% endif %}
 
-{# ADD DELETE FUNCTIONALITY #}
+{# DELETE FORM #}
 <form action="/locations/{{input_location.id}}/delete" method="post">
 <label for="delete">Delete Location:</label>
     <input id="delete" type="submit" value="Delete" >
 </form>
 
-{# ADD EDIT FUNCTIONALITY #}
 
 {% endblock %}

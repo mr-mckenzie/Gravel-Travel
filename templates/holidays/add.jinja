@@ -1,0 +1,20 @@
+{% extends 'base.jinja'%}
+
+{% block content %}
+<h1>Add a new holiday</h1>
+
+<form action="/holidays/add" method="post">
+
+    <select name="location_id" id="location-select">
+    <option value="">--Please choose a location--</option>
+    {% for location in input_locations%}
+    <option value="{{location.id}}">{{location.name}}</option>
+    {% endfor %}
+    </select>
+
+    <input type="date" name="date">
+    
+    <input type="submit" value="Add" >
+</form>
+
+{% endblock %}

@@ -34,8 +34,6 @@ def select_all():
 #    value = str(input_holiday_id)
 #    return run_sql(sql, value)[0]
 
-#NEED FUNCTIONS TO DISPLAY VISITED FOR ONE TRAVELLER ID
-
 def has_visited(input_location_id):
     sql = 'SELECT * FROM holidays where location_id = (%s)'
     result = run_sql(sql, str(input_location_id))

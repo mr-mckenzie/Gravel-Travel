@@ -1,5 +1,5 @@
 # import flask
-from flask import Flask, render_template, Blueprint, redirect
+from flask import Flask, render_template, Blueprint, redirect, request
 from models.location import Location
 import repositories.location_repository as location_repo
 import repositories.country_repository as country_repo
@@ -19,12 +19,20 @@ def delete_entry(id):
     holiday_repo.delete_by_id(id)
     return redirect('/holidays')
 
+@holidays_blueprint.route('/holidays/add', methods=['GET'])
+def show_form():
+    #all_countries = country_repo.select_all()
+    all_locations = location_repo.select_all()
+    return render_template('/holidays/add.jinja', input_locations = all_locations)
 
-# @locations_blueprint.route('/holidays/<id>')
-# def single_holiday(id):
-#     one_location = location_repo.select_one(id)
-#     has_visited = holiday_repo.has_visited(id)
-#     on_wishlist = wishlist_repo.on_wishlist(id)
-#     print(f'THIS IS ONE LOCATION: {one_location}')
-#     return render_template('locations/single_location.jinja', input_location = one_location, has_visited = has_visited, on_wishlist = on_wishlist)
-#     #return render_template('locations/index.jinja', input_locations = one_location)
+@holidays_blueprint.route('/holidays/add', methods=['POST'])
+def add_holiday():
+
+    location_id = request.form['location_id']
+    date_visited = request.form['date']
+
+    location_visited = location_repo.select_one(location_id)
+
+    holiday_repo.save(location_visited, date_visited)
+
+    return redirect('/holidays')
