@@ -11,7 +11,7 @@
 
 {% endfor %}
 
-<form action="/countries/edit" method="get">
+<form action="/countries/{{input_country.id}}/edit" method="get">
 <label for="edit">Edit Country:</label>
     <input type="submit" id="edit" value="Edit" >
 </form>

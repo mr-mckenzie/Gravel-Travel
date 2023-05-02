@@ -1,0 +1,48 @@
+{% extends 'base.jinja'%}
+
+{% block content %}
+<h1>EDIT {{input_country.name}}</h1>
+
+<p>Here are the locations in {{input_country.name}}:</p>
+
+{% for location in input_locations %}
+
+<p> <a href="/locations/{{location.id}}">{{ location.name }}</a> </p>
+
+<form action="/locations/{{location.id}}/delete" method="post">
+<label for="delete">Delete Location:</label>
+    <input id="delete" type="submit" value="Delete" >
+</form>
+
+
+{% endfor %}
+
+<h2>Add a new location in {{input_country.name}}</h2>
+
+<form action="/countries/{{input_country.id}}/add_location" method="post">
+<label for="name">Location name:</label>
+    <input type="text" value="Insert name" name="name" id="name">
+    <select name="country_id" id="country-select">
+    <option value="{{input_country.id}}">{{input_country.name}}</option>
+    </select>
+    <input type="submit" value="Add" >
+</form>
+
+{# CAN ONLY DELETE IF NO LOCATIONS EXIST #}
+
+{%if input_locations%}
+
+To delete this country record, please delete the location(s) first,
+
+{% else %}
+
+<form action="/countries/{{input_country.id}}/delete" method="post">
+<label for="delete">Delete Country:</label>
+    <input id="delete" type="submit" value="Delete" >
+</form>
+
+{% endif %}
+
+
+
+{% endblock %}

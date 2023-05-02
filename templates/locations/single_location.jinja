@@ -15,14 +15,33 @@
 
 {% if on_wishlist == True%}
 {# CHANGE THIS TO BE A TOGGLE-ABLE ELEMENT #}
-<p> On wishlist </p>
+<p> On your wishlist </p>
+
+<form action="/locations/{{input_location.id}}/toggle_wishlist" method="post">
+<label>Remove from wishlist?
+    <input type="submit" value="Yes" >
+</label>
+</form>
+
+{% endif %}
+{% if on_wishlist == False%}
+{# CHANGE THIS TO BE A TOGGLE-ABLE ELEMENT #}
+<p> Not on  your wishlist </p>
+
+<form action="/locations/{{input_location.id}}/toggle_wishlist" method="post">
+<label>Add to wishlist?
+    <input type="submit" value="Yes" >
+</label>
+</form>
+
 {% endif %}
 
+
 {# DELETE FORM #}
-<form action="/locations/{{input_location.id}}/delete" method="post">
+{# <form action="/locations/{{input_location.id}}/delete" method="post">
 <label for="delete">Delete Location:</label>
     <input id="delete" type="submit" value="Delete" >
-</form>
+</form> #}
 
 
 {% endblock %}

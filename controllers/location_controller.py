@@ -53,3 +53,15 @@ def add_country():
     location_repo.save(new_location)
 
     return redirect('/locations')
+
+@locations_blueprint.route('/locations/<id>/toggle_wishlist', methods=['POST'])
+def toggle_wishlist(id):
+
+    if wishlist_repo.on_wishlist(id) == True:
+        wishlist_repo.delete_by_location_id(id)
+    else:
+        wishlist_repo.save(id)
+
+    path = '/locations/'+str(id)
+
+    return redirect(path)

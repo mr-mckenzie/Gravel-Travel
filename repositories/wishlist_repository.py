@@ -5,9 +5,9 @@ from db.run_sql import run_sql
 from models.location import Location
 import repositories.location_repository as location_repo
 
-def save (input_location: Location):
+def save (input_location_id):
     sql = 'INSERT INTO wishlist (location_id) VALUES (%s)'
-    value = (input_location.id)
+    value = [input_location_id]
     run_sql(sql, value)
     return #print('SAVE SUCCESSFUL')
 
@@ -31,7 +31,7 @@ def select_all():
 
 def on_wishlist(input_location_id):
     sql = 'SELECT * FROM wishlist where location_id = (%s)'
-    result = run_sql(sql, str(input_location_id))
+    result = run_sql(sql, [str(input_location_id)])
     #print(result)
     if result:
         return True

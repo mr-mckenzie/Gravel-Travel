@@ -26,8 +26,8 @@ location_repo.save(location_havana)
 holiday_repo.save(location_reykavik, '2002-02-02')
 holiday_repo.save(location_havana, '2005-05-05') 
 
-wishlist_repo.save(location_havana)
-wishlist_repo.save(location_reykavik)
+#wishlist_repo.save(location_havana)
+#wishlist_repo.save(location_reykavik)
 
 all_countries = country_repo.select_all()
 #print(f'ALL COUNTRIES = {all_countries}')
