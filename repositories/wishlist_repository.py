@@ -3,10 +3,9 @@ from db.run_sql import run_sql
 
 #import Location and Traveller classes
 from models.location import Location
-from models.traveller import Traveller
 
-def save (input_traveller: Traveller, input_location: Location):
-    sql = 'INSERT INTO wishlist (traveller_id, location_id) VALUES (%s, %s)'
-    values = (input_traveller.id, input_location.id)
-    run_sql(sql, values)
+def save (input_location: Location):
+    sql = 'INSERT INTO wishlist (location_id) VALUES (%s)'
+    value = (input_location.id)
+    run_sql(sql, value)
     return #print('SAVE SUCCESSFUL')

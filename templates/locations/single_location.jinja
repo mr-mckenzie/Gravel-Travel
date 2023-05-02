@@ -1,0 +1,15 @@
+{% extends 'base.jinja'%}
+
+{% block content %}
+<h1>{{input_location.name}}</h1>
+
+<p>Here are the locations:</p>
+
+
+<p> <a href="/locations/{{input_location.id}}">{{ input_location.name }}</a>, <a href="/countries/{{input_location.country.id}}">{{input_location.country.name}}</a> </p>
+
+{% if has_visited == True%}
+<p> BEEN THERE!! </p>
+{% endif %}
+
+{% endblock %}

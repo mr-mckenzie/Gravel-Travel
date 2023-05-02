@@ -25,6 +25,7 @@ def select_one(location_id):
     sql = 'SELECT * FROM locations WHERE id = (%s)'
     value = str(location_id)
     result = run_sql(sql, value)[0]
+    #print(f'THIS IS THE RESULT FROM SELECT ONE LOCATION {result}')
     selected_country = country_repo.select_one(result[2])
     selected_location = Location(result[1], selected_country, int(result[0]))
     return selected_location

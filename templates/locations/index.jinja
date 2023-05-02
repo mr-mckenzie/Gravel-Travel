@@ -9,6 +9,16 @@
 
 <p> <a href="/locations/{{location.id}}">{{ location.name }}</a>, <a href="/countries/{{location.country.id}}">{{location.country.name}}</a> </p>
 
+{% for holiday in input_all_holidays %}
+    {% if holiday[0].id == location.id%}
+    <p> BEEN THERE!! </p>
+    {% endif %}
+{% endfor %}
+
+{# {% if has_visited == True %}
+<p> I've visited!</p>
+{% endif %} #}
+
 {% endfor %}
 
 {% endblock %}
