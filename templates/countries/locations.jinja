@@ -11,4 +11,26 @@
 
 {% endfor %}
 
+<form action="/countries/edit" method="get">
+<label for="edit">Edit Country:</label>
+    <input type="submit" id="edit" value="Edit" >
+</form>
+
+{# CAN ONLY DELETE IF NO LOCATIONS EXIST #}
+
+{%if input_locations%}
+
+To delete this country record, please delete the location first,
+
+{% else %}
+
+<form action="/countries/{{input_country.id}}/delete" method="post">
+<label for="delete">Delete Country:</label>
+    <input id="delete" type="submit" value="Delete" >
+</form>
+
+{% endif %}
+
+
+
 {% endblock %}

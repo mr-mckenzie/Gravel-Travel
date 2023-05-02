@@ -26,9 +26,12 @@ def select_all():
     return all_results
 
 def select_one(input_country_id):
-    sql = 'SELECT * FROM countries WHERE id = %s'
-    value = str(input_country_id)
-    selected_country = run_sql(sql, value)[0]
+    sql = 'SELECT * FROM countries WHERE id = (%s)'
+    value = [str(input_country_id)]
+    return_from_sql = run_sql(sql, value)
+    #print(f'THIS IS THE RESULT FROM SELECT ONE COUNTRY {return_from_sql}')
+
+    selected_country = return_from_sql[0]
     country_instance = Country(selected_country[1], int(selected_country[0]))
     #returns selected country as list
     return country_instance
@@ -46,3 +49,7 @@ def get_locations(input_country_id):
     #print(list_of_locations_in_country)
     return list_of_locations_in_country
 
+def delete_by_id(input_id):
+    sql = 'DELETE FROM countries WHERE id = (%s)'
+    value = str(input_id)
+    run_sql(sql, value)

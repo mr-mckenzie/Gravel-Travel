@@ -28,7 +28,10 @@ def add_a_country():
 def view_single_country(id):
     current_country = country_repo.select_one(id)
     all_locations = country_repo.get_locations(id)
-   #print(all_locations)
-
-
+    #print(all_locations)
     return render_template('/countries/locations.jinja', input_locations = all_locations, input_country = current_country)
+
+@countries_blueprint.route('/countries/<id>/delete', methods=['POST'])
+def delete_country(id):
+    country_repo.delete_by_id(id)
+    return redirect('/countries')

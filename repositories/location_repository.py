@@ -22,10 +22,18 @@ def select_all():
     return location_list
 
 def select_one(location_id):
-    sql = 'SELECT * FROM locations WHERE id = (%s)'
-    value = str(location_id)
-    result = run_sql(sql, value)[0]
-    #print(f'THIS IS THE RESULT FROM SELECT ONE LOCATION {result}')
+    sql = 'SELECT * FROM locations WHERE id = %s'
+    value = [str(location_id)]
+    #print("PRINTING THIS")
+    #print(value)
+    return_from_sql = run_sql(sql, value)
+    #print(f'THIS IS THE RESULT FROM SELECT ONE LOCATION {return_from_sql}')
+    result = return_from_sql[0]
     selected_country = country_repo.select_one(result[2])
     selected_location = Location(result[1], selected_country, int(result[0]))
     return selected_location
+
+def delete_by_id(input_id):
+    sql = 'DELETE FROM locations WHERE id = (%s)'
+    value = str(input_id)
+    run_sql(sql, value)

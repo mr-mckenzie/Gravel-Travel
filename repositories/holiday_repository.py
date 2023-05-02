@@ -9,7 +9,7 @@ def save (input_location: Location, input_date):
     sql = 'INSERT INTO holidays (location_id, date_visited) VALUES (%s, %s)'
     values = (input_location.id, input_date)
     run_sql(sql, values)
-    return #print('SAVE SUCCESSFUL')
+    return print('SAVE SUCCESSFUL')
 
 # XXXXXXXX   STILL TO UPDATE   XXXXXXX
 # XXXXXXXX        BELOW        XXXXXXX
@@ -18,7 +18,7 @@ def select_all():
     all_holidays = run_sql(sql)
     holidays = [ ]
     for row in all_holidays:
-        print(row)
+        print(f'ROW IS: {row}')
         row_location = location_repo.select_one(row[1])
         date = row[2]
         holiday_id = row[0]

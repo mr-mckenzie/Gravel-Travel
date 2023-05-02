@@ -19,6 +19,10 @@
 {% endif %}
 
 {# ADD DELETE FUNCTIONALITY #}
+<form action="/locations/{{input_location.id}}/delete" method="post">
+<label for="delete">Delete Location:</label>
+    <input id="delete" type="submit" value="Delete" >
+</form>
 
 {# ADD EDIT FUNCTIONALITY #}
 
