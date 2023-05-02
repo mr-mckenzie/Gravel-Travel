@@ -65,3 +65,5 @@ print(all_holidays)
 
 print(holiday_repo.has_visited(1))
 print(holiday_repo.has_visited(2))
+
+#wishlist_repo.delete_by_location_id(7)

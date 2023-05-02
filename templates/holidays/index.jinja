@@ -1,0 +1,17 @@
+{% extends 'base.jinja'%}
+
+{% block content %}
+<h1>Holidays</h1>
+
+<p>Here are your previous trips:</p>
+
+{% for holiday in input_all_holidays %}
+
+<p> {{ holiday[0].name }}, {{holiday[0].country.name}} </p>
+{% if holiday[1] %}
+<p> visited in: {{holiday[1].year}} </p>
+{% endif %}
+
+{% endfor %}
+
+{% endblock %}

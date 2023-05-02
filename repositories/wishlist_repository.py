@@ -19,6 +19,7 @@ def select_all():
         row_location = location_repo.select_one(row[1])
         wishlist.append(row_location)
         #returns a list of wishlist location objects
+    print(f'THIS IS THE WISHLIST: {wishlist}')
     return wishlist
 
 #def select_one(input_holiday_id):
@@ -36,4 +37,8 @@ def on_wishlist(input_location_id):
         return True
     else:
         return False
-    
+
+def delete_by_location_id(input_location_id):
+    sql = 'DELETE FROM wishlist WHERE location_id = %s'
+    value = str(input_location_id)
+    run_sql(sql, value)

@@ -9,11 +9,17 @@
 <p> <a href="/locations/{{input_location.id}}">{{ input_location.name }}</a>, <a href="/countries/{{input_location.country.id}}">{{input_location.country.name}}</a> </p>
 
 {% if has_visited == True%}
+{# CHANGE THIS TO BE A TOGGLE-ABLE ELEMENT #}
 <p> BEEN THERE!! </p>
 {% endif %}
 
 {% if on_wishlist == True%}
+{# CHANGE THIS TO BE A TOGGLE-ABLE ELEMENT #}
 <p> WANT TO GO!! </p>
 {% endif %}
+
+{# ADD DELETE FUNCTIONALITY #}
+
+{# ADD EDIT FUNCTIONALITY #}
 
 {% endblock %}
