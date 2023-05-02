@@ -15,9 +15,11 @@
     {% endif %}
 {% endfor %}
 
-{# {% if has_visited == True %}
-<p> I've visited!</p>
-{% endif %} #}
+{% for wish_location in input_wishlist %}
+    {% if wish_location.id == location.id%}
+    <p> WANT TO GO THERE!! </p>
+    {% endif %}
+{% endfor %}
 
 {% endfor %}
 
