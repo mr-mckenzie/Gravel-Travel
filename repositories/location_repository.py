@@ -5,7 +5,7 @@ import repositories.country_repository as country_repo
 
 def save (location : Location):
     sql = 'INSERT INTO locations (name, country_id) VALUES (%s, %s) RETURNING id'
-    values = (location.name, location.country.id)
+    values = [location.name, location.country.id]
     result = run_sql(sql, values)
     location.id = result[0]['id']
     return location

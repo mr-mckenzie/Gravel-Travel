@@ -38,7 +38,7 @@ def select_one(input_country_id):
 
 def get_locations(input_country_id):
     sql = 'SELECT * FROM locations WHERE country_id = %s'
-    locations = run_sql(sql, str(input_country_id))
+    locations = run_sql(sql, [str(input_country_id)])
     list_of_locations_in_country = [ ]
     #print("THIS IS THE GET LOCATIONS LIST:")
     for row in locations:

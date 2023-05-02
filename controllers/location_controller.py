@@ -23,8 +23,9 @@ def single_location(id):
     one_location = location_repo.select_one(id)
     has_visited = holiday_repo.has_visited(id)
     on_wishlist = wishlist_repo.on_wishlist(id)
+    holidays = holiday_repo.select_by_location(id)
     print(f'THIS IS ONE LOCATION: {one_location}')
-    return render_template('locations/single_location.jinja', input_location = one_location, has_visited = has_visited, on_wishlist = on_wishlist)
+    return render_template('locations/single_location.jinja', input_location = one_location, has_visited = has_visited, on_wishlist = on_wishlist, holidays = holidays)
     #return render_template('locations/index.jinja', input_locations = one_location)
 
 @locations_blueprint.route('/locations/<id>/delete', methods=['POST'])
