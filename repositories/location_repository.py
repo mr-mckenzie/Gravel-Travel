@@ -35,5 +35,5 @@ def select_one(location_id):
 
 def delete_by_id(input_id):
     sql = 'DELETE FROM locations WHERE id = (%s)'
-    value = str(input_id)
+    value = [str(input_id)]
     run_sql(sql, value)

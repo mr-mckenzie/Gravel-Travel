@@ -51,5 +51,5 @@ def get_locations(input_country_id):
 
 def delete_by_id(input_id):
     sql = 'DELETE FROM countries WHERE id = (%s)'
-    value = str(input_id)
+    value = [str(input_id)]
     run_sql(sql, value)

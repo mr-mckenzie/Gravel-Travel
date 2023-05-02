@@ -29,6 +29,7 @@ def single_location(id):
 
 @locations_blueprint.route('/locations/<id>/delete', methods=['POST'])
 def delete_location(id):
+    #country_id = location_repo.select_one(id).country.id
     location_repo.delete_by_id(id)
     return redirect('/locations')
 

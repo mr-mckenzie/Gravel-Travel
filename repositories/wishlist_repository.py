@@ -40,5 +40,5 @@ def on_wishlist(input_location_id):
 
 def delete_by_location_id(input_location_id):
     sql = 'DELETE FROM wishlist WHERE location_id = %s'
-    value = str(input_location_id)
+    value = [str(input_location_id)]
     run_sql(sql, value)

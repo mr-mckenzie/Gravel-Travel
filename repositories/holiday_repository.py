@@ -45,5 +45,5 @@ def has_visited(input_location_id):
     
 def delete_by_id(input_id):
     sql = 'DELETE FROM holidays WHERE id = %s'
-    value = str(input_id)
+    value = [str(input_id)]
     run_sql(sql, value)
