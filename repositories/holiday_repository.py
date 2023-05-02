@@ -18,12 +18,13 @@ def select_all():
     all_holidays = run_sql(sql)
     holidays = [ ]
     for row in all_holidays:
-        #print(row)
+        print(row)
         row_location = location_repo.select_one(row[1])
         date = row[2]
+        holiday_id = row[0]
         #print(row_location.__dict__)
         #print(date)
-        holidays.append([row_location, date])
+        holidays.append([row_location, date, holiday_id])
 
         #returns a list of holidays in the format [location_object, date] 
     return holidays
@@ -44,9 +45,7 @@ def has_visited(input_location_id):
     else:
         return False
     
-# def list_of_visited():
-#     sql = 'SELECT * FROM holidays'
-#     all_records = run_sql(sql)
-#     location_ids_visited = []
-#     for row in all_records:
-#         if
+def delete_by_id(input_id):
+    sql = 'DELETE FROM holidays WHERE id = %s'
+    value = str(input_id)
+    run_sql(sql, value)

@@ -1,5 +1,5 @@
 # import flask
-from flask import Flask, render_template, Blueprint
+from flask import Flask, render_template, Blueprint, request, redirect
 from models.location import Location
 from models.location import Country
 import repositories.location_repository as location_repo
@@ -12,6 +12,16 @@ countries_blueprint = Blueprint("countries", __name__)
 def view_all_countries():
     all_countries = country_repo.select_all()
     return render_template('countries/index.jinja', input_countries = all_countries)
+
+#add a country
+@countries_blueprint.route('/countries', methods=['POST'])
+def add_a_country():
+    new_country_name =request.form['name']
+    print(f'THIS IS NEW COUNTRY NAME: {new_country_name}')
+    new_country = Country(new_country_name)
+    print(f'THIS IS NEW COUNTRY INSTANCE: {new_country.__dict__}')
+    country_repo.save(new_country)
+    return redirect('/countries')
 
 #show single country listing all locations
 @countries_blueprint.route('/countries/<id>')
