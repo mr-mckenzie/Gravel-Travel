@@ -22,7 +22,7 @@ def select_all():
     print(f'THIS IS THE WISHLIST: {wishlist}')
     return wishlist
 
-#returns a boolean to showing if a location is on the wishlist
+#returns a boolean to show if a location is on the wishlist
 def on_wishlist(input_location_id):
     sql = 'SELECT * FROM wishlist where location_id = (%s)'
     result = run_sql(sql, [str(input_location_id)])

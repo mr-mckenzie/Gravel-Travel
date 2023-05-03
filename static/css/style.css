@@ -1,22 +1,38 @@
 html {
-    background-color:honeydew;
+    background-color:lightgray
 }
 
 body {
     margin: 0;
 }
 
+main {
+    margin: 15px;
+}
+
 header {
-    background-color:darkseagreen;
+    background-image: url(/static/images/gravel.jpg);
+    color: white;
+}
+
+header > div > a {
+    font-size: 30px;
 }
 
 .header_flex_box {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .header_flex_box > a {
-    margin: 15px 30px 15px
+    margin: 15px 30px 15px;
+    color: white
+}
+
+header > p {
+    margin: 15px 30px 15px;
+    text-align: right;
 }
 
 .location_flex_box {
@@ -30,19 +46,41 @@ header {
     flex-direction: column;
     margin: 15px;
     width: 200px;
-    border: 2px burlywood solid;
-    background-color:mintcream;
+    border: 2px solid slategray;
+    background-color:antiquewhite;
+    padding: 10px;
+    align-items: center;
+}
+
+.location_box > p {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .visited {
-    width: 50%;
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .wishlist {
-    width: 50%
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .visit_wishlist_flex_box {
     display: flex;
     flex-direction: row;
+}
+
+.country_span {
+    font-size: smaller;
+}
+
+#warning {
+    color: red;
+    font-size: smaller;
 }

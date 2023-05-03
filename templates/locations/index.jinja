@@ -5,13 +5,11 @@
 
 <a href="/locations/add">Add a location</a>
 
-<h2>Here are the locations:</h2>
 <div class="location_flex_box">
     {% for location in input_locations %}
 
     <div class="location_box">
-        <h3> <a href="/locations/{{location['location'].id}}">{{ location['location'].name }}</a></h3>
-        <h4> <a href="/countries/{{location['location'].country.id}}">{{location['location'].country.name}} </a> </h4>
+        <h3> <a href="/locations/{{location['location'].id}}">{{ location['location'].name }}</a>, <span class="country_span"><a href="/countries/{{location['location'].country.id}}">{{location['location'].country.name}} </a></span></h3>
 
         <div class="visit_wishlist_flex_box">
             <aside class="visited"> 
