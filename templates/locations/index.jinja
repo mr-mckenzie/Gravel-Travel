@@ -6,28 +6,36 @@
 <a href="/locations/add">Add a location</a>
 
 <h2>Here are the locations:</h2>
+<div class="location_flex_box">
+    {% for location in input_locations %}
 
-{% for location in input_locations %}
+    <div class="location_box">
+        <h3> <a href="/locations/{{location['location'].id}}">{{ location['location'].name }}</a></h3>
+        <h4> <a href="/countries/{{location['location'].country.id}}">{{location['location'].country.name}} </a> </h4>
 
-<div>
-<h3> <a href="/locations/{{location['location'].id}}">{{ location['location'].name }}</a>, <a href="/countries/{{location['location'].country.id}}">{{location['location'].country.name}}</a> </h3>
+        <div class="visit_wishlist_flex_box">
+            <aside class="visited"> 
+                <p>Visited?</p>
+                {% if location['has_visited'] == True%}
+                    <p> &#9989 </p>
+                {% else %}
+                    <p> &#10062 </p>
+                {% endif %}
+            </aside>
 
-    <p>Visited?</p>
-    {% if location['has_visited'] == True%}
-    <p> &#9745 </p>
-    {% else %}
-    <p> &#9746 </p>
-    {% endif %}
+            <aside class="wishlist">
+                <p>On wishlist?</p>
+                {% if location['on_wishlist']%}
+                    <p> &#9989</p>
+                {% else %}
+                    <p> &#10062 </p>
+                {% endif %}
+            </aside>
+        </div>
+    </div>
 
-    <p>On wishlist?</p>
-    {% if location['on_wishlist']%}
-    <p> &#9745</p>
-    {% else %}
-    <p> &#9746 </p>
-    {% endif %}
+    {% endfor %}
 
 </div>
-
-{% endfor %}
 
 {% endblock %}

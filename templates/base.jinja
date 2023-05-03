@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {# <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> #}
-    <title>Travel Tracker</title>
-
-    <a href="/">Home</a>
-    <a href="/countries">Countries</a>
-    <a href="/locations">Locations</a>
-    <a href="/holidays">Holidays</a>
-    <a href="/wishlist">Wishlist</a>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+<header>
+<title>Travel Tracker</title>
+    <div class="header_flex_box">
+        <a href="/">Home</a>
+        <a href="/countries">Countries</a>
+        <a href="/locations">Locations</a>
+        <a href="/holidays">Holidays</a>
+        <a href="/wishlist">Wishlist</a>
+    </div>
+</header>
 
 {% block content %}
 

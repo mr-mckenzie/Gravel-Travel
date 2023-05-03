@@ -1,0 +1,49 @@
+html {
+    background-color:honeydew;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    background-color:darkseagreen;
+}
+
+.header_flex_box {
+    display: flex;
+    flex-direction: row;
+}
+
+.header_flex_box > a {
+    margin: 15px 30px 15px
+}
+
+.location_flex_box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.location_box {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    width: 200px;
+    border: 2px burlywood solid;
+    background-color:lightskyblue;
+}
+
+.visited {
+    width: 50%;
+
+}
+
+.wishlist {
+    width: 50%
+}
+
+.visit_wishlist_flex_box {
+    display: flex;
+    flex-direction: row;
+}
