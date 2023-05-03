@@ -17,13 +17,13 @@ def view_all_countries():
 @countries_blueprint.route('/countries', methods=['POST'])
 def add_a_country():
     new_country_name =request.form['name']
-    print(f'THIS IS NEW COUNTRY NAME: {new_country_name}')
+    #print(f'THIS IS NEW COUNTRY NAME: {new_country_name}')
     new_country = Country(new_country_name)
-    print(f'THIS IS NEW COUNTRY INSTANCE: {new_country.__dict__}')
+    #print(f'THIS IS NEW COUNTRY INSTANCE: {new_country.__dict__}')
     country_repo.save(new_country)
     return redirect('/countries')
 
-#show single country listing all locations
+#show a single country and list all locations in country
 @countries_blueprint.route('/countries/<id>')
 def view_single_country(id):
     current_country = country_repo.select_one(id)
@@ -31,13 +31,13 @@ def view_single_country(id):
     #print(all_locations)
     return render_template('/countries/locations.jinja', input_locations = all_locations, input_country = current_country)
 
-#delete country record
+#delete a country
 @countries_blueprint.route('/countries/<id>/delete', methods=['POST'])
 def delete_country(id):
     country_repo.delete_by_id(id)
     return redirect('/countries')
 
-#edit country
+#go to edit country form
 @countries_blueprint.route('/countries/<id>/edit', methods=['GET'])
 def edit_country(id):
     current_country = country_repo.select_one(id)
@@ -52,7 +52,7 @@ def edit_country_name(id):
     path = '/countries/'+str(id)+'/edit'
     return redirect(path)
 
-#add location
+#add a location to a country
 @countries_blueprint.route('/countries/<id>/add_location', methods=['POST'])
 def add_location(id):
     new_location_name = request.form['name']
