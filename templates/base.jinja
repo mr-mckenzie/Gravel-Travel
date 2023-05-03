@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<title>Travel Tracker</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 <header>
-<title>Travel Tracker</title>
-    <div class="header_flex_box">
-        <a href="/">Home</a>
-        <a href="/countries">Countries</a>
-        <a href="/locations">Locations</a>
-        <a href="/holidays">Trips</a>
-        <a href="/wishlist">Wishlist</a>
-    </div>
+  <div class="header_flex_box">
+    <a href="/">Home</a>
+    <a href="/countries">Countries</a>
+    <a href="/locations">Locations</a>
+    <a href="/holidays">Trips</a>
+    <a href="/wishlist">Wishlist</a>
+  </div>
 </header>
 
 {% block content %}

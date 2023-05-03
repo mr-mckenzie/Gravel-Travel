@@ -31,12 +31,11 @@ header {
     margin: 15px;
     width: 200px;
     border: 2px burlywood solid;
-    background-color:lightskyblue;
+    background-color:mintcream;
 }
 
 .visited {
     width: 50%;
-
 }
 
 .wishlist {
