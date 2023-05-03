@@ -1,17 +1,11 @@
 -- Set up tables, firstly by dropping any old tables that exist.
--- holidays is a join table so it must be dropped first as it depends on the other tables.
+-- holidays & wishlist are join tables so must be dropped first 
+-- as they depend on the other tables.
 DROP TABLE IF EXISTS holidays;
 DROP TABLE IF EXISTS wishlist;
 DROP TABLE IF EXISTS locations;
--- DROP TABLE IF EXISTS travellers;
 DROP TABLE IF EXISTS countries;
 
--- a table to hold the details of the traveller
--- CREATE TABLE travellers (
---     id              SERIAL NOT NULL PRIMARY KEY,
---     first_name      VARCHAR(255),
---     last_name       VARCHAR(255)
--- );
 
 -- a table to hold country information
 CREATE TABLE countries (
@@ -19,37 +13,26 @@ CREATE TABLE countries (
     name            VARCHAR(255)
 );
 
-
+-- table to hold locations
 CREATE TABLE locations (
     id              SERIAL NOT NULL PRIMARY KEY,
     name            VARCHAR(255),
     country_id      INT REFERENCES countries(id) NOT NULL
 );
 
--- a join table to link travellers with countries visited
--- note that traveller_id and location_id must be NOT NULL because this stops instances of Traveller and Location classes without ids from being saved
--- date can be Null - optional variable
+-- a join table to record countries visited
+-- note that location_id must be NOT NULL because this stops instances of Location classes without ids from being saved
 CREATE TABLE holidays (
     id              SERIAL PRIMARY KEY NOT NULL,
---     traveller_id    INT REFERENCES travellers(id) NOT NULL,
-    location_id     INT REFERENCES locations(id) NOT NULL,
+    location_id     INT REFERENCES locations(id) ON DELETE CASCADE NOT NULL,
     date_visited    DATE
 );
 
--- a join table to link travellers with countries they'd like to visit
--- note that traveller_id and location_id must be NOT NULL because this stops instances of Traveller and Location classes without ids from being saved
+-- a join table to record countries the user wants to visit
 CREATE TABLE wishlist (
     id              SERIAL PRIMARY KEY NOT NULL,
---     traveller_id    INT REFERENCES travellers(id) NOT NULL,
-    location_id     INT REFERENCES locations(id) NOT NULL
+    location_id     INT REFERENCES locations(id) ON DELETE CASCADE NOT NULL
 );
-
--- add table rows containing traveller records
--- INSERT INTO travellers (first_name, last_name)
--- VALUES ('Gertrude', 'Smith');
-
--- INSERT INTO travellers (first_name, last_name)
--- VALUES ('Timothy', 'White');
 
 -- add table rows containing country records
 INSERT INTO countries (name)
@@ -92,15 +75,15 @@ VALUES('Apia', 5);
 INSERT INTO locations (name, country_id)
 VALUES ('Quito', 6);
 
--- add table rows linking travellers to locations
+-- add table rows recording holiday trips
 INSERT INTO holidays (location_id, date_visited)
 VALUES (2, '2015-09-07');
 
 INSERT INTO holidays (location_id, date_visited)
 VALUES (4, '2023-03-27');
 
-INSERT INTO holidays (location_id)
-VALUES (3);
+INSERT INTO holidays (location_id, date_visited)
+VALUES (3, '2013-04-03');
 
 INSERT INTO holidays (location_id, date_visited)
 VALUES (2, '2004-07-14');
@@ -114,12 +97,3 @@ VALUES (7);
 
 INSERT INTO wishlist (location_id)
 VALUES (5);
-
-
-
-
-
-
-
-
--- XXXXXXX  ON DELETE CASCADE TO REMOVE HOLIDAY/WISHLIST ENTRIES???

@@ -14,11 +14,6 @@
 <p> visited in: {{holiday[1].year}} </p>
 {% endif %}
 
-{# NOT YET CONNECTED #}
-<form action="/holidays/{{ holiday[2] }}/edit" method="POST">
-    <input type="submit" value="edit" />
-</form>
-
 <form action="/holidays/{{ holiday[2] }}/delete" method="POST">
     <input type="submit" value="delete" />
 </form>

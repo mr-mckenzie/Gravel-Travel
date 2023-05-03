@@ -1,30 +1,33 @@
 {% extends 'base.jinja'%}
 
 {% block content %}
-<h1>Location</h1>
+<h1>Locations</h1>
 
-<p>Here are the locations:</p>
+<a href="/locations/add">Add a location</a>
+
+<h2>Here are the locations:</h2>
 
 {% for location in input_locations %}
 
-<p> <a href="/locations/{{location.id}}">{{ location.name }}</a>, <a href="/countries/{{location.country.id}}">{{location.country.name}}</a> </p>
+<div>
+<h3> <a href="/locations/{{location['location'].id}}">{{ location['location'].name }}</a>, <a href="/countries/{{location['location'].country.id}}">{{location['location'].country.name}}</a> </h3>
 
-{% for holiday in input_all_holidays %}
-    {% if holiday[0].id == location.id%}
-    {# CHANGE THIS TO BE A TOGGLE-ABLE ELEMENT #}
-    <p> **VISITED** </p>
+    <p>Visited?</p>
+    {% if location['has_visited'] == True%}
+    <p> &#9745 </p>
+    {% else %}
+    <p> &#9746 </p>
     {% endif %}
-{% endfor %}
 
-{% for wish_location in input_wishlist %}
-    {% if wish_location.id == location.id%}
-    {# CHANGE THIS TO BE A TOGGLE-ABLE ELEMENT #}
-    <p> **ON WISHLIST** </p>
+    <p>On wishlist?</p>
+    {% if location['on_wishlist']%}
+    <p> &#9745</p>
+    {% else %}
+    <p> &#9746 </p>
     {% endif %}
-{% endfor %}
+
+</div>
 
 {% endfor %}
-
-<a href="/locations/add">Add a location</a>
 
 {% endblock %}

@@ -12,11 +12,17 @@ locations_blueprint = Blueprint("locations", __name__)
 @locations_blueprint.route('/locations')
 def locations():
     all_locations = location_repo.select_all()
-    all_holidays = holiday_repo.select_all()
-    wishlist = wishlist_repo.select_all()
-    #print(all_locations)
-    #print(all_holidays)
-    return render_template('locations/index.jinja', input_locations = all_locations, input_all_holidays = all_holidays, input_wishlist = wishlist)
+
+    location_with_visit_and_wishlist = []
+
+    for location in all_locations:
+        has_visited = holiday_repo.has_visited(location.id)
+        on_wishlist = wishlist_repo.on_wishlist(location.id)
+        location_with_visit_and_wishlist.append({'location':location, 
+                                                 'has_visited':has_visited,
+                                                 'on_wishlist':on_wishlist})
+
+    return render_template('locations/index.jinja', input_locations = location_with_visit_and_wishlist)
 
 @locations_blueprint.route('/locations/<id>')
 def single_location(id):
@@ -30,9 +36,10 @@ def single_location(id):
 
 @locations_blueprint.route('/locations/<id>/delete', methods=['POST'])
 def delete_location(id):
-    #country_id = location_repo.select_one(id).country.id
+    country_id = location_repo.select_one(id).country.id
     location_repo.delete_by_id(id)
-    return redirect('/locations')
+    path = '/countries/'+str(country_id)
+    return redirect(path)
 
 @locations_blueprint.route('/locations/add', methods=['GET'])
 def show_form():
@@ -65,4 +72,10 @@ def toggle_wishlist(id):
 
     path = '/locations/'+str(id)
 
+    return redirect(path)
+
+@locations_blueprint.route('/locations/<location_id>/holiday/<holiday_id>/delete', methods=['POST'])
+def delete_holiday(location_id, holiday_id):
+    holiday_repo.delete_by_id(holiday_id)
+    path = '/locations/'+str(location_id)
     return redirect(path)

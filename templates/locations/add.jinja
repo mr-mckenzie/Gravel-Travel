@@ -9,7 +9,7 @@
 
 
 
-    <select name="country_id" id="country-select">
+    <select name="country_id" id="country-select" required>
     <option value="">--Please choose a country--</option>
     {% for country in input_countries%}
     <option value="{{country.id}}">{{country.name}}</option>

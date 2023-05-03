@@ -1,7 +1,7 @@
 {% extends 'base.jinja'%}
 
 {% block content %}
-<h1>EDIT {{input_country.name}}</h1>
+<h1>EDIT - {{input_country.name}}</h1>
 
 <form action="/countries/{{input_country.id}}/edit" method="post">
 <label for="name">Edit name:</label>
@@ -20,7 +20,6 @@
     <input id="delete" type="submit" value="Delete" >
 </form>
 
-
 {% endfor %}
 
 <h2>Add a new location in {{input_country.name}}</h2>
@@ -34,11 +33,11 @@
     <input type="submit" value="Add" >
 </form>
 
-{# CAN ONLY DELETE IF NO LOCATIONS EXIST #}
 
+{# Warning for DELETE #}
 {%if input_locations%}
 
-To delete this country record, please delete the location(s) first,
+<p>To delete this country record, please delete location(s) first. </p>
 
 {% else %}
 
@@ -48,7 +47,5 @@ To delete this country record, please delete the location(s) first,
 </form>
 
 {% endif %}
-
-
 
 {% endblock %}
