@@ -1,4 +1,3 @@
-#               Not sure if this import is neccesary...
 from models.country import Country
 
 class Location:

@@ -3,13 +3,19 @@
 {% block content %}
 <h1>{{input_country.name}}</h1>
 
-<p>Here are the locations in {{input_country.name}}:</p>
+<h2>Locations:</h2>
+
+{% if input_locations == [] %}
+    <p>None - please add a location via edit button below.</p>
+{%endif%}
 
 {% for location in input_locations %}
 
     <p> <a href="/locations/{{location.id}}">{{ location.name }}</a> </p>
 
 {% endfor %}
+
+<hr>
 
 <form action="/countries/{{input_country.id}}/edit" method="get">
     <label for="edit">Edit Country:</label>

@@ -3,6 +3,7 @@ from db.run_sql import run_sql
 from models.location import Location
 import repositories.country_repository as country_repo
 
+#save a new location to the database
 def save (location : Location):
     sql = 'INSERT INTO locations (name, country_id) VALUES (%s, %s) RETURNING id'
     values = [location.name, location.country.id]
@@ -10,6 +11,7 @@ def save (location : Location):
     location.id = result[0]['id']
     return location
 
+#select all locations
 def select_all():
     sql = 'SELECT * FROM locations'
     results = run_sql(sql)
@@ -21,6 +23,7 @@ def select_all():
     #    print(row['name'])
     return location_list
 
+#select a single location by id
 def select_one(location_id):
     sql = 'SELECT * FROM locations WHERE id = %s'
     value = [str(location_id)]
@@ -33,6 +36,7 @@ def select_one(location_id):
     selected_location = Location(result[1], selected_country, int(result[0]))
     return selected_location
 
+#delete a location by id
 def delete_by_id(input_id):
     sql = 'DELETE FROM locations WHERE id = (%s)'
     value = [str(input_id)]

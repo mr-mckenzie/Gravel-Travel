@@ -5,13 +5,14 @@ from db.run_sql import run_sql
 from models.location import Location
 import repositories.location_repository as location_repo
 
+#save holiday new record to database
 def save (input_location: Location, input_date):
     sql = 'INSERT INTO holidays (location_id, date_visited) VALUES (%s, %s)'
     values = [input_location.id, input_date]
     run_sql(sql, values)
     return print('SAVE SUCCESSFUL')
 
-
+#select all holidays
 def select_all():
     sql = 'SELECT * FROM holidays'
     all_holidays = run_sql(sql)
@@ -28,7 +29,7 @@ def select_all():
         #returns a list of holidays in the format [location_object, date] 
     return holidays
 
-
+#select all holidays by location id
 def select_by_location(input_location_id):
     sql = 'SELECT * FROM holidays WHERE location_id = %s'
     value = [str(input_location_id)]
@@ -43,7 +44,7 @@ def select_by_location(input_location_id):
     #returns a list of holidays in the format [location_object, date] 
     return holidays
 
-
+#return a boolean representing if a location has been visited
 def has_visited(input_location_id):
     sql = 'SELECT * FROM holidays where location_id = (%s)'
     result = run_sql(sql, [str(input_location_id)])
@@ -53,7 +54,7 @@ def has_visited(input_location_id):
     else:
         return False
     
-
+#delete a single holiday by id
 def delete_by_id(input_id):
     sql = 'DELETE FROM holidays WHERE id = %s'
     value = [str(input_id)]

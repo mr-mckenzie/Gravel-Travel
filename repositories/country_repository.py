@@ -1,6 +1,5 @@
 # import run_sql function
 from db.run_sql import run_sql
-# import Country class
 from models.country import Country
 from models.location import Location
 
@@ -12,9 +11,9 @@ def save(input_country: Country):
     #print(f"THIS IS THE 'run_sql_return' VARIABLE FROM SAVE COUNTRY: {run_sql_return}")
     id = run_sql_return[0]['id']
     input_country.id = id
-    #               XXXXXX Unsure if I need to return the country in this function... make similar adjustment to traveller repo XXXXXX
     return input_country
 
+#select all country records
 def select_all():
     sql = 'SELECT * FROM countries'
     all_countries = run_sql(sql)
@@ -25,6 +24,7 @@ def select_all():
     #returns instacnes of country classes in list format
     return all_results
 
+#select a single country record by id
 def select_one(input_country_id):
     sql = 'SELECT * FROM countries WHERE id = (%s)'
     value = [str(input_country_id)]
@@ -36,6 +36,7 @@ def select_one(input_country_id):
     #returns selected country as list
     return country_instance
 
+#get all locations in a single country
 def get_locations(input_country_id):
     sql = 'SELECT * FROM locations WHERE country_id = %s'
     locations = run_sql(sql, [str(input_country_id)])
@@ -49,15 +50,14 @@ def get_locations(input_country_id):
     #print(list_of_locations_in_country)
     return list_of_locations_in_country
 
+#delete country by id
 def delete_by_id(input_id):
     sql = 'DELETE FROM countries WHERE id = (%s)'
     value = [str(input_id)]
     run_sql(sql, value)
 
+#update country name
 def update_name(input_id, input_name):
     sql = 'UPDATE countries SET name = (%s) WHERE id = (%s)'
     value = [input_name, input_id]
     run_sql(sql, value)
-
-def delete_everything(input_id):
-    sql = 'DELETE '
