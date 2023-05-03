@@ -53,6 +53,9 @@ VALUES ('Samoa');
 INSERT INTO countries (name)
 VALUES ('Ecuador');
 
+INSERT INTO countries (name)
+VALUES ('France');
+
 -- add table entries containing locations 
 INSERT INTO locations (name, country_id)
 VALUES ('Seoul', 1);
@@ -74,6 +77,18 @@ VALUES('Apia', 5);
 
 INSERT INTO locations (name, country_id)
 VALUES ('Quito', 6);
+
+INSERT INTO locations (name, country_id)
+VALUES ('Paris', 7);
+
+INSERT INTO locations (name, country_id)
+VALUES ('Bordeaux', 7);
+
+INSERT INTO locations (name, country_id)
+VALUES ('Nice', 7);
+
+INSERT INTO locations (name, country_id)
+VALUES ('Orleans', 7);
 
 -- add table rows recording holiday trips
 INSERT INTO holidays (location_id, date_visited)
@@ -97,3 +112,6 @@ VALUES (7);
 
 INSERT INTO wishlist (location_id)
 VALUES (5);
+
+INSERT INTO wishlist (location_id)
+VALUES (9);
