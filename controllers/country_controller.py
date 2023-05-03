@@ -42,6 +42,14 @@ def edit_country(id):
     all_locations = country_repo.get_locations(id)
     return render_template('/countries/edit.jinja', input_locations = all_locations, input_country = current_country)
 
+@countries_blueprint.route('/countries/<id>/edit', methods=['POST'])
+def edit_country_name(id):
+    new_name = request.form['name']
+    country_repo.update_name(id, new_name)
+    path = '/countries/'+str(id)+'/edit'
+    return redirect(path)
+
+
 
 @countries_blueprint.route('/countries/<id>/add_location', methods=['POST'])
 def add_location(id):

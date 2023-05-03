@@ -3,6 +3,12 @@
 {% block content %}
 <h1>EDIT {{input_country.name}}</h1>
 
+<form action="/countries/{{input_country.id}}/edit" method="post">
+<label for="name">Edit name:</label>
+    <input type="text" value="{{input_country.name}}" name="name" id="name">
+    <input type="submit" value="Submit" >
+</form>
+
 <p>Here are the locations in {{input_country.name}}:</p>
 
 {% for location in input_locations %}
