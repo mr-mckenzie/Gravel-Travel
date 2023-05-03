@@ -4,7 +4,7 @@
 <h1>EDIT - {{input_country.name}}</h1>
 
 <form action="/countries/{{input_country.id}}/edit" method="post">
-<label for="name">Edit name:</label>
+    <label for="name">Edit name:</label>
     <input type="text" value="{{input_country.name}}" name="name" id="name">
     <input type="submit" value="Submit" >
 </form>
@@ -13,38 +13,38 @@
 
 {% for location in input_locations %}
 
-<p> <a href="/locations/{{location.id}}">{{ location.name }}</a> </p>
+    <p> <a href="/locations/{{location.id}}">{{ location.name }}</a> </p>
 
-<form action="/locations/{{location.id}}/delete" method="post">
-<label for="delete">Delete Location:</label>
-    <input id="delete" type="submit" value="Delete" >
-</form>
+    <form action="/locations/{{location.id}}/delete" method="post">
+        <label for="delete">Delete Location:</label>
+        <input id="delete" type="submit" value="Delete" >
+    </form>
 
 {% endfor %}
 
 <h2>Add a new location in {{input_country.name}}</h2>
 
 <form action="/countries/{{input_country.id}}/add_location" method="post">
-<label for="name">Location name:</label>
+    <label for="name">Location name:</label>
     <input type="text" value="Insert name" name="name" id="name">
     <select name="country_id" id="country-select">
-    <option value="{{input_country.id}}">{{input_country.name}}</option>
+        <option value="{{input_country.id}}">{{input_country.name}}</option>
     </select>
     <input type="submit" value="Add" >
 </form>
 
 
-{# Warning for DELETE #}
+{# Warning message for DELETE function#}
 {%if input_locations%}
 
-<p>To delete this country record, please delete location(s) first. </p>
+    <p>To delete this country record, please delete location(s) first. </p>
 
-{% else %}
+    {% else %}
 
-<form action="/countries/{{input_country.id}}/delete" method="post">
-<label for="delete">Delete Country:</label>
-    <input id="delete" type="submit" value="Delete" >
-</form>
+    <form action="/countries/{{input_country.id}}/delete" method="post">
+        <label for="delete">Delete Country:</label>
+        <input id="delete" type="submit" value="Delete" >
+    </form>
 
 {% endif %}
 

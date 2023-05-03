@@ -1,22 +1,26 @@
 {% extends 'base.jinja'%}
 
 {% block content %}
-<h1>Holidays</h1>
+<h1>Trips</h1>
 
 <a href="holidays/add">Add a trip</a>
 
-<p>Here are your previous trips:</p>
+<h2>Your trips:</h2>
 
 {% for holiday in input_all_holidays %}
 
-<p> {{ holiday[0].name }}, {{holiday[0].country.name}} </p>
-{% if holiday[1] %}
-<p> visited in: {{holiday[1].year}} </p>
-{% endif %}
+    <p> {{ holiday[0].name }}, {{holiday[0].country.name}} </p>
+    
+    {# If location has been visited, display the year #}
+    {% if holiday[1] %}
+        <p> visited in: {{holiday[1].year}} </p>
+    {% endif %}
 
-<form action="/holidays/{{ holiday[2] }}/delete" method="POST">
-    <input type="submit" value="delete" />
-</form>
+    <form action="/holidays/{{ holiday[2] }}/delete" method="POST">
+        <input type="submit" value="delete" />
+    </form>
+
+    <br>
 
 {% endfor %}
 
