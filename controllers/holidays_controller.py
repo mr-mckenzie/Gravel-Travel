@@ -1,10 +1,7 @@
 # import flask
 from flask import Flask, render_template, Blueprint, redirect, request
-from models.location import Location
 import repositories.location_repository as location_repo
-import repositories.country_repository as country_repo
 import repositories.holiday_repository as holiday_repo
-import repositories.wishlist_repository as wishlist_repo
 
 holidays_blueprint = Blueprint("holidays", __name__)
 
