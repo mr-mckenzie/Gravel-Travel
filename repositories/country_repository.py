@@ -2,11 +2,12 @@
 from db.run_sql import run_sql
 from models.country import Country
 from models.location import Location
+import repositories.continent_repository as continent_repo
 
 # a function to save instances of country classes into the 'countries' db
 def save(input_country: Country):
-    sql = 'INSERT INTO countries (name) VALUES (%s) RETURNING (id)'
-    values = [input_country.name]
+    sql = 'INSERT INTO countries (name, continent_id) VALUES (%s, %s) RETURNING (id)'
+    values = [input_country.name, input_country.continent.id]
     run_sql_return = run_sql(sql, values)
     #print(f"THIS IS THE 'run_sql_return' VARIABLE FROM SAVE COUNTRY: {run_sql_return}")
     id = run_sql_return[0]['id']
@@ -15,36 +16,36 @@ def save(input_country: Country):
 
 #select all country records
 def select_all():
-    sql = 'SELECT * FROM countries'
+    sql = 'SELECT * FROM countries ORDER BY name'
     all_countries = run_sql(sql)
     #print('THIS IS THE RETURN OF RUN_SQL ON SELECT ALL:')
     all_results = []
     for row in all_countries:
-        all_results.append(Country(row[1], int(row[0])))
-    #returns instacnes of country classes in list format
+        continent = continent_repo.select_one(row['continent_id'])
+        all_results.append(Country(row['name'], continent,  int(row['id'])))
+    #returns instances of country classes in list format
     return all_results
 
 #select a single country record by id
 def select_one(input_country_id):
     sql = 'SELECT * FROM countries WHERE id = (%s)'
     value = [str(input_country_id)]
-    return_from_sql = run_sql(sql, value)
+    result = run_sql(sql, value)[0]
     #print(f'THIS IS THE RESULT FROM SELECT ONE COUNTRY {return_from_sql}')
-
-    selected_country = return_from_sql[0]
-    country_instance = Country(selected_country[1], int(selected_country[0]))
-    #returns selected country as list
+    continent = continent_repo.select_one(result['continent_id'])
+    country_instance = Country(result['name'], continent, int(result['id']))
+    #returns an instance of a country
     return country_instance
 
 #get all locations in a single country
 def get_locations(input_country_id):
-    sql = 'SELECT * FROM locations WHERE country_id = %s'
+    sql = 'SELECT * FROM locations WHERE country_id = %s ORDER BY name'
     locations = run_sql(sql, [str(input_country_id)])
     list_of_locations_in_country = [ ]
     #print("THIS IS THE GET LOCATIONS LIST:")
     for row in locations:
 
-        list_of_locations_in_country.append(Location(row[1], select_one(input_country_id), int(row[0])))
+        list_of_locations_in_country.append(Location(row['name'], select_one(input_country_id), int(row['id'])))
 
         #print(row)
     #print(list_of_locations_in_country)
