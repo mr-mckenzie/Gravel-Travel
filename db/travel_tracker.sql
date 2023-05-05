@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS holidays;
 DROP TABLE IF EXISTS wishlist;
 DROP TABLE IF EXISTS locations;
 DROP TABLE IF EXISTS countries;
-DROP TABLE IF EXISTS continent;
+DROP TABLE IF EXISTS continents;
 
 -- a table to hold continents
 CREATE TABLE continents (

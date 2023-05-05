@@ -16,14 +16,14 @@ def select_all():
 
 #select a single continent record by id
 def select_one(input_continent_id):
-    sql = 'SELECT * FROM countries WHERE id = (%s)'
+    sql = 'SELECT * FROM continents WHERE id = (%s)'
     value = [str(input_continent_id)]
-    selected_contient = (run_sql(sql, value))[0]
+    selected_continent = (run_sql(sql, value))[0]
     
     #return_from_sql = run_sql(sql, value)
     #selected_continent = return_from_sql[0]
 
-    continent_instance = Continent(selected_contient['name'], int(selected_contient['id']))
+    continent_instance = Continent(selected_continent['name'], int(selected_continent['id']))
     #returns an instance of a continent class
     return continent_instance
 
@@ -39,3 +39,18 @@ def get_countries(input_continent_id):
 
     #print(list_of_locations_in_country)
     return list_of_countries_in_continent
+
+def all_by_continent():
+    countries_by_continent = []
+    
+    for num in range(1,7):
+        if get_countries(num) != []:
+            continent_name = select_one(num).name
+            dict_continent_countries = {
+                'continent_name' : continent_name,
+                'countries' : get_countries(num)
+            }
+            countries_by_continent.append( dict_continent_countries )
+            print(countries_by_continent)
+    #returns a list containing lists of countries
+    return countries_by_continent

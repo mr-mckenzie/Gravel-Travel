@@ -84,3 +84,15 @@ header > p {
     color: red;
     font-size: smaller;
 }
+
+#continent_flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.country_list {
+    margin: 15px;
+    width: 175px;
+}

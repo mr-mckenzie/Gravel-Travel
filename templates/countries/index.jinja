@@ -3,17 +3,37 @@
 {% block content %}
 <h1>Countries</h1>
 
-{% for country in input_countries %}
+<div id="continent_flex">
+{% for continent in input_countries %}
 
-    <p> <a href="/countries/{{country.id}}">{{ country.name }}</a> </p>
+<div class="country_list">
+
+    <h2>{{ continent['continent_name'] }}</h2>
+
+    {% for country in continent['countries'] %}
+        <p> <a href="/countries/{{country.id}}">{{ country.name }}</a> </p>
+    {% endfor %}
+
+</div>
 
 {% endfor %}
+</div> 
 
 <hr>
 
 <form action="/countries" method="post">
     <label for="name">Add a Country:</label>
-    <input type="text" value="Insert name" name="name" id="name">
+    <input type="text" name="name" id="name" required>
+
+    <select name="continent_id" id="continent-select" required>
+        <option value="">--Please choose a continent--</option>
+    
+        {% for continent in continents%}
+            <option value="{{continent.id}}">{{continent.name}}</option>
+        {% endfor %}
+    
+    </select>
+
     <input type="submit" value="Add" >
 </form>
 
