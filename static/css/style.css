@@ -109,7 +109,7 @@ header > p {
     position: absolute;
     height: 100%;
     width: 3px;
-    background-color: darkslategrey;
+    background-color: rgb(35, 35, 35);
 }
 
 .trip_box_left {
@@ -184,6 +184,7 @@ header > p {
 .wishlist_flex_box {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .wishlist_box {
