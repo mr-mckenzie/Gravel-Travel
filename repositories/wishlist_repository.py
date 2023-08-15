@@ -12,7 +12,7 @@ def save (input_location_id):
 
 #select all wishlist records
 def select_all():
-    sql = 'SELECT * FROM wishlist'
+    sql = 'SELECT * FROM wishlist where wishlist = TRUE'
     all_wishlist = run_sql(sql)
     wishlist = [ ]
     for row in all_wishlist:
@@ -24,7 +24,7 @@ def select_all():
 
 #returns a boolean to show if a location is on the wishlist
 def on_wishlist(input_location_id):
-    sql = 'SELECT * FROM wishlist where location_id = (%s)'
+    sql = 'SELECT * FROM wishlist where location_id = (%s) AND wishlist = TRUE'
     result = run_sql(sql, [str(input_location_id)])
     #print(result)
     if result:
@@ -34,6 +34,6 @@ def on_wishlist(input_location_id):
 
 #delete a wishlist record by the location_id
 def delete_by_location_id(input_location_id):
-    sql = 'DELETE FROM wishlist WHERE location_id = %s'
+    sql = 'DELETE FROM wishlist WHERE location_id = %s AND wishlist = TRUE'
     value = [str(input_location_id)]
     run_sql(sql, value)

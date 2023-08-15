@@ -1,5 +1,8 @@
 html {
-    background-color:lightgray
+    font-family: 'Geologica', sans-serif;
+    background: linear-gradient(137deg, whitesmoke, 20%, dimgrey, 80%, rgb(39, 56, 56));
+    background-size: cover;
+    min-height: 100%;
 }
 
 body {
@@ -10,9 +13,16 @@ main {
     margin: 15px;
 }
 
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 header {
     background-image: url(/static/images/gravel.jpg);
     color: white;
+    position: relative;
 }
 
 header > div > a {
@@ -27,34 +37,134 @@ header > div > a {
 
 .header_flex_box > a {
     margin: 15px 30px 15px;
-    color: white
+    color: white;
+    z-index: 1;
+}
+
+.header_flex_box > a:hover {
+    color:moccasin;
 }
 
 header > p {
     margin: 15px 30px 15px;
     text-align: right;
+    z-index: 1;
+    position: relative;
+}
+
+.header_overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 20%;
+    background-color: black;
+    overflow: hidden;
+    z-index: 0;
 }
 
 .location_flex_box {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
-.location_box {
+.trip_flex_box {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    margin: 75px;
+}
+
+.trip_box_left > p > a, .trip_box_right > p > a {
+    color: white;
+}
+
+.trip_box_left > p > a:hover, .trip_box_right > p > a:hover {
+    color:moccasin;
+}
+
+.location_box, .trip_box_left, .trip_box_right, .wishlist_box {
+    position: relative;
     display: flex;
     flex-direction: column;
     margin: 15px;
-    width: 200px;
     border: 2px solid slategray;
-    background-color:antiquewhite;
+    background-image: url(/static/images/pebbles.jpg);
+    background-size: 1000%;
+    background-position: center;
     padding: 10px;
     align-items: center;
+    color: white;
+}
+
+.location_box {
+    width: 220px;
+}
+
+.timeline {
+    position: absolute;
+    height: 100%;
+    width: 3px;
+    background-color: darkslategrey;
+}
+
+.trip_box_left {
+    width: 250px;
+    position: relative;
+    left: -165px;
+    margin-top: -45px;
+    margin-bottom: -45px;
+}
+
+.trip_box_right {
+    width: 250px;
+    position: relative;
+    left: +165px;
+    margin-top: -45px;
+    margin-bottom: -45px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 30%;
+    background-color: black;
+    z-index: 1;
+}
+
+.z-index {
+    z-index: 2;
+}
+
+.location_box > h3 > a, .location_box > h3 > span > a, .country_list > p > a {
+    color: white;
+    z-index: 2;
+}
+
+.location_box > h3 > a:hover, .location_box > h3 > span > a:hover, .country_list > p > a:hover {
+    color: moccasin;
+}
+
+.country_list > p > a {
+    color: black;
+    z-index: 2;
+}
+
+.country_list > p > a:hover {
+    color: white;
 }
 
 .location_box > p {
     margin-top: 5px;
     margin-bottom: 5px;
+    z-index: 2;
 }
 
 .visited {
@@ -69,6 +179,30 @@ header > p {
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+.wishlist_flex_box {
+    display: flex;
+    flex-direction: row;
+}
+
+.wishlist_box {
+    width: 250px;
+}
+
+.wishlist_box > p, .wishlist_box > form{
+    z-index: 1;
+}
+
+.wishlist_box_overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: black;
+    opacity: 20%;
+    top: 0;
+    left: 0;
 }
 
 .visit_wishlist_flex_box {
@@ -95,4 +229,47 @@ header > p {
 .country_list {
     margin: 15px;
     width: 175px;
+}
+
+.gravel_img {
+    max-width: 50%;
+    height: auto;
+}
+
+#name, #continent-select, #country-select {
+    font-family: 'Geologica', sans-serif;
+}
+
+.button {
+    background-color:tan;
+    color: black;
+    z-index: 2;
+    font-family: 'Geologica', sans-serif;
+}
+
+.button:hover {
+    background-color: grey;
+    color: white;
+    cursor: pointer;
+}
+
+.tick {
+    color:aquamarine;
+    font-size: 1.5rem;
+    z-index: 2;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cross {
+    color: lightcoral;
+    font-size: 1.5rem;
+    z-index: 2;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.asterisk {
+    font-size: 0.75rem;
+    vertical-align: super;
 }

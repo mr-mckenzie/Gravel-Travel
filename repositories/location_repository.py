@@ -13,7 +13,7 @@ def save (location : Location):
 
 #select all locations
 def select_all():
-    sql = 'SELECT * FROM locations'
+    sql = 'SELECT * FROM locations order by name ASC'
     results = run_sql(sql)
     location_list = [ ]
     for row in results:

@@ -1,0 +1,26 @@
+{% extends 'base.jinja'%}
+
+{% block content %}
+<h1>Record Your Trip</h1>
+
+<form action="/trips/add" method="post">
+
+    <select name="location_id" id="location-select">
+        
+        <option value="">--Where was the gravel?--</option>
+        
+        {% for location in input_locations%}
+        <option value="{{location.id}}">{{location.name}}, {{location.country.name}}</option>
+        {% endfor %}
+    
+    </select>
+
+    <input type="date" name="date">
+
+    <label for="delete">Length of trip:</label>
+    <input type="number" name="length">
+    
+    <input type="submit" value="Add" >
+</form>
+
+{% endblock %}

@@ -23,7 +23,7 @@
 
 <form action="/countries" method="post">
     <label for="name">Add a Country:</label>
-    <input type="text" name="name" id="name" required>
+    <input class="text_input" type="text" name="name" placeholder="Insert name" id="name" required>
 
     <select name="continent_id" id="continent-select" required>
         <option value="">--Please choose a continent--</option>
@@ -34,7 +34,7 @@
     
     </select>
 
-    <input type="submit" value="Add" >
+    <input class="button" type="submit" value="Add" >
 </form>
 
 {% endblock %}

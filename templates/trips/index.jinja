@@ -1,0 +1,44 @@
+{% extends 'base.jinja'%}
+
+{% block content %}
+<h1>Trips</h1>
+
+<a href="trips/add">Add a trip</a>
+
+<h2>You have gravelled to the following locations:</h2>
+<h3>For a total of {{days_travelled}} days</h3>
+
+<div class="trip_flex_box">
+    <div class="timeline"></div>
+    {% for trip in input_trips %}
+    <div 
+        {% if input_trips.index(trip)%2 %} class="trip_box_left"
+        {%else%} class="trip_box_right" 
+        {%endif%} 
+        style="background-position: {{trip.rand_bg_pos_x}}% {{trip.rand_bg_pos_y}}%"
+    >
+        <div class="overlay"></div> 
+        <p class="z-index"> <a href="/locations/{{trip['trip'][0].id}}"> {{ trip['trip'][0].name }}</a>, <a href="/countries/{{trip['trip'][0].country.id}}">{{trip['trip'][0].country.name}} </a> </p>
+        
+        <p class="z-index"> 
+            {%if trip['trip'][2]%5 == 0 %} You relished the rocks in 
+            {%elif trip['trip'][2]%4 == 0 %} You savoured the stones in
+            {%elif trip['trip'][2]%3 == 0 %} You revelled in the pebbles in
+            {%elif trip['trip'][2]%2 == 0 %} You marvelled at the gravel in
+            {%else%} You mingled with the shingle in
+            {%endif%}
+        </p>
+        <p class="z-index"> {{trip['month']}} {{trip['trip'][1].year}}</p>
+        <p class="z-index"> for {{trip['trip'][2]}} {% if trip['trip'][2] > 1 %} days {%else%} day {%endif%}</p>
+
+        <form class="z-index" action="/trips/{{ trip['trip'][3] }}/delete" method="POST">
+            <input class="button" type="submit" value="delete your gravel memory" />
+        </form>
+
+        <br>
+        
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

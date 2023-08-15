@@ -3,19 +3,23 @@
 {% block content %}
 <h1>Wishlist</h1>
 
-{% for wish_location in wishlist %}
+<div class="wishlist_flex_box">
 
-    <p> {{ wish_location.name }}, {{wish_location.country.name}} </p>
+    {% for wish_location in wishlist %}
 
-    <form action="/wishlist/{{ wish_location.id }}/delete" method="POST">
-        <input type="submit" value="delete" />
-    </form>
+        <div class="wishlist_box">
+        <div class="wishlist_box_overlay"></div>
+            <p> {{ wish_location.name }}, {{wish_location.country.name}} </p>
 
-    <br>
-    <br>
+            <form action="/wishlist/{{ wish_location.id }}/delete" method="POST">
+                <input class="button" type="submit" value="remove from wishlist" />
+            </form>
 
-{% endfor %}
+        </div>
 
+    {% endfor %}
+
+</div>
 
 <h2>So much gravel, so little time...</h2>
 {% endblock %}

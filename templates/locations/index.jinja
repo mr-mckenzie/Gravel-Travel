@@ -8,25 +8,29 @@
 <div class="location_flex_box">
     {% for location in input_locations %}
 
-    <div class="location_box">
-        <h3> <a href="/locations/{{location['location'].id}}">{{ location['location'].name }}</a>, <span class="country_span"><a href="/countries/{{location['location'].country.id}}">{{location['location'].country.name}} </a></span></h3>
+    
+
+    <div class="location_box" style="background-position: {{location.rand_bg_pos_x}}% {{location.rand_bg_pos_y}}%";>
+        <div class="overlay"></div>
+        <h3 class="z-index"> <a href="/locations/{{location['location'].id}}">{{ location['location'].name }}</a>, <span class="country_span"><a href="/countries/{{location['location'].country.id}}">{{location['location'].country.name}} </a></span></h3>
 
         <div class="visit_wishlist_flex_box">
-            <aside class="visited"> 
-                <p>Visited?</p>
+            
+            <aside class="visited" class="z-index"> 
+                <p class="z-index">Visited?</p>
                 {% if location['has_visited'] == True%}
-                    <p> &#9989 </p>
+                    <p class="tick"> &#x2713 </p>
                 {% else %}
-                    <p> &#10060 </p>
+                    <p class="cross"> &#x2718 </p>
                 {% endif %}
             </aside>
 
-            <aside class="wishlist">
-                <p>On wishlist?</p>
+            <aside class="wishlist" >
+                <p class="z-index">On wishlist?</p>
                 {% if location['on_wishlist']%}
-                    <p> &#9989</p>
+                    <p class="tick"> &#x2713</p>
                 {% else %}
-                    <p> &#10060 </p>
+                    <p class="cross"> &#x2718 </p>
                 {% endif %}
             </aside>
         </div>

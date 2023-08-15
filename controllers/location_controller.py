@@ -1,8 +1,10 @@
 from flask import Flask, render_template, Blueprint, redirect, request
 from models.location import Location
+from random import randint
 import repositories.location_repository as location_repo
 import repositories.country_repository as country_repo
 import repositories.holiday_repository as holiday_repo
+import repositories.trip_repository as trip_repo
 import repositories.wishlist_repository as wishlist_repo
 
 locations_blueprint = Blueprint("locations", __name__)
@@ -15,12 +17,15 @@ def locations():
     location_with_visit_and_wishlist = []
 
     for location in all_locations:
-        has_visited = holiday_repo.has_visited(location.id)
-        on_wishlist = wishlist_repo.on_wishlist(location.id)
+        has_visited = trip_repo.has_visited(location.id)
+        on_wishlist = trip_repo.on_wishlist(location.id)
         location_with_visit_and_wishlist.append(
             {'location':location, 
             'has_visited':has_visited,
-            'on_wishlist':on_wishlist}
+            'on_wishlist':on_wishlist,
+            'rand_bg_pos_x': randint(0,100),
+            'rand_bg_pos_y': randint(0,100)
+            }
             )
 
     return render_template('locations/index.jinja', input_locations = location_with_visit_and_wishlist)
@@ -29,10 +34,10 @@ def locations():
 @locations_blueprint.route('/locations/<id>')
 def single_location(id):
     one_location = location_repo.select_one(id)
-    has_visited = holiday_repo.has_visited(id)
-    on_wishlist = wishlist_repo.on_wishlist(id)
-    holidays = holiday_repo.select_by_location(id)
-    print(f'THIS IS ONE LOCATION: {one_location}')
+    has_visited = trip_repo.has_visited(id)
+    on_wishlist = trip_repo.on_wishlist(id)
+    holidays = trip_repo.select_by_location(id)
+    # print(f'THIS IS ONE LOCATION: {one_location}')
     return render_template('locations/single_location.jinja', input_location = one_location, has_visited = has_visited, on_wishlist = on_wishlist, holidays = holidays)
 
 #delete location record
@@ -65,17 +70,17 @@ def add_country():
 @locations_blueprint.route('/locations/<id>/toggle_wishlist', methods=['POST'])
 def toggle_wishlist(id):
 
-    if wishlist_repo.on_wishlist(id) == True:
-        wishlist_repo.delete_by_location_id(id)
+    if trip_repo.on_wishlist(id) == True:
+        trip_repo.delete_wishlist_by_location_id(id)
     else:
-        wishlist_repo.save(id)
+        trip_repo.add_to_wishlist(id)
 
     path = '/locations/'+str(id)
     return redirect(path)
 
 #delete holiday record
 @locations_blueprint.route('/locations/<location_id>/holiday/<holiday_id>/delete', methods=['POST'])
-def delete_holiday(location_id, holiday_id):
-    holiday_repo.delete_by_id(holiday_id)
+def delete_trip(location_id, holiday_id):
+    trip_repo.delete_by_id(holiday_id)
     path = '/locations/'+str(location_id)
     return redirect(path)
