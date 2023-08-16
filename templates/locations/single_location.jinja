@@ -1,17 +1,15 @@
 {% extends 'base.jinja'%}
 
 {% block content %}
-<h1>{{input_location.name}}</h1>
+<h1>{{input_location.name}}, <span class="country_span"><a class="black_anchor" href="/countries/{{input_location.country.id}}">{{input_location.country.name}}</a></span></h1>
 
-<p>Location:</p>
-
-<p> <a href="/locations/{{input_location.id}}">{{ input_location.name }}</a>, <a href="/countries/{{input_location.country.id}}">{{input_location.country.name}}</a> </p>
+<p><a class="black_anchor" href="https://en.wikipedia.org/wiki/{{input_location.name}}" title="Learn more about {{input_location.name}} at Wikipedia">Learn more</a> </p>
 
 {% if has_visited == True%}
     <p> Visited on:</p>
     {% for trip in holidays %}
 
-        <p>{{trip[1].day}}/{{trip[1].month}}/{{trip[1].year}}</p>
+        <p>{{trip[1].day}}/{{trip[1].month}}/{{trip[1].year}} for {{trip[2]}} day(s)</p>
 
         <p>delete trip?</p>
         <form action="/locations/{{input_location.id}}/holiday/{{ trip[2] }}/delete" method="POST">
@@ -45,6 +43,21 @@
 
 {% endif %}
 <br>
+<h3>Log a trip:</h3>
+<form action="/trips/add" method="post">
+    <select name="location_id" id="location-select">
+        <option value="{{input_location.id}}">{{input_location.name}}, {{input_location.country.name}}</option>   
+    </select>
+
+    <label for="date">Arrival date:</label>
+    <input type="date" name="date" id="date">
+
+    <label for="length">Length of trip:</label>
+    <input type="number" name="length" id="length" min="1">
+    
+    <input type="submit" value="Add" class="button">
+</form>
+
 <form action="/locations/{{input_location.id}}/delete" method="post">
     <label for="delete">Delete Location:</label>
     <input class="button" id="delete" type="submit" value="Delete">

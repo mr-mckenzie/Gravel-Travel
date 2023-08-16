@@ -3,17 +3,22 @@
 {% block content %}
 <h1>{{input_country.name}}</h1>
 
+<p><a class="black_anchor" href="https://en.wikipedia.org/wiki/{{input_country.name}}" title="Learn more about {{input_country.name}} at Wikipedia">Learn more</a> </p>
+
 <h2>Locations:</h2>
 
 {% if input_locations == [] %}
     <p>None - please add a location via edit button below.</p>
 {%endif%}
 
-{% for location in input_locations %}
+<div class="location_list">
+    {% for location in input_locations %}
 
-    <p> <a href="/locations/{{location.id}}">{{ location.name }}</a> </p>
+        <p> <a class="black_anchor" href="/locations/{{location.id}}">{{ location.name }}</a> </p>
 
-{% endfor %}
+    {% endfor %}
+
+</div>
 
 <hr>
 

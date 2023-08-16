@@ -6,7 +6,7 @@
 <a href="trips/add">Add a trip</a>
 
 <h2>You have gravelled to the following locations:</h2>
-<h3>For a total of {{days_travelled}} days</h3>
+<h3> {{trips_taken}} Trips taken totalling {{days_travelled}} days spent in {{locations_visited}} locations across {{countries_visited}} different countries.</h3>
 
 <div class="trip_flex_box">
     <div class="timeline"></div>
@@ -18,11 +18,11 @@
         style="background-position: {{trip.rand_bg_pos_x}}% {{trip.rand_bg_pos_y}}%"
     >
         <div class="overlay"></div> 
-        <p class="z-index"> <a href="/locations/{{trip['trip'][0].id}}"> {{ trip['trip'][0].name }}</a>, <a href="/countries/{{trip['trip'][0].country.id}}">{{trip['trip'][0].country.name}} </a> </p>
+        <h3 class="z-index"> <a class="white_anchor" href="/locations/{{trip['trip'][0].id}}"> {{ trip['trip'][0].name }}</a>, <span class="country_span"> </span><a class="white_anchor" href="/countries/{{trip['trip'][0].country.id}}">{{trip['trip'][0].country.name}} </a> </span></h3>
         
         <p class="z-index"> 
-            {%if trip['trip'][2]%5 == 0 %} You relished the rocks in 
-            {%elif trip['trip'][2]%4 == 0 %} You savoured the stones in
+            {%if trip['trip'][2]%5 == 0 %} You gawked at the rocks in 
+            {%elif trip['trip'][2]%4 == 0 %} You stared at the stones in
             {%elif trip['trip'][2]%3 == 0 %} You revelled in the pebbles in
             {%elif trip['trip'][2]%2 == 0 %} You marvelled at the gravel in
             {%else%} You mingled with the shingle in

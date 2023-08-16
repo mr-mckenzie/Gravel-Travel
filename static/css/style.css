@@ -37,12 +37,7 @@ header > div > a {
 
 .header_flex_box > a {
     margin: 15px 30px 15px;
-    color: white;
     z-index: 1;
-}
-
-.header_flex_box > a:hover {
-    color:moccasin;
 }
 
 header > p {
@@ -143,21 +138,21 @@ header > p {
     z-index: 2;
 }
 
-.location_box > h3 > a, .location_box > h3 > span > a, .country_list > p > a {
+.white_anchor{
     color: white;
     z-index: 2;
 }
 
-.location_box > h3 > a:hover, .location_box > h3 > span > a:hover, .country_list > p > a:hover {
+.white_anchor:hover {
     color: moccasin;
 }
 
-.country_list > p > a {
+ .black_anchor {
     color: black;
     z-index: 2;
 }
 
-.country_list > p > a:hover {
+ .black_anchor:hover{
     color: white;
 }
 
@@ -237,7 +232,7 @@ header > p {
     height: auto;
 }
 
-#name, #continent-select, #country-select {
+#name, #continent-select, #country-select, #location-select, #date, #length {
     font-family: 'Geologica', sans-serif;
 }
 

@@ -9,11 +9,11 @@
     <input class="button" type="submit" value="Submit" >
 </form>
 
-<p>Here are the locations in {{input_country.name}}:</p>
+<p>Locations in {{input_country.name}}:</p>
 
 {% for location in input_locations %}
 
-    <p> <a href="/locations/{{location.id}}">{{ location.name }}</a> </p>
+    <p> <a class="black_anchor" href="/locations/{{location.id}}">{{ location.name }}</a> </p>
 
     <form action="/locations/{{location.id}}/delete" method="post">
         <label for="delete">Delete Location:</label>

@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Locations</h1>
 
-<a href="/locations/add">Add a location</a>
+<a class="black_anchor" href="/locations/add">Add a location</a>
 
 <div class="location_flex_box">
     {% for location in input_locations %}
@@ -12,7 +12,7 @@
 
     <div class="location_box" style="background-position: {{location.rand_bg_pos_x}}% {{location.rand_bg_pos_y}}%";>
         <div class="overlay"></div>
-        <h3 class="z-index"> <a href="/locations/{{location['location'].id}}">{{ location['location'].name }}</a>, <span class="country_span"><a href="/countries/{{location['location'].country.id}}">{{location['location'].country.name}} </a></span></h3>
+        <h3 class="z-index"> <a class="white_anchor" href="/locations/{{location['location'].id}}">{{ location['location'].name }}</a>, <span class="country_span"><a class="white_anchor" href="/countries/{{location['location'].country.id}}">{{location['location'].country.name}} </a></span></h3>
 
         <div class="visit_wishlist_flex_box">
             

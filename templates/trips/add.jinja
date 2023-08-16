@@ -15,12 +15,13 @@
     
     </select>
 
-    <input type="date" name="date">
+    <label for="date">Arrival date:</label>
+    <input type="date" name="date" id="date">
 
-    <label for="delete">Length of trip:</label>
-    <input type="number" name="length">
+    <label for="length">Length of trip:</label>
+    <input type="number" name="length" id="length" min="1">
     
-    <input type="submit" value="Add" >
+    <input type="submit" value="Add" class="button">
 </form>
 
 {% endblock %}

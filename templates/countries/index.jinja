@@ -11,7 +11,7 @@
     <h2>{{ continent['continent_name'] }}</h2>
 
     {% for country in continent['countries'] %}
-        <p> <a href="/countries/{{country.id}}">{{ country.name }}</a> </p>
+        <p> <a class="black_anchor" href="/countries/{{country.id}}">{{ country.name }}</a> </p>
     {% endfor %}
 
 </div>

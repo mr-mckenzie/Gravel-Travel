@@ -14,6 +14,9 @@ def show_all_trips():
 
     trips_with_random_position = []
 
+    country_counter = []
+    location_counter = []
+
     for trip in all_trips:
 
         trips_with_random_position.append(
@@ -23,11 +26,17 @@ def show_all_trips():
             'month': trip[1].strftime("%B")
             }
         )
+
+        location_counter.append(trip[0].id)
+        country_counter.append(trip[0].country.id)
     
     days_travelled = trip_repo.days_travelled()
+    countries_visited = len(set(country_counter))
+    locations_visited = len(set(location_counter))
+    trips_taken = len(all_trips)
 
 
-    return render_template('trips/index.jinja', input_trips = trips_with_random_position, days_travelled = days_travelled)
+    return render_template('trips/index.jinja', input_trips = trips_with_random_position, days_travelled = days_travelled, locations_visited = locations_visited, countries_visited = countries_visited, trips_taken = trips_taken)
 
 #delete a holiday
 @trips_blueprint.route('/trips/<id>/delete', methods=['POST'])
