@@ -67,5 +67,5 @@ def add_location(id):
     new_country = country_repo.select_one(new_country_id)
     new_location = Location(new_location_name, new_country)
     location_repo.save(new_location)
-    path = '/countries/'+str(id)+'/edit'
+    path = '/countries/'+str(id)
     return redirect(path)

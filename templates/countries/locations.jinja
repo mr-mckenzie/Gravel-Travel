@@ -7,16 +7,56 @@
 
 <h2>Locations:</h2>
 
-{% if input_locations == [] %}
-    <p>None - please add a location via edit button below.</p>
-{%endif%}
+<div class="country_locations_flex_box">
 
-<div class="location_list">
     {% for location in input_locations %}
 
-        <p> <a class="black_anchor" href="/locations/{{location.id}}">{{ location.name }}</a> </p>
+        {# <p> <a class="black_anchor" href="/locations/{{location.id}}">{{ location.name }}</a> </p> #}
+
+
+        <div class="location_box" style="background-position: {{location.rand_bg_pos_x}}% {{location.rand_bg_pos_y}}%";>
+            <div class="overlay"></div>
+            <h3 class="z-index"> <a class="white_anchor" href="/locations/{{location.id}}">{{ location.name }}</a></h3>
+
+            <div class="visit_wishlist_flex_box">
+                
+                <aside class="visited" class="z-index"> 
+                    <p class="z-index">Visited?</p>
+                    {% if location['has_visited'] == True%}
+                        <p class="tick"> &#x2713 </p>
+                    {% else %}
+                        <p class="cross"> &#x2718 </p>
+                    {% endif %}
+                </aside>
+
+                <aside class="wishlist" >
+                    <p class="z-index">On wishlist?</p>
+                    {% if location['on_wishlist']%}
+                        <p class="tick"> &#x2713</p>
+                    {% else %}
+                        <p class="cross"> &#x2718 </p>
+                    {% endif %}
+                </aside>
+            </div>
+        </div>
 
     {% endfor %}
+
+            <div class="location_box">
+            {# <div class="overlay"></div> #}
+            <h3 class="z-index" class="white_anchor"> None</h3>
+            <p>please add a location via edit button below</p>
+
+
+            <form action="/countries/{{input_country.id}}/add_location" method="post">
+                <label for="name">Location name:</label>
+                <input type="text" placeholder="Insert name" name="name" id="name">
+                <select name="country_id" id="country-select">
+                    <option value="{{input_country.id}}">{{input_country.name}}</option>
+                </select>
+                <input class="button" type="submit" value="Add" >
+            </form>
+        </div>
 
 </div>
 
