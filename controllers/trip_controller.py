@@ -20,15 +20,18 @@ def show_all_trips():
     for trip in all_trips:
 
         trips_with_random_position.append(
-            {'trip':trip,
+            {'location': trip.location,
+            'date':trip.date,
+            'length':trip.length,
+            'id':trip.id,
             'rand_bg_pos_x': randint(0,100),
             'rand_bg_pos_y': randint(0,100),
-            'month': trip[1].strftime("%B")
+            'month': trip.date.strftime("%B")
             }
         )
 
-        location_counter.append(trip[0].id)
-        country_counter.append(trip[0].country.id)
+        location_counter.append(trip.id)
+        country_counter.append(trip.location.country.id)
     
     days_travelled = trip_repo.days_travelled()
     countries_visited = len(set(country_counter))

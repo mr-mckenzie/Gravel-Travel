@@ -9,7 +9,7 @@
     <p> Visited on:</p>
     {% for trip in holidays %}
 
-        <p>{{trip[1].day}}/{{trip[1].month}}/{{trip[1].year}} for {{trip[2]}} day(s)</p>
+        <p>{{trip.date.day}}/{{trip.date.month}}/{{trip.date.year}} for {{trip.length}} day(s)</p>
 
         <p>delete trip?</p>
         <form action="/locations/{{input_location.id}}/holiday/{{ trip[2] }}/delete" method="POST">

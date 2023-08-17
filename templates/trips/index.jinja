@@ -18,20 +18,20 @@
         style="background-position: {{trip.rand_bg_pos_x}}% {{trip.rand_bg_pos_y}}%"
     >
         <div class="overlay"></div> 
-        <h3 class="z-index"> <a class="white_anchor" href="/locations/{{trip['trip'][0].id}}"> {{ trip['trip'][0].name }}</a>, <span class="country_span"> </span><a class="white_anchor" href="/countries/{{trip['trip'][0].country.id}}">{{trip['trip'][0].country.name}} </a> </span></h3>
+        <h3 class="z-index"> <a class="white_anchor" href="/locations/{{trip.location.id}}"> {{ trip.location.name }}</a>, <span class="country_span"> </span><a class="white_anchor" href="/countries/{{trip.location.country.id}}">{{trip.location.country.name}} </a> </span></h3>
         
         <p class="z-index"> 
-            {%if trip['trip'][2]%5 == 0 %} You gawked at the rocks in 
-            {%elif trip['trip'][2]%4 == 0 %} You stared at the stones in
-            {%elif trip['trip'][2]%3 == 0 %} You revelled in the pebbles in
-            {%elif trip['trip'][2]%2 == 0 %} You marvelled at the gravel in
+            {%if trip.length%5 == 0 %} You gawked at the rocks in 
+            {%elif trip.length%4 == 0 %} You stared at the stones in
+            {%elif trip.length%3 == 0 %} You revelled in the pebbles in
+            {%elif trip.length%2 == 0 %} You marvelled at the gravel in
             {%else%} You mingled with the shingle in
             {%endif%}
         </p>
-        <p class="z-index"> {{trip['month']}} {{trip['trip'][1].year}}</p>
-        <p class="z-index"> for {{trip['trip'][2]}} {% if trip['trip'][2] > 1 %} days {%else%} day {%endif%}</p>
+        <p class="z-index"> {{trip.month}} {{trip.date.year}}</p>
+        <p class="z-index"> for {{trip.length}} {% if trip.length > 1 %} days {%else%} day {%endif%}</p>
 
-        <form class="z-index" action="/trips/{{ trip['trip'][3] }}/delete" method="POST">
+        <form class="z-index" action="/trips/{{ trip.id }}/delete" method="POST">
             <input class="button" type="submit" value="delete your gravel memory" />
         </form>
 

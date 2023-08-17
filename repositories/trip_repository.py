@@ -5,6 +5,8 @@ from db.run_sql import run_sql
 from models.location import Location
 import repositories.location_repository as location_repo
 
+from models.trip import Trip
+
 #save new trip record to database
 def save (input_location: Location, input_date, input_length = None, input_wishlist = False):
     sql = 'INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist) VALUES (%s, %s, %s, %s)'
@@ -18,16 +20,13 @@ def select_all_trips():
     results = run_sql(sql)
     trips = [ ]
     for row in results:
-        # print(f'ROW IS: {row}')
         location = location_repo.select_one(row['location_id'])
         date = row['date_visited']
         length = row['length_of_visit']
         trip_id = row['id']
-        #print(row_location.__dict__)
-        #print(date)
-        trips.append([location, date, length, trip_id])
-
-        #returns a list of trips in the format [location_object, date, length, id] 
+        new_trip = Trip(location, date, length, trip_id)
+        trips.append(new_trip)
+        
     return trips
 
 #select all trips by location id
@@ -41,9 +40,10 @@ def select_by_location(input_location_id):
         date = row['date_visited']
         length = row['length_of_visit']
         trip_id = row['id']
-        trips.append([location, date, length, trip_id])
+        new_trip = Trip(location, date, length, trip_id)
+        trips.append(new_trip)
 
-    #returns a list of holidays in the format [location_object, date] 
+    #returns a list of trip objects 
     return trips
 
 #return a boolean representing if a location has been visited
