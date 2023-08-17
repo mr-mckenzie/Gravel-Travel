@@ -2,6 +2,7 @@
 from db.run_sql import run_sql
 from models.continent import Continent
 from models.country import Country
+import repositories.country_repository as country_repo
 
 #select all continent records
 def select_all():
@@ -30,12 +31,19 @@ def select_one(input_continent_id):
 #get all countries in a single continent
 def get_countries(input_continent_id):
     sql = 'SELECT * FROM countries WHERE continent_id = %s ORDER BY name'
-    locations = run_sql(sql, [str(input_continent_id)])
+    countries = run_sql(sql, [str(input_continent_id)])
     list_of_countries_in_continent = [ ]
 
-    for row in locations:
+    for row in countries:
 
-        list_of_countries_in_continent.append(Country(row['name'], select_one(input_continent_id), int(row['id'])))
+        country = Country(row['name'], select_one(input_continent_id), int(row['id']))
+
+        country_with_locations = {'name': country.name,
+                                  'continent': country.continent,
+                                  'id': country.id,
+                                  'locations': country_repo.get_locations(row['id'])}
+
+        list_of_countries_in_continent.append(country_with_locations)
 
     #print(list_of_locations_in_country)
     return list_of_countries_in_continent

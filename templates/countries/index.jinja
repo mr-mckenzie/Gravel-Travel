@@ -12,6 +12,11 @@
 
     {% for country in continent['countries'] %}
         <p> <a class="black_anchor" href="/countries/{{country.id}}">{{ country.name }}</a> </p>
+        <ul>
+        {% for location in country['locations'] %}
+            <li><a class="black_anchor" href="/locations/{{location.id}}">{{location.name}}</a></li>
+        {% endfor %}
+        </ul>
     {% endfor %}
 
 </div>
