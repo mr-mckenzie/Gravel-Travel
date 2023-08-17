@@ -44,7 +44,12 @@ def show_all_trips():
 #delete a trip
 @trips_blueprint.route('/trips/<id>/delete', methods=['POST'])
 def delete_entry(id):
+    trip = trip_repo.get_single_trip(id)
     trip_repo.delete_by_id(id)
+
+    if trip_repo.number_of_visits(trip.location.id) == 0:
+        trip_repo.add_to_wishlist(trip.location.id)
+        
     return redirect('/trips')
 
 #go to add trip form

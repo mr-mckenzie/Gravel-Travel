@@ -110,6 +110,10 @@ def toggle_wishlist(id):
 def delete_trip(location_id, trip_id):
     trip_repo.delete_by_id(trip_id)
     path = '/locations/'+str(location_id)
+
+    if trip_repo.number_of_visits(location_id) == 0:
+        trip_repo.add_to_wishlist(location_id)
+
     return redirect(path)
 
 #add a trip record

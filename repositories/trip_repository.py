@@ -116,8 +116,26 @@ def add_to_wishlist(input_location_id, input_date = None, input_length = None, i
     run_sql(sql, values)
 
 
-# #delete a wishlist record by the location_id
+#delete a wishlist record by the location_id
 def delete_wishlist_by_location_id(input_location_id):
     sql = 'DELETE FROM trips WHERE location_id = %s AND wishlist = TRUE'
     value = [str(input_location_id)]
     run_sql(sql, value)
+
+#get single trip id
+def get_single_trip(input_id):
+    sql = 'SELECT * FROM trips where id = %s'
+    value = [str(input_id)]
+    return_from_sql = run_sql(sql, value)
+    # print(f'THIS IS THE RESULT FROM SELECT ONE TRIP {return_from_sql}')
+
+    result = return_from_sql[0]
+
+    # print(result)
+
+    location = location_repo.select_one(result[1])
+    date = result[2]
+    length = result[3]
+    id = result[0]
+
+    return Trip(location, date, length, id)
