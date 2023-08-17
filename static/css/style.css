@@ -94,7 +94,6 @@ header > p {
     border: 2px solid slategray;
     background-image: url(/static/images/pebbles.jpg);
     background-size: 1000%;
-    background-position: center;
     padding: 10px;
     align-items: center;
     color: white;
@@ -281,18 +280,22 @@ header > p {
     vertical-align: super;
 }
 
+.wiki_span, .wiki_anchor {
+ background-color: white;
+ color: black;
+ font-family: 'Linux Libertine', 'Times New Roman', Times, serif;
+ border-top: 2px solid rgb(112, 112, 112);
+ border-left: 2px solid rgb(112, 112, 112);
+ border-right: 2px solid rgb(73, 73, 73);
+ border-bottom: 2px solid rgb(73, 73, 73);
+ padding: 0.1rem;
+ 
+}
+
 .wiki_anchor {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 0.1em;
-    background-color: white;
-    color: black;
-    font-family: 'Linux Libertine', 'Times New Roman', Times, serif;
-    border-top: 2px solid rgb(112, 112, 112);
-    border-left: 2px solid rgb(112, 112, 112);
-    border-right: 2px solid rgb(73, 73, 73);
-    border-bottom: 2px solid rgb(73, 73, 73);
 }
 
 .wiki_anchor:hover {
@@ -305,4 +308,32 @@ header > p {
     flex-direction: column;
     height: 50%;
     justify-content: space-evenly;
+}
+
+.location_trip_flex_box {
+    padding: 1rem;
+    padding-top: 0;
+    min-width: 10rem;
+    max-width: fit-content;
+    margin: 1rem;
+}
+
+.calendar {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.calendar_date {
+    width: 2rem;
+    height: 2rem;
+    margin: 0.1rem;
+    background-image: url(/static/images/rocks.jpg);
+    background-size: 3000%;
+}
+
+.button_box {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
 }

@@ -3,57 +3,59 @@
 {% block content %}
 <h1>{{input_location.name}}, <span class="country_span"><a class="black_anchor" href="/countries/{{input_location.country.id}}">{{input_location.country.name}}</a></span></h1>
 
-<p><a class="black_anchor" href="https://en.wikipedia.org/wiki/{{input_location.name}}" title="Learn more about {{input_location.name}} at Wikipedia">Learn more</a> </p>
+<p><span class="wiki_span">W</span> <a class="black_anchor" href="https://en.wikipedia.org/wiki/{{input_location.name}}" target="_blank"title="Learn more about {{input_location.name}} at Wikipedia">Learn more at Wikipedia</a> </p>
 
-{% if has_visited == True%}
-    <p> Visited on:</p>
-    {% for trip in holidays %}
 
-        <p>{{trip.date.day}}/{{trip.date.month}}/{{trip.date.year}} for {{trip.length}} day(s)</p>
+<h2> Trips:</h2>
+{% if has_visited == False %}
+<hr>
+<p>You have not yet gravelled to {{input_location.name}}.</p>
 
-        <p>delete trip?</p>
-        <form action="/locations/{{input_location.id}}/holiday/{{ trip[2] }}/delete" method="POST">
-            <input class="button" type="submit" value="delete" />
-        </form>
+{% elif has_visited == True%}
+    {% for trip in trips %}
+    <hr>
+    <div class="location_trip_flex_box">
+
+        <h3>{{trip.date.day}} {{trip.month if trip.month != trip.dates_list[-1].month or trip.date.year != trip.dates_list[-1].date.year else ''}} {{trip.date.year if trip.date.year != trip.dates_list[-1].date.year else ''}} to {{trip.dates_list[-1].date.day}} {{trip.dates_list[-1].month}} {{trip.dates_list[-1].date.year}}</h3>
+
+        <aside class="calendar_aside">
+            <p>({{trip.length}} {{'days' if trip.length>1 else 'day'}})</p>
+            <div class="calendar">
+                {%for date in trip.dates_list%}
+                    <a class="calendar_date" style="background-position: {{date.x_pos}}% {{date.y_pos}}%" title="{{date.date.day}} {{date.month}} {{date.date.year}}"></a>
+                {% endfor %}
+            </div>
+        </aside>
+
+        <div class="button_box">
+
+            <form action="/locations/{{input_location.id}}/trips/{{trip.id}}/edit" method="get">
+                <input class="button" type="submit" id="edit" value="Edit" >
+            </form>
+
+            <form action="/locations/{{input_location.id}}/trips/{{trip.id}}/delete" method="POST">
+                <input class="button" type="submit" value="Delete" />
+            </form>
+        </div>
+
+    </div>
 
     {% endfor %}
 {% endif %}
 
+<hr>
 
-{% if on_wishlist == True%}
-    <p> On your wishlist </p>
-
-    <form action="/locations/{{input_location.id}}/toggle_wishlist" method="post">
-        <label>Remove from wishlist?
-            <input class="button" type="submit" value="Yes" >
-        </label>
-    </form>
-
-{% endif %}
-
-
-{% if on_wishlist == False and has_visited == False%}
-    <p> Not on wishlist </p>
-
-    <form action="/locations/{{input_location.id}}/toggle_wishlist" method="post">
-        <label>Want to see the gravel?
-            <input class="button" type="submit" value="Yes" >
-        </label>
-    </form>
-
-{% endif %}
-<br>
 <h3>Log a trip:</h3>
-<form action="/trips/add" method="post">
-    <select name="location_id" id="location-select">
+<form class="add_trip_form" action="/locations/{{input_location.id}}/trips/add" method="post">
+    <select name="location_id" id="location-select" style="display: none;">
         <option value="{{input_location.id}}">{{input_location.name}}, {{input_location.country.name}}</option>   
     </select>
 
     <label for="date">Arrival date:</label>
-    <input type="date" name="date" id="date">
+    <input type="date" name="date" id="date" required>
 
-    <label for="length">Length of trip:</label>
-    <input type="number" name="length" id="length" min="1">
+    <label for="length">Length of trip (days):</label>
+    <input type="number" name="length" id="length" min="1" required>
     
     <input type="submit" value="Add" class="button">
 </form>

@@ -3,7 +3,7 @@ import repositories.location_repository as location_repo
 import repositories.trip_repository as trip_repo
 import repositories.wishlist_repository as wishlist_repo
 from random import randint
-from datetime import datetime
+from datetime import datetime, timedelta
 
 trips_blueprint = Blueprint("trips", __name__)
 
@@ -26,7 +26,7 @@ def show_all_trips():
             'id':trip.id,
             'rand_bg_pos_x': randint(0,100),
             'rand_bg_pos_y': randint(0,100),
-            'month': trip.date.strftime("%B")
+            'month': trip.date.strftime("%B"),
             }
         )
 
@@ -41,7 +41,7 @@ def show_all_trips():
 
     return render_template('trips/index.jinja', input_trips = trips_with_random_position, days_travelled = days_travelled, locations_visited = locations_visited, countries_visited = countries_visited, trips_taken = trips_taken)
 
-#delete a holiday
+#delete a trip
 @trips_blueprint.route('/trips/<id>/delete', methods=['POST'])
 def delete_entry(id):
     trip_repo.delete_by_id(id)
@@ -61,6 +61,7 @@ def add_trip():
     trip_length = request.form['length']
     location_visited = location_repo.select_one(location_id)
     trip_repo.save(location_visited, date_visited, trip_length, False)
+    trip_repo.delete_wishlist_by_location_id(location_id)
     return redirect('/trips')
 
 @trips_blueprint.route('/wishlist')

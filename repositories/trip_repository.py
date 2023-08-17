@@ -31,7 +31,7 @@ def select_all_trips():
 
 #select all trips by location id
 def select_by_location(input_location_id):
-    sql = 'SELECT * FROM trips WHERE location_id = %s'
+    sql = 'SELECT * FROM trips WHERE location_id = %s AND wishlist = FALSE order by date_visited DESC'
     value = [str(input_location_id)]
     results = run_sql(sql, value)
     trips = [ ]

@@ -76,7 +76,7 @@ def view_single_country(id):
     }
     
 
-    return render_template('/countries/locations.jinja', input_locations = locations_with_visit_and_wishlist_data, input_country = current_country, trip_data = trip_data)
+    return render_template('/countries/single_country.jinja', input_locations = locations_with_visit_and_wishlist_data, input_country = current_country, trip_data = trip_data)
 
 #delete a country
 @countries_blueprint.route('/countries/<id>/delete', methods=['POST'])

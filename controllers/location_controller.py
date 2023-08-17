@@ -7,6 +7,8 @@ import repositories.holiday_repository as holiday_repo
 import repositories.trip_repository as trip_repo
 import repositories.wishlist_repository as wishlist_repo
 
+from datetime import datetime, timedelta
+
 locations_blueprint = Blueprint("locations", __name__)
 
 #display all locations
@@ -36,9 +38,34 @@ def single_location(id):
     one_location = location_repo.select_one(id)
     has_visited = trip_repo.has_visited(id)
     on_wishlist = trip_repo.on_wishlist(id)
-    holidays = trip_repo.select_by_location(id)
+    all_trips = trip_repo.select_by_location(id)
+
+
+    trips_with_random_position = []
+        
+    for trip in all_trips:
+
+        i = 0
+        dates_list = []
+
+        while i < trip.length:
+            date = trip.date + timedelta(days=i)
+            dates_list.append({'date':date, 'x_pos': randint(0,100),'y_pos': randint(0,100), 'month':date.strftime("%B")})
+            i += 1
+    
+        trips_with_random_position.append(
+            {'location': trip.location,
+            'date':trip.date,
+            'length':trip.length,
+            'id':trip.id,
+            'rand_bg_pos_x': randint(0,100),
+            'rand_bg_pos_y': randint(0,100),
+            'month': trip.date.strftime("%B"),
+            'dates_list': dates_list
+            }
+        )
     # print(f'THIS IS ONE LOCATION: {one_location}')
-    return render_template('locations/single_location.jinja', input_location = one_location, has_visited = has_visited, on_wishlist = on_wishlist, holidays = holidays)
+    return render_template('locations/single_location.jinja', input_location = one_location, has_visited = has_visited, on_wishlist = on_wishlist, trips = trips_with_random_position)
 
 #delete location record
 @locations_blueprint.route('/locations/<id>/delete', methods=['POST'])
@@ -78,9 +105,27 @@ def toggle_wishlist(id):
     path = '/locations/'+str(id)
     return redirect(path)
 
-#delete holiday record
-@locations_blueprint.route('/locations/<location_id>/holiday/<holiday_id>/delete', methods=['POST'])
-def delete_trip(location_id, holiday_id):
-    trip_repo.delete_by_id(holiday_id)
+#delete trip record
+@locations_blueprint.route('/locations/<location_id>/trips/<trip_id>/delete', methods=['POST'])
+def delete_trip(location_id, trip_id):
+    trip_repo.delete_by_id(trip_id)
     path = '/locations/'+str(location_id)
     return redirect(path)
+
+#add a trip record
+@locations_blueprint.route('/locations/<location_id>/trips/add', methods=['POST'])
+def add_trip(location_id):
+    location_id = request.form['location_id']
+    date_visted = request.form['date']
+    trip_length = request.form['length']
+    location_visited = location_repo.select_one(location_id)
+    trip_repo.save(location_visited, date_visted, trip_length, False)
+    
+    trip_repo.delete_wishlist_by_location_id(location_id)
+
+    return redirect('/locations/' + location_id)
+
+#edit a trip record
+@locations_blueprint.route('/locations/<location_id>/trips/<trip_id>/edit', methods=['GET'])
+def edit_trip(trip_id):
+    asdad = 1
