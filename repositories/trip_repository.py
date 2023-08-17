@@ -64,8 +64,18 @@ def number_of_visits(input_location_id):
 
 #count how many days total travelled
 def days_travelled():
-    sql = 'SELECT * FROM trips where wishlist = FALSE order by date_visited DESC'
+    sql = 'SELECT * FROM trips where wishlist = FALSE'
     results = run_sql(sql)
+    counter = 0
+    for row in results:
+        counter += row['length_of_visit']
+
+    return counter
+
+#count how many days total travelled in a single country
+def days_travelled_in_location(input_location_id):
+    sql = 'SELECT * FROM trips where location_id = (%s) AND wishlist = FALSE'
+    results = run_sql(sql, [str(input_location_id)])
     counter = 0
     for row in results:
         counter += row['length_of_visit']

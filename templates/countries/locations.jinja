@@ -3,7 +3,7 @@
 {% block content %}
 <h1>{{input_country.name}}</h1>
 
-<p><a class="black_anchor" href="https://en.wikipedia.org/wiki/{{input_country.name}}" title="Learn more about {{input_country.name}} at Wikipedia">Learn more</a> </p>
+<p><a class="black_anchor" href="https://en.wikipedia.org/wiki/{{input_country.name}}" target="_blank" title="Learn more about {{input_country.name}} at Wikipedia">Learn more</a> </p>
 
 <h2>Locations:</h2>
 
@@ -11,17 +11,33 @@
 
     {% for location in input_locations %}
 
-        {# <p> <a class="black_anchor" href="/locations/{{location.id}}">{{ location.name }}</a> </p> #}
-
-
         <div class="location_box" style="background-position: {{location.rand_bg_pos_x}}% {{location.rand_bg_pos_y}}%";>
             <div class="overlay"></div>
-            <h3 class="z-index"> <a class="white_anchor" href="/locations/{{location.id}}">{{ location.name }}</a></h3>
+
+            <p><a class="wiki_anchor" href="https://en.wikipedia.org/wiki/{{location.name}},_{{input_country.name}}" target="_blank" title="Learn more about {{location.name}} at Wikipedia">W</a> </p>
+            
+            <form class="delete_button" id="delete-button" action="/locations/{{location.id}}/delete" method="POST"> 
+            {# onclick="alert('You have clicked the x.')" #}
+                <input class="button"type="submit" value="x" />
+            </form>
+
+            <dialog class="confirm_delete_dialog" >
+                <p id="warning">WARNING ALL WISHLIST AND TRIP DATA WILL BE REMOVED IF YOU DELETE THIS LOCATION</p>
+                <p>Are you sure you want to delete this location?</p>
+                <form action="/locations/{{location.id}}/delete" method="POST">
+                    <input class="button" type="submit" value="Yes" />
+                </form>
+                <form>
+                    <input class="button" type="submit" value="Cancel" />
+                </form>
+            </dialog>
+
+            <h3> <a class="white_anchor" href="/locations/{{location.id}}">{{ location.name }}</a></h3>
 
             <div class="visit_wishlist_flex_box">
                 
-                <aside class="visited" class="z-index"> 
-                    <p class="z-index">Visited?</p>
+                <aside class="visited"> 
+                    <p>Visited?</p>
                     {% if location['has_visited'] == True%}
                         <p class="tick"> &#x2713 </p>
                     {% else %}
@@ -29,38 +45,44 @@
                     {% endif %}
                 </aside>
 
-                <aside class="wishlist" >
-                    <p class="z-index">On wishlist?</p>
-                    {% if location['on_wishlist']%}
-                        <p class="tick"> &#x2713</p>
-                    {% else %}
-                        <p class="cross"> &#x2718 </p>
-                    {% endif %}
-                </aside>
             </div>
         </div>
 
     {% endfor %}
 
-            <div class="location_box">
-            {# <div class="overlay"></div> #}
-            <h3 class="z-index" class="white_anchor"> None</h3>
-            <p>please add a location via edit button below</p>
+    <div class="location_box">
+        <div class="overlay"></div>
+        <h3>Add location</h3>
 
+        <form class="add_location_form" action="/countries/{{input_country.id}}/add_location" method="post">
+            <label for="name">Name:
+                <input type="text" placeholder="Insert name" name="name" id="name" required>
+            </label>
+            <select name="country_id" id="country-select" style="display:none">
+                <option value="{{input_country.id}}">{{input_country.name}}</option>
+            </select>
+            <input class="button" type="submit" value="Add" >
+        </form>
+    </div>
 
-            <form action="/countries/{{input_country.id}}/add_location" method="post">
-                <label for="name">Location name:</label>
-                <input type="text" placeholder="Insert name" name="name" id="name">
-                <select name="country_id" id="country-select">
-                    <option value="{{input_country.id}}">{{input_country.name}}</option>
-                </select>
-                <input class="button" type="submit" value="Add" >
-            </form>
-        </div>
+    <div class="location_box">
+        <div class="overlay"></div>
+        <h3>Facts</h3>
+        <p>Locations visited: </p> 
+        <p>{{trip_data.locations_visited}} of {{trip_data.total_locations}} ({{trip_data.percentage_visited}}%)</p>
+        <p>Total trips: {{trip_data.trip_total}}</p>
+        <p>Days spent: {{trip_data.days_travelled}}</p>
+    </div>
 
 </div>
 
 <hr>
+
+{# <p>You have visited {{trip_data.locations_visited}} of {{trip_data.total_locations}} wishlist locations in {{input_country.name}} ({{trip_data.percentage_visited}}%).</p>
+<p>Total trips: {{trip_data.trip_total}}</p>
+<p>Days spent: {{trip_data.days_travelled}}</p> #}
+{# 
+<hr> #}
 
 <form action="/countries/{{input_country.id}}/edit" method="get">
     <label for="edit">Edit Country:</label>

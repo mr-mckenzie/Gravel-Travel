@@ -16,8 +16,8 @@
     <p> <a class="black_anchor" href="/locations/{{location.id}}">{{ location.name }}</a> </p>
 
     <form action="/locations/{{location.id}}/delete" method="post">
-        <label for="delete">Delete Location:</label>
-        <input class="button" id="delete" type="submit" value="Delete" >
+        <label for="delete_{{location.id}}">Delete Location:</label>
+        <input class="button" id="delete_{{location.id}}" type="submit" value="Delete" >
     </form>
 
 {% endfor %}
