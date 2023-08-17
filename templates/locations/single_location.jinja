@@ -16,7 +16,7 @@
     <hr>
     <div class="location_trip_flex_box">
 
-        <h3>{{trip.date.day}} {{trip.month if trip.month != trip.dates_list[-1].month or trip.date.year != trip.dates_list[-1].date.year else ''}} {{trip.date.year if trip.date.year != trip.dates_list[-1].date.year else ''}} to {{trip.dates_list[-1].date.day}} {{trip.dates_list[-1].month}} {{trip.dates_list[-1].date.year}}</h3>
+        <h3>{{trip.date.day if trip.length > 1 else ''}} {{trip.month if trip.month != trip.dates_list[-1].month or trip.date.year != trip.dates_list[-1].date.year else ''}} {{trip.date.year if trip.date.year != trip.dates_list[-1].date.year else ''}} {{'to' if trip.length > 1 else '' }} {{trip.dates_list[-1].date.day}} {{trip.dates_list[-1].month}} {{trip.dates_list[-1].date.year}}</h3>
 
         <aside class="calendar_aside">
             <p>({{trip.length}} {{'days' if trip.length>1 else 'day'}})</p>
