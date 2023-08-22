@@ -139,3 +139,9 @@ def get_single_trip(input_id):
     id = result[0]
 
     return Trip(location, date, length, id)
+
+#udate a trip
+def update_trip(input_date, input_length, input_id) :
+    sql = 'UPDATE trips SET date_visited = (%s), length_of_visit = (%s) WHERE id = (%s)'
+    value = [input_date, input_length, input_id]
+    run_sql(sql, value)

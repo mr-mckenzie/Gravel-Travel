@@ -75,8 +75,24 @@ def show_wishlist():
     #print(wishlist)
     return render_template('wishlist/index.jinja', wishlist = wishlist)
 
-#delete a wishlist record
-@trips_blueprint.route('/wishlist/<location_id>/delete', methods=['POST'])
-def delete_wishlist(location_id):
-    trip_repo.delete_wishlist_by_location_id(location_id)
-    return redirect('/wishlist')
+    # #delete a wishlist record
+    # @trips_blueprint.route('/wishlist/<location_id>/delete', methods=['POST'])
+    # def delete_wishlist(location_id):
+    #     trip_repo.delete_wishlist_by_location_id(location_id)
+    #     return redirect('/wishlist')
+
+#go to edit trip form
+@trips_blueprint.route('/locations/<location_id>/trips/<trip_id>/edit', methods=['GET'])
+def show_edit_trip(location_id, trip_id):
+    trip_location = location_repo.select_one(location_id)
+    selected_trip = trip_repo.get_single_trip(trip_id)
+    return render_template('/trips/edit.jinja', location = trip_location, trip = selected_trip)
+
+#update trip
+@trips_blueprint.route('/locations/<location_id>/trips/<trip_id>/edit', methods=['POST'])
+def update_trip(location_id, trip_id):
+    new_departure_date = request.form['date']
+    new_trip_length = request.form['length']
+    trip_repo.update_trip(new_departure_date, new_trip_length, trip_id)
+    path = '/locations/'+str(location_id)
+    return redirect(path)

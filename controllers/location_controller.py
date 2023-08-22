@@ -129,7 +129,7 @@ def add_trip(location_id):
 
     return redirect('/locations/' + location_id)
 
-#edit a trip record
-@locations_blueprint.route('/locations/<location_id>/trips/<trip_id>/edit', methods=['GET'])
-def edit_trip(trip_id):
-    asdad = 1
+# #edit a trip record
+# @locations_blueprint.route('/locations/<location_id>/trips/<trip_id>/edit', methods=['GET'])
+# def edit_trip(trip_id):
+#     asdad = 1
