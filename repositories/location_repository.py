@@ -41,3 +41,9 @@ def delete_by_id(input_id):
     sql = 'DELETE FROM locations WHERE id = (%s)'
     value = [str(input_id)]
     run_sql(sql, value)
+
+#update location name
+def update_name(input_id, input_name):
+    sql = 'UPDATE locations SET name = (%s) WHERE id = (%s)'
+    value = [input_name, input_id]
+    run_sql(sql, value)

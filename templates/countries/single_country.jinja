@@ -25,8 +25,9 @@
 
             <p><a class="wiki_anchor" href="https://en.wikipedia.org/wiki/{{location.name}},_{{input_country.name}}" target="_blank" title="Learn more about {{location.name}} at Wikipedia">W</a> </p>
             
-            <form class="delete_button" id="delete-button-{{location.id}}" action="/locations/{{location.id}}/delete" method="POST"> 
-                <input class="button" type="submit" value="x" />
+            <form class="delete_button" id="delete-button-{{location.id}}" action="/locations/{{location.id}}/delete" method="POST">
+             {# To reactivate this button change type from "button" to "submit"  #}
+                <input class="button" id="delete-location-{{location.id}}" type="button" value="x" />
             </form>
 
             <h3> <a class="white_anchor" href="/locations/{{location.id}}">{{ location.name }}</a></h3>
@@ -66,14 +67,23 @@
 
 <hr>
 
-<form action="/countries/{{input_country.id}}/edit" method="get">
-    <label for="edit">Edit Country:</label>
-    <input class="button" type="submit" id="edit" value="Edit" >
+<dialog id="editDialog">
+    <form action="/countries/{{input_country.id}}/edit" method="post">
+        <label for="name">Edit name:</label>
+        <input type="text" value="{{input_country.name}}" name="name" id="name">
+        <input class="button" type="submit" value="Cancel" formmethod="dialog">
+        <input class="button" type="submit" value="Submit" >
+    </form>
+</dialog>
+
+<form>
+    <label for="editButton">Edit name:</label>
+  <input class="button" type="button" id="editButton" value="Edit">
 </form>
 
 
 <form action="/countries/{{input_country.id}}/delete" method="post" id="deleteForm">
-    <label for="delete">Delete Country:</label>
+    <label for="deleteButton">Delete Country:</label>
     <input class="button" id="deleteButton" type="button" value="Delete" >
 </form>
 
@@ -83,7 +93,7 @@
     <p>All locations and associated trip data will be lost!</p>
     <form method="dialog">
         <menu>
-            <input class="button" id="cancel" type="reset" value="Cancel">
+            <input class="button" id="cancel" type="submit" value="Cancel" formmethod="dialog">
             <input class="button" id="confirm" type="submit" value="Confirm">
         </menu>
     </form>
@@ -91,20 +101,21 @@
 
 <script>
   (() => {
-    const deleteButton = document.getElementById("deleteButton");
-    const cancelButton = document.getElementById("cancel");
-    const confirmButton = document.getElementById("confirm");
     const deleteForm = document.getElementById("deleteForm")
-    const dialog = document.getElementById("deleteDialog");
+    const deleteButton = document.getElementById("deleteButton");
+    const confirmButton = document.getElementById("confirm");
+    const deleteDialog = document.getElementById("deleteDialog");
+    const editButton = document.getElementById("editButton")
+    const editDialog = document.getElementById("editDialog");
 
-    // delete button opens the dialog
+    // delete button opens the delete dialog
     deleteButton.addEventListener("click", () => {
-      dialog.showModal();
+      deleteDialog.showModal();
     });
 
-    // Form cancel button closes the dialog box
-    cancelButton.addEventListener("click", () => {
-      dialog.close();
+    // edit button opens the edit dialog
+    editButton.addEventListener("click", () => {
+      editDialog.showModal();
     });
 
     //confirm button submits the delete form

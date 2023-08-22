@@ -96,7 +96,7 @@ def edit_country(id):
 def edit_country_name(id):
     new_name = request.form['name']
     country_repo.update_name(id, new_name)
-    path = '/countries/'+str(id)+'/edit'
+    path = '/countries/'+str(id)
     return redirect(path)
 
 #add a location to a country

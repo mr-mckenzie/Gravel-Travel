@@ -62,16 +62,29 @@
 
 <hr>
 
-    <form action="/locations/{{input_location.id}}/delete" id="deleteForm" method="post">
-        <input class="button" type="button" id="deleteButton" value="Delete Location">
+<dialog id="editDialog">
+    <form action="/locations/{{input_location.id}}/edit" method="post">
+        <label for="name">Edit name:</label>
+        <input type="text" value="{{input_location.name}}" name="name" id="name">
+        <input class="button" type="submit" value="Cancel" formmethod="dialog">
+        <input class="button" type="submit" value="Submit" >
     </form>
+</dialog>
+
+<form>
+  <input class="button" type="button" id="editButton" value="Edit">
+</form>
+
+<form action="/locations/{{input_location.id}}/delete" id="deleteForm" method="post">
+    <input class="button" type="button" id="deleteButton" value="Delete Location">
+</form>
 
 <dialog id="deleteDialog" class="deleteDialog">
     <p>Are you sure you want to delete this record?</p>
     <p>Any associated trip data will be lost!</p>
     <form method="dialog">
         <menu>
-            <input class="button" id="cancel" type="reset" value="Cancel">
+            <input class="button" id="cancel" type="submit" value="Cancel" formmethod="dialog">
             <input class="button" id="confirm" type="submit" value="Confirm">
         </menu>
     </form>
@@ -80,19 +93,20 @@
 <script>
   (() => {
     const deleteButton = document.getElementById("deleteButton");
-    const cancelButton = document.getElementById("cancel");
     const confirmButton = document.getElementById("confirm");
     const deleteForm = document.getElementById("deleteForm")
-    const dialog = document.getElementById("deleteDialog");
+    const deleteDialog = document.getElementById("deleteDialog");
+    const editButton = document.getElementById("editButton")
+    const editDialog = document.getElementById("editDialog");
 
     // delete button opens the dialog
     deleteButton.addEventListener("click", () => {
-      dialog.showModal();
+      deleteDialog.showModal();
     });
 
-    // Form cancel button closes the dialog box
-    cancelButton.addEventListener("click", () => {
-      dialog.close();
+    // edit button opens the edit dialog
+    editButton.addEventListener("click", () => {
+      editDialog.showModal();
     });
 
     //confirm button submits the delete form
