@@ -9,6 +9,15 @@
 
 <div class="country_locations_flex_box">
 
+    <div class="location_box">
+        <div class="overlay"></div>
+        <h3>{{input_country.name}} at a glance</h3>
+        <p>Locations visited: </p> 
+        <p>{{trip_data.locations_visited}} of {{trip_data.total_locations}} ({{trip_data.percentage_visited}}%)</p>
+        <p>Total trips: {{trip_data.trip_total}}</p>
+        <p>Days spent: {{trip_data.days_travelled}}</p>
+    </div>
+
     {% for location in input_locations %}
 
         <div class="location_box" style="background-position: {{location.rand_bg_pos_x}}% {{location.rand_bg_pos_y}}%";>
@@ -16,21 +25,9 @@
 
             <p><a class="wiki_anchor" href="https://en.wikipedia.org/wiki/{{location.name}},_{{input_country.name}}" target="_blank" title="Learn more about {{location.name}} at Wikipedia">W</a> </p>
             
-            <form class="delete_button" id="delete-button" action="/locations/{{location.id}}/delete" method="POST"> 
-            {# onclick="alert('You have clicked the x.')" #}
-                <input class="button"type="submit" value="x" />
+            <form class="delete_button" id="delete-button-{{location.id}}" action="/locations/{{location.id}}/delete" method="POST"> 
+                <input class="button" type="submit" value="x" />
             </form>
-
-            <dialog class="confirm_delete_dialog" >
-                <p id="warning">WARNING ALL WISHLIST AND TRIP DATA WILL BE REMOVED IF YOU DELETE THIS LOCATION</p>
-                <p>Are you sure you want to delete this location?</p>
-                <form action="/locations/{{location.id}}/delete" method="POST">
-                    <input class="button" type="submit" value="Yes" />
-                </form>
-                <form>
-                    <input class="button" type="submit" value="Cancel" />
-                </form>
-            </dialog>
 
             <h3> <a class="white_anchor" href="/locations/{{location.id}}">{{ location.name }}</a></h3>
 
@@ -65,42 +62,57 @@
         </form>
     </div>
 
-    <div class="location_box">
-        <div class="overlay"></div>
-        <h3>Facts</h3>
-        <p>Locations visited: </p> 
-        <p>{{trip_data.locations_visited}} of {{trip_data.total_locations}} ({{trip_data.percentage_visited}}%)</p>
-        <p>Total trips: {{trip_data.trip_total}}</p>
-        <p>Days spent: {{trip_data.days_travelled}}</p>
-    </div>
-
 </div>
 
 <hr>
-
-{# <p>You have visited {{trip_data.locations_visited}} of {{trip_data.total_locations}} wishlist locations in {{input_country.name}} ({{trip_data.percentage_visited}}%).</p>
-<p>Total trips: {{trip_data.trip_total}}</p>
-<p>Days spent: {{trip_data.days_travelled}}</p> #}
-{# 
-<hr> #}
 
 <form action="/countries/{{input_country.id}}/edit" method="get">
     <label for="edit">Edit Country:</label>
     <input class="button" type="submit" id="edit" value="Edit" >
 </form>
 
-{# CAN ONLY DELETE IF NO LOCATIONS EXIST #}
-{%if input_locations%}
 
-    <p>Delete Country: To delete this country record, please delete all locations. </p>
-
-{% else %}
-
-<form action="/countries/{{input_country.id}}/delete" method="post">
+<form action="/countries/{{input_country.id}}/delete" method="post" id="deleteForm">
     <label for="delete">Delete Country:</label>
-    <input class="button" id="delete" type="submit" value="Delete" >
+    <input class="button" id="deleteButton" type="button" value="Delete" >
 </form>
 
-{% endif %}
+
+<dialog id="deleteDialog" class="deleteDialog">
+    <p>Are you sure you want to delete this record?</p>
+    <p>All locations and associated trip data will be lost!</p>
+    <form method="dialog">
+        <menu>
+            <input class="button" id="cancel" type="reset" value="Cancel">
+            <input class="button" id="confirm" type="submit" value="Confirm">
+        </menu>
+    </form>
+</dialog>
+
+<script>
+  (() => {
+    const deleteButton = document.getElementById("deleteButton");
+    const cancelButton = document.getElementById("cancel");
+    const confirmButton = document.getElementById("confirm");
+    const deleteForm = document.getElementById("deleteForm")
+    const dialog = document.getElementById("deleteDialog");
+
+    // delete button opens the dialog
+    deleteButton.addEventListener("click", () => {
+      dialog.showModal();
+    });
+
+    // Form cancel button closes the dialog box
+    cancelButton.addEventListener("click", () => {
+      dialog.close();
+    });
+
+    //confirm button submits the delete form
+    confirmButton.addEventListener("click", () => {
+      deleteForm.submit();
+    });
+
+  })();
+</script>
 
 {% endblock %}

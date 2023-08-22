@@ -3,7 +3,7 @@
 {% block content %}
 <h1>{{input_location.name}}, <span class="country_span"><a class="black_anchor" href="/countries/{{input_location.country.id}}">{{input_location.country.name}}</a></span></h1>
 
-<aside><span class="wiki_span">W</span> <a class="black_anchor" href="https://en.wikipedia.org/wiki/{{input_location.name}}" target="_blank"title="Learn more about {{input_location.name}} at Wikipedia">Learn more at Wikipedia</a> </aside>
+<aside><span class="wiki_span">W</span> <a class="black_anchor" href="https://en.wikipedia.org/wiki/{{input_location.name}},_{{input_location.country.name}}" target="_blank"title="Learn more about {{input_location.name}} at Wikipedia">Learn more at Wikipedia</a> </aside>
 
 
 <h2> Trips:</h2>
@@ -45,7 +45,7 @@
 
 <hr>
 
-<h3>Log a trip:</h3>
+<h3>Log {{"a" if has_visited == False else "another"}} trip:</h3>
 <form class="add_trip_form" action="/locations/{{input_location.id}}/trips/add" method="post">
     <select name="location_id" id="location-select" style="display: none;">
         <option value="{{input_location.id}}">{{input_location.name}}, {{input_location.country.name}}</option>   
@@ -60,9 +60,10 @@
     <input type="submit" value="Add" class="button">
 </form>
 
+<hr>
+
     <form action="/locations/{{input_location.id}}/delete" id="deleteForm" method="post">
-        {# <input class="button" id="delete" type="submit" value="Confirm"> #}
-        <input class="button" id="deleteLocation" value="Delete Location">
+        <input class="button" type="button" id="deleteButton" value="Delete Location">
     </form>
 
 <dialog id="deleteDialog" class="deleteDialog">
@@ -78,14 +79,14 @@
 
 <script>
   (() => {
-    const updateButton = document.getElementById("deleteLocation");
+    const deleteButton = document.getElementById("deleteButton");
     const cancelButton = document.getElementById("cancel");
     const confirmButton = document.getElementById("confirm");
     const deleteForm = document.getElementById("deleteForm")
     const dialog = document.getElementById("deleteDialog");
 
-    // Update button opens a modeless dialog
-    updateButton.addEventListener("click", () => {
+    // delete button opens the dialog
+    deleteButton.addEventListener("click", () => {
       dialog.showModal();
     });
 
@@ -94,17 +95,11 @@
       dialog.close();
     });
 
+    //confirm button submits the delete form
     confirmButton.addEventListener("click", () => {
       deleteForm.submit();
     });
   })();
 </script>
-
-
-{% if on_wishlist == True or has_visited == True%}
-
-    <p id="warning">WARNING ALL WISHLIST AND TRIP DATA WILL BE REMOVED IF YOU DELETE THIS LOCATION</p>
-
-{% endif %} 
 
 {% endblock %}

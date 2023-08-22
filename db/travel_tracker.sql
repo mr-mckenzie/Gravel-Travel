@@ -14,30 +14,22 @@ CREATE TABLE continents (
     name            VARCHAR(255)
 );
 
--- a table to hold country information
+-- a join table to hold country information
 CREATE TABLE countries (
     id              SERIAL NOT NULL PRIMARY KEY,
     name            VARCHAR(255),
     continent_id    INT REFERENCES continents(id) NOT NULL
 );
 
--- table to hold locations
+-- a join table to hold locations
 CREATE TABLE locations (
     id              SERIAL NOT NULL PRIMARY KEY,
     name            VARCHAR(255),
-    country_id      INT REFERENCES countries(id) NOT NULL
+    country_id      INT REFERENCES countries(id) ON DELETE CASCADE NOT NULL
 );
 
--- a join table to record countries visited
+-- a join table to record trips
 -- note that location_id must be NOT NULL because this stops instances of Location classes without ids from being saved
---CREATE TABLE holidays (
---    id              SERIAL PRIMARY KEY NOT NULL,
---    location_id     INT REFERENCES locations(id) ON DELETE CASCADE NOT NULL,
---    date_visited    DATE,
---    length_of_visit INT,
---    wishlist        BOOLEAN
---);
-
 CREATE TABLE trips (
     id              SERIAL PRIMARY KEY NOT NULL,
     location_id     INT REFERENCES locations(id) ON DELETE CASCADE NOT NULL,
@@ -45,12 +37,6 @@ CREATE TABLE trips (
     length_of_visit INT,
     wishlist        BOOLEAN
 );
-
--- a join table to record countries the user wants to visit
---CREATE TABLE wishlist (
---    id              SERIAL PRIMARY KEY NOT NULL,
---    location_id     INT REFERENCES locations(id) ON DELETE CASCADE NOT NULL
---);
 
 -- add table rows containing continent records
 INSERT INTO continents (name)
@@ -142,7 +128,7 @@ VALUES ('Bordeaux', 7);
 INSERT INTO locations (name, country_id)
 VALUES ('Mallorca', 10);
 
--- add table rows recording holiday trips
+-- add table rows recording trips
 INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist)
 VALUES (1, '2020-01-10', 8, False);
 
@@ -163,7 +149,19 @@ VALUES (9, '2022-11-01', 3, False);
 
 -- add table rows to wishlist
 INSERT INTO trips (location_id, wishlist)
+VALUES (4, True);
+
+INSERT INTO trips (location_id, wishlist)
 VALUES (5, True);
 
 INSERT INTO trips (location_id, wishlist)
-VALUES (9, True);
+VALUES (6, True);
+
+INSERT INTO trips (location_id, wishlist)
+VALUES (8, True);
+
+INSERT INTO trips (location_id, wishlist)
+VALUES (10, True);
+
+INSERT INTO trips (location_id, wishlist)
+VALUES (12, True);

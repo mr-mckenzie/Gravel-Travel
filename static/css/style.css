@@ -343,3 +343,7 @@ header > p {
     background-position: 60%;
     color: white;
 }
+
+input, select {
+    background-color: linen;
+}
