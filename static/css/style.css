@@ -337,3 +337,9 @@ header > p {
     flex-direction: row;
     margin-top: 1rem;
 }
+
+.deleteDialog{
+    background-image: url(/static/images/rocks.jpg);
+    background-position: 60%;
+    color: white;
+}
