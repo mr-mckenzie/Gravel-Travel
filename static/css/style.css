@@ -301,6 +301,17 @@ header > p {
     left: 0;
 }
 
+.map_span {
+    background-color: white;
+    color:cornflowerblue;
+    font-family: 'Gill sans', sans-serif;
+    border-top: 2px solid rgb(112, 112, 112);
+    border-left: 2px solid rgb(112, 112, 112);
+    border-right: 2px solid rgb(73, 73, 73);
+    border-bottom: 2px solid rgb(73, 73, 73);
+    padding: 0.1rem;
+   }
+
 .wiki_anchor:hover {
     background-color: grey;
     color: white;
