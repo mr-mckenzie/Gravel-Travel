@@ -9,17 +9,19 @@
 
         <div class="wishlist_box">
         <div class="wishlist_box_overlay"></div>
-            <p> {{ wish_location.name }}, {{wish_location.country.name}} </p>
+            <p> <a class="white_anchor" href="/locations/{{wish_location.id}}"> {{ wish_location.name }}</a>, <a class="white_anchor" href="/countries/{{wish_location.country.id}}">{{wish_location.country.name}} </a> </p>
 
-            <form action="/wishlist/{{ wish_location.id }}/delete" method="POST">
-                <input class="button" type="submit" value="remove from wishlist" />
-            </form>
-
+            <p><a class="white_anchor" href="https://www.google.com/maps/place/{{wish_location.name}},+{{wish_location.country.name}}/" target="_blank">Click me for Google Map</a></p>
+            {# <form action="/wishlist/{{ wish_location.id }}/delete" method="POST">
+                <input class="button" type="button" value="remove from wishlist" />
+            </form> #}
         </div>
 
     {% endfor %}
 
 </div>
 
-<h2>So much gravel, so little time...</h2>
+<aside>
+    <h2>So much gravel, so little time...</h2>
+</aside>
 {% endblock %}

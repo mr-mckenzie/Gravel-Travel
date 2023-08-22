@@ -188,6 +188,9 @@ header > p {
 
 .wishlist_box {
     width: 250px;
+    background-image: url(../images/shingle.jpg);
+    background-size: 500%;
+    background-position: 50%;
 }
 
 .wishlist_box > p, .wishlist_box > form{
