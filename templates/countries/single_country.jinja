@@ -27,9 +27,8 @@
 
             <p><a class="wiki_anchor" href="https://en.wikipedia.org/wiki/{{location.name}},_{{input_country.name}}" target="_blank" title="Learn more about {{location.name}} at Wikipedia">W</a> </p>
             
-            <form class="delete_button" id="delete-button-{{location.id}}" action="/locations/{{location.id}}/delete" method="POST">
-             {# To reactivate this button change type from "button" to "submit"  #}
-                <input class="button" id="delete-location-{{location.id}}" type="button" value="x" />
+            <form class="delete_button" id="delete-form-{{location.id}}" action="/locations/{{location.id}}/delete" method="POST">
+                <input class="button" id="delete-button-{{location.id}}" type="button" value="x" />
             </form>
 
             <h3> <a class="white_anchor" href="/locations/{{location.id}}">{{ location.name }}</a></h3>
@@ -47,6 +46,37 @@
 
             </div>
         </div>
+
+        <dialog id="delete-dialog-{{location.id}}" class="deleteDialog">
+            <p>Are you sure you want to delete this record?</p>
+            <p>All associated trip data will be lost!</p>
+            <form method="dialog">
+                <menu>
+                    <input class="button" id="cancel-{{location.id}}" type="submit" value="Cancel" formmethod="dialog">
+                    <input class="button" id="confirm-{{location.id}}" type="submit" value="Confirm">
+                </menu>
+            </form>
+        </dialog>
+
+        <script>
+            (() => {
+                const deleteForm{{location.id}} = document.getElementById("delete-form-{{location.id}}");
+                const deleteButton{{location.id}} = document.getElementById("delete-button-{{location.id}}");
+                const confirmButton{{location.id}} = document.getElementById("confirm-{{location.id}}");
+                const deleteDialog{{location.id}} = document.getElementById("delete-dialog-{{location.id}}");
+
+                // delete button opens the delete dialog
+                deleteButton{{location.id}}.addEventListener("click", () => {
+                deleteDialog{{location.id}}.showModal();
+                });
+
+                //confirm button submits the delete form
+                confirmButton{{location.id}}.addEventListener("click", () => {
+                deleteForm{{location.id}}.submit();
+                });
+
+            })();
+        </script>
 
     {% endfor %}
 
@@ -103,12 +133,14 @@
 
 <script>
   (() => {
-    const deleteForm = document.getElementById("deleteForm")
+    const deleteForm = document.getElementById("deleteForm");
     const deleteButton = document.getElementById("deleteButton");
     const confirmButton = document.getElementById("confirm");
     const deleteDialog = document.getElementById("deleteDialog");
-    const editButton = document.getElementById("editButton")
+    const editButton = document.getElementById("editButton");
     const editDialog = document.getElementById("editDialog");
+
+
 
     // delete button opens the delete dialog
     deleteButton.addEventListener("click", () => {

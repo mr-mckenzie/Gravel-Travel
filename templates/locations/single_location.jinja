@@ -31,15 +31,65 @@
         <div class="button_box">
 
             <form action="/locations/{{input_location.id}}/trips/{{trip.id}}/edit" method="GET">
-                <input class="button" type="submit" id="edit" value="Edit" >
+                <input class="button" type="button" id="edit-button-{{trip.id}}" value="Edit" >
             </form>
 
-            <form action="/locations/{{input_location.id}}/trips/{{trip.id}}/delete" method="POST">
-                <input class="button" type="submit" value="Delete your gravel memory" />
+            <form id="delete-form-{{trip.id}}" action="/locations/{{input_location.id}}/trips/{{trip.id}}/delete" method="POST">
+                <input class="button" id="delete-button-{{trip.id}}" type="button" value="Delete your gravel memory" />
             </form>
         </div>
 
     </div>
+
+    <dialog id="delete-dialog-{{trip.id}}" class="deleteDialog">
+        <p>Are you sure you want to delete this record?</p>
+        <form method="dialog">
+            <menu>
+                <input class="button" id="cancel-delete-{{trip.id}}" type="submit" value="Cancel" formmethod="dialog">
+                <input class="button" id="confirm-{{trip.id}}" type="submit" value="Confirm">
+            </menu>
+        </form>
+    </dialog>
+
+    <dialog id="edit-dialog-{{trip.id}}">
+        <form class="edit_trip_form" action="/locations/{{input_location.id}}/trips/{{trip.id}}/edit" method="post">
+            <label for="date">Arrival date:</label>
+            <input type="date" name="date" id="date" value={{trip.date}} required>
+
+            <label for="length">Length of trip (days):</label>
+            <input type="number" name="length" id="length" min="1" value={{trip.length}} required>
+            
+            <input class="button" id="cancel-edit-{{trip.id}}" type="submit" value="Cancel" formmethod="dialog">
+            <input type="submit" value="Submit" class="button">
+        </form>
+    </dialog>
+
+    <script>
+        (() => {
+            const deleteForm{{trip.id}} = document.getElementById("delete-form-{{trip.id}}");
+            const deleteButton{{trip.id}} = document.getElementById("delete-button-{{trip.id}}");
+            const confirmButton{{trip.id}} = document.getElementById("confirm-{{trip.id}}");
+            const deleteDialog{{trip.id}} = document.getElementById("delete-dialog-{{trip.id}}");
+            const editButton{{trip.id}} = document.getElementById("edit-button-{{trip.id}}");
+            const editDialog{{trip.id}} = document.getElementById("edit-dialog-{{trip.id}}");
+
+            // delete button opens the delete dialog
+            deleteButton{{trip.id}}.addEventListener("click", () => {
+            deleteDialog{{trip.id}}.showModal();
+            });
+
+            // edit button opens the edit dialog
+            editButton{{trip.id}}.addEventListener("click", () => {
+            editDialog{{trip.id}}.showModal();
+            });
+
+            //confirm button submits the delete form
+            confirmButton{{trip.id}}.addEventListener("click", () => {
+            deleteForm{{trip.id}}.submit();
+            });
+
+        })();
+    </script>
 
     {% endfor %}
 {% endif %}
