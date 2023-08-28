@@ -30,14 +30,13 @@ def show_all_trips():
             }
         )
 
-        location_counter.append(trip.id)
+        location_counter.append(trip.location.id)
         country_counter.append(trip.location.country.id)
     
     days_travelled = trip_repo.days_travelled()
     countries_visited = len(set(country_counter))
     locations_visited = len(set(location_counter))
     trips_taken = len(all_trips)
-
 
     return render_template('trips/index.jinja', input_trips = trips_with_random_position, days_travelled = days_travelled, locations_visited = locations_visited, countries_visited = countries_visited, trips_taken = trips_taken)
 
@@ -74,19 +73,6 @@ def show_wishlist():
     wishlist = trip_repo.select_all_wishlist()
     #print(wishlist)
     return render_template('wishlist/index.jinja', wishlist = wishlist)
-
-    # #delete a wishlist record
-    # @trips_blueprint.route('/wishlist/<location_id>/delete', methods=['POST'])
-    # def delete_wishlist(location_id):
-    #     trip_repo.delete_wishlist_by_location_id(location_id)
-    #     return redirect('/wishlist')
-
-#go to edit trip form
-@trips_blueprint.route('/locations/<location_id>/trips/<trip_id>/edit', methods=['GET'])
-def show_edit_trip(location_id, trip_id):
-    trip_location = location_repo.select_one(location_id)
-    selected_trip = trip_repo.get_single_trip(trip_id)
-    return render_template('/trips/edit.jinja', location = trip_location, trip = selected_trip)
 
 #update trip
 @trips_blueprint.route('/locations/<location_id>/trips/<trip_id>/edit', methods=['POST'])

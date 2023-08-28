@@ -84,13 +84,6 @@ def delete_country(id):
     country_repo.delete_by_id(id)
     return redirect('/countries')
 
-#go to edit country form
-@countries_blueprint.route('/countries/<id>/edit', methods=['GET'])
-def edit_country(id):
-    current_country = country_repo.select_one(id)
-    all_locations = country_repo.get_locations(id)
-    return render_template('/countries/edit.jinja', input_locations = all_locations, input_country = current_country)
-
 #change country name
 @countries_blueprint.route('/countries/<id>/edit', methods=['POST'])
 def edit_country_name(id):
