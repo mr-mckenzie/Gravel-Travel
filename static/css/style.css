@@ -64,7 +64,7 @@ header > p {
     justify-content: space-evenly;
 }
 
-.country_locations_flex_box > div > h3, .country_locations_flex_box > div > .visit_wishlist_flex_box, .country_locations_flex_box > div > form {
+.country_locations_flex_box > div > h3, .location_flex_box > div > h3, .country_locations_flex_box > div > .visit_wishlist_flex_box, .location_flex_box > div > .visit_wishlist_flex_box, .country_locations_flex_box > div > form, .location_flex_box > div > form {
     z-index: 2;
 }
 
@@ -127,15 +127,23 @@ header > p {
     margin-bottom: -45px;
 }
 
-.overlay {
+.overlay, .visited_overlay, .not_yet_visited_overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 30%;
-    background-color: black;
     z-index: 1;
+}
+
+.overlay {
+    background-color: black;
+    opacity: 30%;
+}
+
+.not_yet_visited_overlay {
+    background-color: black;
+    opacity: 60%
 }
 
 .z-index {
@@ -167,10 +175,11 @@ header > p {
 }
 
 .visited {
-    margin: 15px;
+    margin: 0.5rem;
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
 }
 
 .wishlist {
@@ -210,15 +219,10 @@ header > p {
 
 .visit_wishlist_flex_box {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .country_span {
-    font-size: smaller;
-}
-
-#warning {
-    color: red;
     font-size: smaller;
 }
 
@@ -266,8 +270,8 @@ header > p {
     color:aquamarine;
     font-size: 1.5rem;
     z-index: 2;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .cross {
@@ -284,23 +288,17 @@ header > p {
 }
 
 .wiki_span, .wiki_anchor {
- background-color: white;
- color: black;
- font-family: 'Linux Libertine', 'Times New Roman', Times, serif;
- border-top: 2px solid rgb(112, 112, 112);
- border-left: 2px solid rgb(112, 112, 112);
- border-right: 2px solid rgb(73, 73, 73);
- border-bottom: 2px solid rgb(73, 73, 73);
- padding: 0.1rem;
+    background-color: white;
+    color: black;
+    font-family: 'Linux Libertine', 'Times New Roman', Times, serif;
+    border-top: 2px solid rgb(112, 112, 112);
+    border-left: 2px solid rgb(112, 112, 112);
+    border-right: 2px solid rgb(73, 73, 73);
+    border-bottom: 2px solid rgb(73, 73, 73);
+    padding: 0.1rem;
 }
 
-.wiki_anchor {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.map_span {
+.map_span, .map_anchor {
     background-color:dodgerblue;
     color:white;
     font-family: 'Gill sans', sans-serif;
@@ -309,11 +307,35 @@ header > p {
     border-right: 2px solid rgb(73, 73, 73);
     border-bottom: 2px solid rgb(73, 73, 73);
     padding: 0.1rem;
-   }
+}
+
+.wiki_anchor, .map_anchor {
+    width: 1.05rem;
+    height: 1.05rem;
+    text-align: center;
+    text-decoration: none;
+}
+
+.wiki_anchor {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
 .wiki_anchor:hover {
     background-color: grey;
     color: white;
+}
+
+.map_anchor_fixed {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.map_anchor:hover {
+    background-color: white;
+    color: dodgerblue;
 }
 
 .add_location_form {
@@ -360,3 +382,4 @@ header > p {
 input, select {
     background-color: linen;
 }
+

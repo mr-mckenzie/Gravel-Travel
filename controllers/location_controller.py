@@ -15,21 +15,36 @@ locations_blueprint = Blueprint("locations", __name__)
 def locations():
     all_locations = location_repo.select_all()
 
+    total_locations = len(all_locations)
+    visited_locations_counter = 0
+
     location_with_visit_and_wishlist = []
 
     for location in all_locations:
         has_visited = trip_repo.has_visited(location.id)
-        on_wishlist = trip_repo.on_wishlist(location.id)
+        # on_wishlist = trip_repo.on_wishlist(location.id)
         location_with_visit_and_wishlist.append(
-            {'location':location, 
+            {'name': location.name,
+            'country':location.country,
+            'id':location.id,
             'has_visited':has_visited,
-            'on_wishlist':on_wishlist,
+            # 'on_wishlist':on_wishlist,
             'rand_bg_pos_x': randint(0,100),
             'rand_bg_pos_y': randint(0,100)
             }
             )
+        
+        if has_visited == True:
+            visited_locations_counter += 1        
 
-    return render_template('locations/index.jinja', input_locations = location_with_visit_and_wishlist)
+    visited_percentage = 0
+
+    if total_locations > 0 :
+        visited_percentage = round((visited_locations_counter/total_locations)*100, 2)
+    
+    all_countries = country_repo.select_all()
+
+    return render_template('locations/index.jinja', input_locations = location_with_visit_and_wishlist, input_countries = all_countries, visited_locations = visited_locations_counter, total_locations = total_locations, visited_percentage = visited_percentage)
 
 #display single location record
 @locations_blueprint.route('/locations/<id>')
@@ -90,6 +105,7 @@ def add_country():
     new_country = country_repo.select_one(new_country_id)
     new_location = Location(new_location_name, new_country)
     location_repo.save(new_location)
+    trip_repo.add_to_wishlist(new_location.id)
     return redirect('/locations')
 
 #add/remove location from wishlist

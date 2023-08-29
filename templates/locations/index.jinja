@@ -2,42 +2,69 @@
 
 {% block content %}
 <h1>Locations</h1>
+<p> Locations visited: {{visited_locations}} of {{total_locations}} ({{visited_percentage}}%)</p>
 
-<a class="black_anchor" href="/locations/add">Add a location</a>
+<input class="button" id="addButton" value="Add a location" type="button"></a>
 
 <div class="location_flex_box">
     {% for location in input_locations %}
 
-    
-
     <div class="location_box" style="background-position: {{location.rand_bg_pos_x}}% {{location.rand_bg_pos_y}}%";>
-        <div class="overlay"></div>
-        <h3 class="z-index"> <a class="white_anchor" href="/locations/{{location['location'].id}}">{{ location['location'].name }}</a>, <span class="country_span"><a class="white_anchor" href="/countries/{{location['location'].country.id}}">{{location['location'].country.name}} </a></span></h3>
+        {% if location.has_visited == True %}
+            <div class="overlay"></div>
+        {% else %}
+            <div class="not_yet_visited_overlay"></div>
+        {% endif %}
+        <h3> <a class="white_anchor" href="/locations/{{location.id}}">{{ location.name }}</a>, <span class="country_span"><a class="white_anchor" href="/countries/{{location.country.id}}">{{location.country.name}} </a></span></h3>
 
         <div class="visit_wishlist_flex_box">
             
-            <aside class="visited" class="z-index"> 
-                <p class="z-index">Visited?</p>
-                {% if location['has_visited'] == True%}
+            <aside class="visited"> 
+                <p>Visited?</p>
+                {% if location.has_visited == True%}
                     <p class="tick"> &#x2713 </p>
                 {% else %}
                     <p class="cross"> &#x2718 </p>
                 {% endif %}
             </aside>
 
-            <aside class="wishlist" >
-                <p class="z-index">On wishlist?</p>
-                {% if location['on_wishlist']%}
-                    <p class="tick"> &#x2713</p>
-                {% else %}
-                    <p class="cross"> &#x2718 </p>
-                {% endif %}
-            </aside>
         </div>
     </div>
 
     {% endfor %}
 
 </div>
+
+<dialog class="addDialog" id="addDialog">
+    <form action="/locations/add" method="post">
+        <label for="name">Location name:</label>
+        <input type="text" placeholder="Insert name" name="name" id="name" required>
+
+        <select name="country_id" id="country-select" required>
+            <option value="">--Please choose a country--</option>
+        
+            {% for country in input_countries%}
+                <option value="{{country.id}}">{{country.name}}</option>
+            {% endfor %}
+        
+        </select>
+        <input class="button" type="submit" value="Cancel" formmethod="dialog">
+        <input class="button" type="submit" value="Add">
+
+    </form>
+</dialog>
+
+<script>
+(() => {
+    const addButton = document.getElementById("addButton");
+    const addDialog = document.getElementById("addDialog");
+        
+    // add button opens the add location dialog
+    addButton.addEventListener("click", () => {
+    addDialog.showModal();
+    });
+
+})();
+</script>
 
 {% endblock %}
