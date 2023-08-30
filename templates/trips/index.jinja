@@ -19,18 +19,26 @@
         <div class="overlay"></div>
 
         <div class="box-content">
-            <h3 class=> {{trip.date.day}} {{trip.month}} {{trip.date.year}}</h3>
+
+            {% if trip.start_month == trip.end_month and trip.start_date.year == trip.end_date.year%} 
+                <h3>{{trip.start_date.day if trip.length > 1 else ''}} {{'to' if trip.length > 1 else '' }} {{trip.end_date.day}} {{trip.end_month}} {{trip.end_date.year}}</h3>
+            {%elif trip.start_month != trip.end_month and trip.start_date.year == trip.end_date.year%}
+                <h3>{{trip.start_date.day}} {{trip.start_month}} to <br> {{trip.end_date.day}} {{trip.end_month}} {{trip.end_date.year}}</h3>
+            {%else%}
+                <h3>{{trip.start_date.day}} {{trip.start_month}} {{trip.start_date.year}} to <br> {{trip.end_date.day}} {{trip.end_month}} {{trip.end_date.year}}</h3>
+            {% endif %}
             
-            <p class=> 
-                {%if trip.length%5 == 0 %} You gawked at the rocks in 
-                {%elif trip.length%4 == 0 %} You stared at the stones in
-                {%elif trip.length%3 == 0 %} You revelled in the pebbles in
-                {%elif trip.length%2 == 0 %} You marvelled at the gravel in
+            <p> 
+                {%if trip.random_int == 5 %} You gawked at the rocks in 
+                {%elif trip.random_int == 4 %} You stared at the stones in
+                {%elif trip.random_int == 3 %} You revelled in the pebbles in
+                {%elif trip.random_int == 2 %} You marvelled at the gravel in
                 {%else%} You mingled with the shingle in
                 {%endif%}
             </p>
-            <p class=> <a class="white_anchor" href="/locations/{{trip.location.id}}"> {{ trip.location.name }}</a>, <a class="white_anchor" href="/countries/{{trip.location.country.id}}">{{trip.location.country.name}} </a> </p>
-            <p class=> for {{trip.length}} {% if trip.length > 1 %} days {%else%} day {%endif%}</p>
+            <p> <a class="white_anchor" href="/locations/{{trip.location.id}}"> {{ trip.location.name }}</a>, <a class="white_anchor" href="/countries/{{trip.location.country.id}}">{{trip.location.country.name}} </a> </p>
+
+            <p> for {{trip.length}} {{ 'days' if trip.length > 1 else 'day' }}</p>
 
             <form class="button" id="delete-form-{{trip.id}}" action="/trips/{{trip.id}}/delete" method="POST">
                 <input class="button" id="delete-button-{{trip.id}}" type="button" value="delete your gravel memory" />

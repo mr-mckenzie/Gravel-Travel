@@ -19,14 +19,19 @@ def show_all_trips():
 
     for trip in all_trips:
 
+        end_date = trip.date + timedelta(days=trip.length)
+
         trips_with_random_position.append(
             {'location': trip.location,
-            'date':trip.date,
+            'start_date':trip.date,
+            'end_date': end_date,
             'length':trip.length,
             'id':trip.id,
             'rand_bg_pos_x': randint(0,100),
             'rand_bg_pos_y': randint(0,100),
-            'month': trip.date.strftime("%B"),
+            'start_month': trip.date.strftime("%B"),
+            'end_month': end_date.strftime("%B"),
+            'random_int': randint(1,5)
             }
         )
 
