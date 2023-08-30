@@ -16,7 +16,7 @@ def save(input_country: Country):
 
 #select all country records
 def select_all():
-    sql = 'SELECT * FROM countries ORDER BY name'
+    sql = 'SELECT * FROM countries ORDER BY LOWER(name)'
     all_countries = run_sql(sql)
     #print('THIS IS THE RETURN OF RUN_SQL ON SELECT ALL:')
     all_results = []
@@ -39,7 +39,7 @@ def select_one(input_country_id):
 
 #get all locations in a single country
 def get_locations(input_country_id):
-    sql = 'SELECT * FROM locations WHERE country_id = %s ORDER BY name'
+    sql = 'SELECT * FROM locations WHERE country_id = %s ORDER BY Lower(name)'
     locations = run_sql(sql, [str(input_country_id)])
     list_of_locations_in_country = [ ]
     #print("THIS IS THE GET LOCATIONS LIST:")

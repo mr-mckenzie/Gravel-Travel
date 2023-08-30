@@ -14,7 +14,7 @@ def save (location : Location):
 #select all locations
 def select_all():
     # sql = 'SELECT * FROM locations JOIN countries ON locations.country_id = countries.id order by countries.name ASC, locations.name ASC'
-    sql = 'SELECT * FROM locations order by name ASC'
+    sql = 'SELECT * FROM locations ORDER BY LOWER(name) ASC '
     results = run_sql(sql)
     location_list = [ ]
     for row in results:
