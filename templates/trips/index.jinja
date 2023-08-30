@@ -3,10 +3,9 @@
 {% block content %}
 <h1>Trips</h1>
 
-<a class="black_anchor" href="trips/add">Add a trip</a>
+<input class="button" id="addButton" value="Add a trip" type="button"/>
 
-<h2>You have gravelled to the following locations:</h2>
-<h3> {{trips_taken}} Trips taken totalling {{days_travelled}} days spent in {{locations_visited}} locations across {{countries_visited}} different countries.</h3>
+<h2> {{trips_taken}} trips taken totalling {{days_travelled}} days spent in {{locations_visited}} locations across {{countries_visited}} different countries.</h2>
 
 <div class="trip_flex_box">
     <div class="timeline"></div>
@@ -18,27 +17,105 @@
         style="background-position: {{trip.rand_bg_pos_x}}% {{trip.rand_bg_pos_y}}%"
     >
         <div class="overlay"></div>
-        <h3 class="z-index"> {{trip.date.day}} {{trip.month}} {{trip.date.year}}</h3>
-        
-        <p class="z-index"> 
-            {%if trip.length%5 == 0 %} You gawked at the rocks in 
-            {%elif trip.length%4 == 0 %} You stared at the stones in
-            {%elif trip.length%3 == 0 %} You revelled in the pebbles in
-            {%elif trip.length%2 == 0 %} You marvelled at the gravel in
-            {%else%} You mingled with the shingle in
-            {%endif%}
-        </p>
-        <p class="z-index"> <a class="white_anchor" href="/locations/{{trip.location.id}}"> {{ trip.location.name }}</a>, <a class="white_anchor" href="/countries/{{trip.location.country.id}}">{{trip.location.country.name}} </a> </p>
-        <p class="z-index"> for {{trip.length}} {% if trip.length > 1 %} days {%else%} day {%endif%}</p>
 
-        <form class="z-index" action="/trips/{{ trip.id }}/delete" method="POST">
-            <input class="button" type="submit" value="delete your gravel memory" />
-        </form>
+        <div class="box-content">
+            <h3 class=> {{trip.date.day}} {{trip.month}} {{trip.date.year}}</h3>
+            
+            <p class=> 
+                {%if trip.length%5 == 0 %} You gawked at the rocks in 
+                {%elif trip.length%4 == 0 %} You stared at the stones in
+                {%elif trip.length%3 == 0 %} You revelled in the pebbles in
+                {%elif trip.length%2 == 0 %} You marvelled at the gravel in
+                {%else%} You mingled with the shingle in
+                {%endif%}
+            </p>
+            <p class=> <a class="white_anchor" href="/locations/{{trip.location.id}}"> {{ trip.location.name }}</a>, <a class="white_anchor" href="/countries/{{trip.location.country.id}}">{{trip.location.country.name}} </a> </p>
+            <p class=> for {{trip.length}} {% if trip.length > 1 %} days {%else%} day {%endif%}</p>
 
-        <br>
-        
+            <form class="button" id="delete-form-{{trip.id}}" action="/trips/{{trip.id}}/delete" method="POST">
+                <input class="button" id="delete-button-{{trip.id}}" type="button" value="delete your gravel memory" />
+            </form>
+        </div>
     </div>
+
+    <dialog id="delete-dialog-{{trip.id}}" class="deleteDialog">
+        <p>Are you sure you want to delete this trip?</p>
+        <form method="dialog">
+            <menu>
+                <input class="button" id="cancel-{{trip.id}}" type="submit" value="Cancel" formmethod="dialog">
+                <input class="button" id="confirm-{{trip.id}}" type="submit" value="Confirm">
+            </menu>
+        </form>
+    </dialog>
+
+    <script>
+        (() => {
+            const deleteForm{{trip.id}} = document.getElementById("delete-form-{{trip.id}}");
+            const deleteButton{{trip.id}} = document.getElementById("delete-button-{{trip.id}}");
+            const confirmButton{{trip.id}} = document.getElementById("confirm-{{trip.id}}");
+            const deleteDialog{{trip.id}} = document.getElementById("delete-dialog-{{trip.id}}");
+
+            // delete button opens the delete dialog
+            deleteButton{{trip.id}}.addEventListener("click", () => {
+            deleteDialog{{trip.id}}.showModal();
+            });
+
+            //confirm button submits the delete form
+            confirmButton{{trip.id}}.addEventListener("click", () => {
+            deleteForm{{trip.id}}.submit();
+            });
+
+        })();
+    </script>
     {% endfor %}
+
+
+    <dialog class="addDialog" id="addDialog">
+
+        <form action="/trips/add" method="post">
+
+            <select name="location_id" id="location-select">
+                
+                <option value="">-- Where was the gravel? --</option>
+
+                {% for location in input_locations%}
+                    <option value="{{location.id}}">{{location.name}}, {{location.country.name}}</option>
+                {% endfor %}
+            
+            </select>
+
+            <label for="date">Arrival date:</label>
+            <input type="date" name="date" id="date" required>
+
+            <label for="length">Length of trip:</label>
+            <input type="number" name="length" id="length" min="1" required>
+            <input class="button" type="submit" value="Cancel" id="addCancel" formmethod="dialog">
+            <input type="submit" value="Add" class="button">
+        </form>
+    
+    </dialog>
+
+    <script>
+    (() => {
+        const addButton = document.getElementById("addButton");
+        const addDialog = document.getElementById("addDialog");
+        const addCancel = document.getElementById("addCancel");
+            
+        // add button opens the add location dialog
+        addButton.addEventListener("click", () => {
+        addDialog.showModal();
+        });
+
+        // cancel button closes the add location dialog
+        addCancel.addEventListener("click", () => {
+        addDialog.close();
+        });
+
+    })();
+    </script>
+
+
+
 </div>
 
 {% endblock %}

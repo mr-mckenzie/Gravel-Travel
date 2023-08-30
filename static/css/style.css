@@ -146,6 +146,14 @@ header > p {
     opacity: 60%
 }
 
+.box-content {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .z-index {
     z-index: 2;
 }

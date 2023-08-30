@@ -11,6 +11,7 @@ trips_blueprint = Blueprint("trips", __name__)
 @trips_blueprint.route('/trips')
 def show_all_trips():
     all_trips = trip_repo.select_all_trips()
+    all_locations = location_repo.select_all()
 
     trips_with_random_position = []
 
@@ -38,7 +39,7 @@ def show_all_trips():
     locations_visited = len(set(location_counter))
     trips_taken = len(all_trips)
 
-    return render_template('trips/index.jinja', input_trips = trips_with_random_position, days_travelled = days_travelled, locations_visited = locations_visited, countries_visited = countries_visited, trips_taken = trips_taken)
+    return render_template('trips/index.jinja', input_trips = trips_with_random_position, input_locations = all_locations, days_travelled = days_travelled, locations_visited = locations_visited, countries_visited = countries_visited, trips_taken = trips_taken)
 
 #delete a trip
 @trips_blueprint.route('/trips/<id>/delete', methods=['POST'])
