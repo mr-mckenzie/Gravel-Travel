@@ -4,7 +4,6 @@ from random import randint
 import repositories.location_repository as location_repo
 import repositories.country_repository as country_repo
 import repositories.trip_repository as trip_repo
-import repositories.wishlist_repository as wishlist_repo
 
 from datetime import datetime, timedelta
 

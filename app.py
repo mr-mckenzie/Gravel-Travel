@@ -5,14 +5,12 @@ from flask import Flask, render_template
 from controllers.location_controller import locations_blueprint
 from controllers.country_controller import countries_blueprint
 from controllers.trip_controller import trips_blueprint
-from controllers.wishlist_controller import wishlist_blueprint
 
 app = Flask(__name__)
 
 app.register_blueprint(locations_blueprint)
 app.register_blueprint(countries_blueprint)
 app.register_blueprint(trips_blueprint)
-app.register_blueprint(wishlist_blueprint)
 
 @app.route('/')
 def home():

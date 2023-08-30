@@ -1,7 +1,6 @@
 from flask import Flask, render_template, Blueprint, redirect, request
 import repositories.location_repository as location_repo
 import repositories.trip_repository as trip_repo
-import repositories.wishlist_repository as wishlist_repo
 from random import randint
 from datetime import datetime, timedelta
 
@@ -52,13 +51,8 @@ def delete_entry(id):
         
     return redirect('/trips')
 
-#go to add trip form
-@trips_blueprint.route('/trips/add', methods=['GET'])
-def show_form():
-    all_locations = location_repo.select_all()
-    return render_template('/trips/add.jinja', input_locations = all_locations)
 
-#save a trip via 'add trip' form
+#save a new trip 
 @trips_blueprint.route('/trips/add', methods=['POST'])
 def add_trip():
     location_id = request.form['location_id']
@@ -72,7 +66,6 @@ def add_trip():
 @trips_blueprint.route('/wishlist')
 def show_wishlist():
     wishlist = trip_repo.select_all_wishlist()
-    #print(wishlist)
     return render_template('wishlist/index.jinja', wishlist = wishlist)
 
 #update trip

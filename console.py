@@ -1,7 +1,6 @@
 import repositories.continent_repository as cont_repo
 import repositories.country_repository as country_repo
 import repositories.location_repository as location_repo
-import repositories.wishlist_repository as wishlist_repo
 import repositories.trip_repository as trip_repo
 from models.country import Country
 from models.location import Location
