@@ -99,7 +99,7 @@ def on_wishlist(input_location_id):
 
 #select all wishlist records
 def select_all_wishlist():
-    sql = 'SELECT * FROM trips where wishlist = TRUE'
+    sql = 'SELECT * FROM trips JOIN locations ON trips.location_id = locations.id where trips.wishlist = TRUE ORDER BY LOWER(locations.name) ASC'
     results = run_sql(sql)
     wishlist = [ ]
     for row in results:

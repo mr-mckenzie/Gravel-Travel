@@ -71,7 +71,22 @@ def add_trip():
 @trips_blueprint.route('/wishlist')
 def show_wishlist():
     wishlist = trip_repo.select_all_wishlist()
-    return render_template('wishlist/index.jinja', wishlist = wishlist)
+    total_locations = len(wishlist)
+
+    wishlist_with_random_position = []
+
+    for location in wishlist:
+        wishlist_with_random_position.append(
+            {'name': location.name,
+             'country':location.country,
+            'id': location.id,
+            'rand_bg_pos_x': randint(0,100),
+            'rand_bg_pos_y': randint(0,100)}
+        )
+    
+
+    
+    return render_template('wishlist/index.jinja', wishlist = wishlist_with_random_position, total_locations = total_locations)
 
 #update trip
 @trips_blueprint.route('/locations/<location_id>/trips/<trip_id>/edit', methods=['POST'])

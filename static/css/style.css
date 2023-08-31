@@ -191,13 +191,6 @@ header > p {
     justify-content: center;
 }
 
-.wishlist {
-    margin: 15px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
 .wishlist_flex_box {
     display: flex;
     flex-direction: row;
@@ -205,14 +198,13 @@ header > p {
 }
 
 .wishlist_box {
-    width: 250px;
+    width: 17.5rem;
+    height: 4rem;
     background-image: url(../images/shingle.jpg);
     background-size: 500%;
-    background-position: 50%;
-}
-
-.wishlist_box > p, .wishlist_box > form{
-    z-index: 1;
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
 
 .wishlist_box_overlay {
