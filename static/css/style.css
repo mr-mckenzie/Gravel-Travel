@@ -13,11 +13,9 @@ main {
     margin: 15px;
 }
 
-.home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
+/*      HEADER      */
+
 
 header {
     background-image: url(/static/images/gravel.jpg);
@@ -55,6 +53,36 @@ header > p {
     background-color: black;
     overflow: hidden;
     z-index: 0;
+}
+
+
+/*      HOME      */
+
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.homepage_image {
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+
+.homepage_image > h3 {
+    position: absolute;
+    top: 5%;
+    flex-wrap: wrap;
+    max-width: 45%;
+    text-align: center;
+    color: white;
+}
+
+.gravel_img {
+    max-width: 50%;
+    height: auto;
 }
 
 .location_flex_box, .country_locations_flex_box {
@@ -143,7 +171,7 @@ header > p {
 
 .not_yet_visited_overlay {
     background-color: black;
-    opacity: 60%
+    opacity: 70%
 }
 
 .box-content {
@@ -237,11 +265,6 @@ header > p {
 .country_list {
     margin: 15px;
     width: 175px;
-}
-
-.gravel_img {
-    max-width: 50%;
-    height: auto;
 }
 
 #name, #continent-select, #country-select, #location-select, #date, #length {
