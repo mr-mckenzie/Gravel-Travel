@@ -1,10 +1,13 @@
 {% extends 'base.jinja'%}
 
 {% block content %}
-<h1>Locations</h1>
-<p> Locations visited: {{visited_locations}} of {{total_locations}} ({{visited_percentage}}%)</p>
+<div class="heading_flex">
+    <h1>Locations</h1>
 
-<input class="button" id="addButton" value="Add a location" type="button"/>
+    <input class="button" id="addButton" value="Add a location" type="button"/>
+</div>
+
+<p> Locations visited: {{visited_locations}} of {{total_locations}} ({{visited_percentage}}%)</p>
 
 <div class="location_flex_box">
     {% for location in input_locations %}
@@ -54,23 +57,6 @@
     </form>
 </dialog>
 
-<script>
-(() => {
-    const addButton = document.getElementById("addButton");
-    const addDialog = document.getElementById("addDialog");
-    const addCancel = document.getElementById("addCancel");
-        
-    // add button opens the add location dialog
-    addButton.addEventListener("click", () => {
-    addDialog.showModal();
-    });
-
-    // cancel button closes the add location dialog
-    addCancel.addEventListener("click", () => {
-    addDialog.close();
-    });
-
-})();
-</script>
+<script src="../static/js/add_button_script.js"></script>
 
 {% endblock %}

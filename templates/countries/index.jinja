@@ -1,7 +1,12 @@
 {% extends 'base.jinja'%}
 
 {% block content %}
-<h1>Countries</h1>
+<div class="heading_flex">
+    <h1>Countries</h1>
+
+    <input class="button" id="addButton" value="Add a country" type="button"/>
+
+</div>
 
 <div id="continent_flex">
 {% for continent in input_countries %}
@@ -24,22 +29,24 @@
 {% endfor %}
 </div> 
 
-<hr>
-
-<form action="/countries" method="post">
-    <label for="name">Add a Country:</label>
+<dialog class="addDialog" id="addDialog">
+    <form action="/countries" method="post">
+    
+    <label for="name">Name:</label>
     <input class="text_input" type="text" name="name" placeholder="Insert name" id="name" required>
 
+    <label for="continent-select">Continent:</label>
     <select name="continent_id" id="continent-select" required>
-        <option value="">--Please choose a continent--</option>
-    
         {% for continent in continents%}
             <option value="{{continent.id}}">{{continent.name}}</option>
         {% endfor %}
-    
     </select>
 
+    <input class="button" type="submit" value="Cancel" id="addCancel" formmethod="dialog">
     <input class="button" type="submit" value="Add" >
 </form>
+</dialog>
+
+<script src="../static/js/add_button_script.js"></script>
 
 {% endblock %}

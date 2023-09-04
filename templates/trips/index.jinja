@@ -1,9 +1,11 @@
 {% extends 'base.jinja'%}
 
 {% block content %}
-<h1>Trips</h1>
+<div class="heading_flex">
+    <h1>Trips</h1>
 
-<input class="button" id="addButton" value="Add a trip" type="button"/>
+    <input class="button" id="addButton" value="Add a trip" type="button"/>
+</div>
 
 <h2> {{trips_taken}} trips taken totalling {{days_travelled}} days spent in {{locations_visited}} locations across {{countries_visited}} different countries.</h2>
 
@@ -103,26 +105,7 @@
     
     </dialog>
 
-    <script>
-    (() => {
-        const addButton = document.getElementById("addButton");
-        const addDialog = document.getElementById("addDialog");
-        const addCancel = document.getElementById("addCancel");
-            
-        // add button opens the add location dialog
-        addButton.addEventListener("click", () => {
-        addDialog.showModal();
-        });
-
-        // cancel button closes the add location dialog
-        addCancel.addEventListener("click", () => {
-        addDialog.close();
-        });
-
-    })();
-    </script>
-
-
+    <script src="../static/js/add_button_script.js"></script>
 
 </div>
 
