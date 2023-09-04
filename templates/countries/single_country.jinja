@@ -5,19 +5,21 @@
 
 <aside><span class="wiki_span">W</span> <a class="black_anchor" href="https://en.wikipedia.org/wiki/{{input_country.name}}" target="_blank" title="Learn more about {{input_country.name}} at Wikipedia">Learn more at Wikipedia</a></aside>
 <br>
-<aside><span class="map_span">G</span> <a class="black_anchor" href="https://www.google.com/maps/place/{{input_country.name}}/" target="_blank"> Discover on map</a></aside>
+<aside><span class="map_span">&#x1F30D</span> <a class="black_anchor" href="https://www.google.com/maps/place/{{input_country.name}}/" target="_blank"title="Discover {{input_country.name}} on the map"> Discover on map</a></aside>
 
 <h2>Locations:</h2>
 
 <div class="country_locations_flex_box">
 
-    <div class="location_box">
+    <div class="location_box" >
         <div class="overlay"></div>
-        <h3>{{input_country.name}} at a glance</h3>
-        <p>Locations visited: </p> 
-        <p>{{trip_data.locations_visited}} of {{trip_data.total_locations}} ({{trip_data.percentage_visited}}%)</p>
-        <p>Total trips: {{trip_data.trip_total}}</p>
-        <p>Days spent: {{trip_data.days_travelled}}</p>
+        <div class="box-content" style="display:block">
+            <h3>{{input_country.name}} at a glance</h3>
+            <p>Locations visited:</p> 
+            <p>{{trip_data.locations_visited}} of {{trip_data.total_locations}} ({{trip_data.percentage_visited}}%)</p>
+            <p>Total trips: {{trip_data.trip_total}}</p>
+            <p>Days spent: {{trip_data.days_travelled}}</p>
+        </div>
     </div>
 
     {% for location in input_locations %}
@@ -25,24 +27,29 @@
         <div class="location_box" style="background-position: {{location.rand_bg_pos_x}}% {{location.rand_bg_pos_y}}%";>
             <div class="overlay"></div>
 
-            <p><a class="wiki_anchor" href="https://en.wikipedia.org/wiki/{{location.name}},_{{input_country.name}}" target="_blank" title="Learn more about {{location.name}} at Wikipedia">W</a> </p>
-            
-            <form class="delete_button" id="delete-form-{{location.id}}" action="/locations/{{location.id}}/delete" method="POST">
-                <input class="button" id="delete-button-{{location.id}}" type="button" value="x" />
-            </form>
+            <div class="box-content">
 
-            <h3> <a class="white_anchor" href="/locations/{{location.id}}">{{ location.name }}</a></h3>
+                <a class="wiki_anchor" href="https://en.wikipedia.org/wiki/{{location.name}},_{{input_country.name}}" target="_blank" title="Learn more about {{location.name}} at Wikipedia">W</a>
+                <a class="map_anchor" href="https://www.google.com/maps/place/{{location.name}},+{{input_country.name}}/" target="_blank" title="Discover {{location.name}} on the map">&#x1F30D </a>
 
-            <div class="visit_wishlist_flex_box">
-                
-                <aside class="visited"> 
-                    <p>Visited?</p>
-                    {% if location.has_visited == True%}
-                        <p class="tick"> &#x2713 </p>
-                    {% else %}
-                        <p class="cross"> &#x2718 </p>
-                    {% endif %}
-                </aside>
+                <form class="delete_button" id="delete-form-{{location.id}}" action="/locations/{{location.id}}/delete" method="POST">
+                    <input class="button" id="delete-button-{{location.id}}" type="button" value="x" />
+                </form>
+
+                <h3> <a class="white_anchor" href="/locations/{{location.id}}">{{ location.name }}</a></h3>
+
+                <div class="visit_wishlist_flex_box">
+                    
+                    <aside class="visited"> 
+                        <p>Visited?</p>
+                        {% if location.has_visited == True%}
+                            <p class="tick"> &#x2713 </p>
+                        {% else %}
+                            <p class="cross"> &#x2718 </p>
+                        {% endif %}
+                    </aside>
+
+                </div>
 
             </div>
         </div>
@@ -82,24 +89,26 @@
 
     <div class="location_box">
         <div class="overlay"></div>
-        <h3>Add location</h3>
+        <div class="box-content" style="justify-content:space-evenly">
+            <h3>Add location</h3>
 
-        <form class="add_location_form" action="/countries/{{input_country.id}}/add_location" method="post">
-            <label for="name">Name:
-                <input type="text" placeholder="Insert name" name="name" id="name" required>
-            </label>
-            <select name="country_id" id="country-select" style="display:none">
-                <option value="{{input_country.id}}">{{input_country.name}}</option>
-            </select>
-            <input class="button" type="submit" value="Add" >
-        </form>
+            <form class="add_location_form" action="/countries/{{input_country.id}}/add_location" method="post">
+                <label for="name">Name:
+                    <input type="text" placeholder="Insert name" name="name" id="name" required>
+                </label>
+                <select name="country_id" id="country-select" style="display:none">
+                    <option value="{{input_country.id}}">{{input_country.name}}</option>
+                </select>
+                <input class="button" type="submit" value="Submit" >
+            </form>
+        </div>
     </div>
-
+    
 </div>
 
 <hr>
 
-<dialog id="editDialog">
+<dialog id="editDialog" class="editDialog">
     <form action="/countries/{{input_country.id}}/edit" method="post">
         <label for="name">Edit name:</label>
         <input type="text" value="{{input_country.name}}" name="name" id="name">
@@ -115,7 +124,7 @@
 
 
 <form action="/countries/{{input_country.id}}/delete" method="post" id="deleteForm">
-    <label for="deleteButton">Delete Country:</label>
+    <label for="deleteButton">Delete country:</label>
     <input class="button" id="deleteButton" type="button" value="Delete" >
 </form>
 

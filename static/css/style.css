@@ -108,7 +108,20 @@ header > p {
 
 /*      LOCATIONS      */
 
-/*      TRIPS      */
+.calendar {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.calendar_date {
+    width: 2rem;
+    height: 2rem;
+    margin: 0.1rem;
+    background-image: url(/static/images/rocks.jpg);
+    background-size: 3000%;
+}
+
 
 /*      WISHLIST      */
 
@@ -139,10 +152,6 @@ header > p {
     justify-content: space-evenly;
 }
 
-.country_locations_flex_box > div > h3, .location_flex_box > div > h3, .country_locations_flex_box > div > .visit_wishlist_flex_box, .location_flex_box > div > .visit_wishlist_flex_box, .country_locations_flex_box > div > form, .location_flex_box > div > form {
-    z-index: 2;
-}
-
 .trip_flex_box {
     display: flex;
     flex-direction: column;
@@ -151,14 +160,6 @@ header > p {
     align-items: center;
     position: relative;
     margin: 75px;
-}
-
-.trip_box_left > p > a, .trip_box_right > p > a {
-    color: white;
-}
-
-.trip_box_left > p > a:hover, .trip_box_right > p > a:hover {
-    color:moccasin;
 }
 
 .location_box, .trip_box_left, .trip_box_right, .wishlist_box {
@@ -177,32 +178,11 @@ header > p {
 .location_box {
     width: 225px;
     height: 225px;
+    justify-content: center;
 }
 
-.timeline {
-    position: absolute;
-    height: 100%;
-    width: 3px;
-    background-color: rgb(35, 35, 35);
-}
 
-.trip_box_left {
-    width: 250px;
-    position: relative;
-    left: -165px;
-    margin-top: -45px;
-    margin-bottom: -45px;
-}
-
-.trip_box_right {
-    width: 250px;
-    position: relative;
-    left: +165px;
-    margin-top: -45px;
-    margin-bottom: -45px;
-}
-
-.overlay, .visited_overlay, .not_yet_visited_overlay {
+.overlay, .not_yet_visited_overlay, .wishlist_box_overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -211,7 +191,7 @@ header > p {
     z-index: 1;
 }
 
-.overlay {
+.overlay, .wishlist_box_overlay {
     background-color: black;
     opacity: 30%;
 }
@@ -228,15 +208,11 @@ header > p {
     justify-content: center;
     align-items: center;
     text-align: center;
-}
-
-.z-index {
-    z-index: 2;
+    height: 100%;
 }
 
 .white_anchor{
     color: white;
-    z-index: 2;
 }
 
 .white_anchor:hover {
@@ -245,7 +221,6 @@ header > p {
 
  .black_anchor {
     color: black;
-    z-index: 2;
 }
 
  .black_anchor:hover{
@@ -255,7 +230,6 @@ header > p {
 .location_box > p {
     margin-top: 5px;
     margin-bottom: 5px;
-    z-index: 2;
 }
 
 .visited {
@@ -282,17 +256,6 @@ header > p {
     justify-content: center;
 }
 
-.wishlist_box_overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background-color: black;
-    opacity: 20%;
-    top: 0;
-    left: 0;
-}
-
 .visit_wishlist_flex_box {
     display: flex;
     flex-direction: column;
@@ -302,7 +265,6 @@ header > p {
     font-size: smaller;
 }
 
-
 #name, #continent-select, #country-select, #location-select, #date, #length {
     font-family: 'Geologica', sans-serif;
 }
@@ -310,7 +272,6 @@ header > p {
 .button {
     background-color:tan;
     color: black;
-    z-index: 2;
     font-family: 'Geologica', sans-serif;
 }
 
@@ -329,7 +290,6 @@ header > p {
 .tick {
     color:aquamarine;
     font-size: 1.5rem;
-    z-index: 2;
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
 }
@@ -337,14 +297,8 @@ header > p {
 .cross {
     color: lightcoral;
     font-size: 1.5rem;
-    z-index: 2;
     margin-top: 1rem;
     margin-bottom: 1rem;
-}
-
-.asterisk {
-    font-size: 0.75rem;
-    vertical-align: super;
 }
 
 .wiki_span, .wiki_anchor {
@@ -359,8 +313,7 @@ header > p {
 }
 
 .map_span, .map_anchor {
-    background-color:dodgerblue;
-    color:white;
+    background-color:skyblue;
     font-family: 'Gill sans', sans-serif;
     border-top: 2px solid rgb(112, 112, 112);
     border-left: 2px solid rgb(112, 112, 112);
@@ -370,8 +323,8 @@ header > p {
 }
 
 .wiki_anchor, .map_anchor {
-    width: 1.05rem;
-    height: 1.05rem;
+    width: 1.2rem;
+    height: 1.2rem;
     text-align: center;
     text-decoration: none;
 }
@@ -387,15 +340,14 @@ header > p {
     color: white;
 }
 
-.map_anchor_fixed {
+.map_anchor {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    top: 0;
+    left: 1.8rem;
 }
 
 .map_anchor:hover {
-    background-color: white;
-    color: dodgerblue;
+    background-color: dodgerblue;
 }
 
 .add_location_form {
@@ -413,27 +365,13 @@ header > p {
     margin: 1rem;
 }
 
-.calendar {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-}
-
-.calendar_date {
-    width: 2rem;
-    height: 2rem;
-    margin: 0.1rem;
-    background-image: url(/static/images/rocks.jpg);
-    background-size: 3000%;
-}
-
 .button_box {
     display: flex;
     flex-direction: row;
     margin-top: 1rem;
 }
 
-.deleteDialog, .addDialog{
+.deleteDialog, .addDialog, .editDialog{
     background-image: url(/static/images/rocks.jpg);
     background-position: 60%;
     color: white;
@@ -443,3 +381,27 @@ input, select {
     background-color: linen;
 }
 
+/*      TRIPS      */
+
+.timeline {
+    position: absolute;
+    height: 100%;
+    width: 3px;
+    background-color: rgb(35, 35, 35);
+}
+
+.trip_box_left {
+    width: 250px;
+    position: relative;
+    left: -165px;
+    margin-top: -45px;
+    margin-bottom: -45px;
+}
+
+.trip_box_right {
+    width: 250px;
+    position: relative;
+    left: +165px;
+    margin-top: -45px;
+    margin-bottom: -45px;
+}

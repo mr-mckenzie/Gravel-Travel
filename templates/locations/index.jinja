@@ -18,19 +18,25 @@
         {% else %}
             <div class="not_yet_visited_overlay"></div>
         {% endif %}
-        <h3> <a class="white_anchor" href="/locations/{{location.id}}">{{ location.name }}</a>, <span class="country_span"><a class="white_anchor" href="/countries/{{location.country.id}}">{{location.country.name}} </a></span></h3>
 
-        <div class="visit_wishlist_flex_box">
-            
-            <aside class="visited"> 
-                <p>Visited?</p>
-                {% if location.has_visited == True%}
-                    <p class="tick"> &#x2713 </p>
-                {% else %}
-                    <p class="cross"> &#x2718 </p>
-                {% endif %}
-            </aside>
+        <div class="box-content">
+            <a class="wiki_anchor" href="https://en.wikipedia.org/wiki/{{location.name}},_{{location.country.name}}" target="_blank" title="Learn more about {{location.name}} at Wikipedia">W</a>
+            <a class="map_anchor" href="https://www.google.com/maps/place/{{location.name}},+{{location.country.name}}/" target="_blank" title="Discover {{location.name}} on the map">&#x1F30D </a>
 
+            <h3> <a class="white_anchor" href="/locations/{{location.id}}">{{ location.name }}</a>, <span class="country_span"><a class="white_anchor" href="/countries/{{location.country.id}}">{{location.country.name}} </a></span></h3>
+
+            <div class="visit_wishlist_flex_box">
+                
+                <aside class="visited"> 
+                    <p>Visited?</p>
+                    {% if location.has_visited == True%}
+                        <p class="tick"> &#x2713 </p>
+                    {% else %}
+                        <p class="cross"> &#x2718 </p>
+                    {% endif %}
+                </aside>
+
+            </div>
         </div>
     </div>
 

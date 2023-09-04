@@ -5,7 +5,7 @@
 
 <aside><span class="wiki_span">W</span> <a class="black_anchor" href="https://en.wikipedia.org/wiki/{{input_location.name}},_{{input_location.country.name}}" target="_blank" title="Learn more about {{input_location.name}} at Wikipedia">Learn more at Wikipedia</a> </aside>
 <br>
-<aside><span class="map_span">G</span> <a class="black_anchor" href="https://www.google.com/maps/place/{{input_location.name}},+{{input_location.country.name}}/" target="_blank" title="Discover {{input_location.name}} on the map"> Discover on map</a></aside>
+<aside><span class="map_span">&#x1F30D</span> <a class="black_anchor" href="https://www.google.com/maps/place/{{input_location.name}},+{{input_location.country.name}}/" target="_blank" title="Discover {{input_location.name}} on the map"> Discover on map</a></aside>
 
 <h2> Trips:</h2>
 {% if has_visited == False %}
@@ -51,7 +51,7 @@
         </form>
     </dialog>
 
-    <dialog id="edit-dialog-{{trip.id}}">
+    <dialog id="edit-dialog-{{trip.id}}" class="editDialog">
         <form class="edit_trip_form" action="/locations/{{input_location.id}}/trips/{{trip.id}}/edit" method="post">
             <label for="date">Arrival date:</label>
             <input type="date" name="date" id="date" value={{trip.date}} required>
@@ -113,7 +113,7 @@
 
 <hr>
 
-<dialog id="editDialog">
+<dialog id="editDialog" class="editDialog">
     <form action="/locations/{{input_location.id}}/edit" method="post">
         <label for="name">Edit name:</label>
         <input type="text" value="{{input_location.name}}" name="name" id="name">
