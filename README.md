@@ -37,3 +37,9 @@ The terminal will tell you the port the app is running on. For example:
 Navigate to this page with your browser of choice and you can start using the app. 
 
 Note that Gravel Travel is optimised for use with Google Chrome, however it should still run on alternative browsers such as Safari or Edge.
+
+## Exiting the app
+
+To stop the app running press the following keys on the terminal.
+
+    CTRL+C
