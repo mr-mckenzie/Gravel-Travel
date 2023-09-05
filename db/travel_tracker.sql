@@ -1,9 +1,7 @@
 -- Set up tables, firstly by dropping any old tables that exist.
--- holidays & wishlist are join tables so must be dropped first 
--- as they depend on the other tables.
+-- trips, locations & countries are join tables so must be dropped in the right order
+-- since they depend on the other tables.
 DROP TABLE IF EXISTS trips;
-DROP TABLE IF EXISTS holidays;
-DROP TABLE IF EXISTS wishlist;
 DROP TABLE IF EXISTS locations;
 DROP TABLE IF EXISTS countries;
 DROP TABLE IF EXISTS continents;
@@ -59,93 +57,87 @@ VALUES ('Oceania');
 
 -- add table rows containing country records
 INSERT INTO countries (name, continent_id)
-VALUES ('China', 1);
+VALUES ('South Korea', 1);
 
 INSERT INTO countries (name, continent_id)
-VALUES ('Canada', 4);
+VALUES ('Vietnam', 1);
 
 INSERT INTO countries (name, continent_id)
-VALUES ('Germany', 3);
+VALUES ('Austria', 3);
 
 INSERT INTO countries (name, continent_id)
-VALUES ('Costa Rica', 4);
+VALUES ('Belarus', 3);
 
 INSERT INTO countries (name, continent_id)
-VALUES ('New Zealand', 6);
-
-INSERT INTO countries (name, continent_id)
-VALUES ('Denmark', 3);
-
-INSERT INTO countries (name, continent_id)
-VALUES ('France', 3);
-
-INSERT INTO countries (name, continent_id)
-VALUES ('Belgium', 3);
-
-INSERT INTO countries (name, continent_id)
-VALUES ('Iceland', 3);
+VALUES ('Netherlands', 3);
 
 INSERT INTO countries (name, continent_id)
 VALUES ('Spain', 3);
 
 INSERT INTO countries (name, continent_id)
-VALUES ('Netherlands', 3);
+VALUES ('Sweden', 3);
+
+INSERT INTO countries (name, continent_id)
+VALUES ('Argentina', 5);
+
+INSERT INTO countries (name, continent_id)
+VALUES ('Uruguay', 5);
 
 -- add table entries containing locations 
 INSERT INTO locations (name, country_id)
-VALUES ('Beijing', 1);
+VALUES ('Busan', 1);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Vancouver', 2);
+VALUES ('Hanoi', 2);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Toronto', 2);
+VALUES ('Vienna', 3);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Sudbury', 2);
+VALUES ('Graz', 3);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Berlin', 3);
+VALUES ('Salihorsk', 4);
 
 INSERT INTO locations (name, country_id)
-VALUES ('San Jose', 4);
+VALUES ('Maastricht', 5);
 
 INSERT INTO locations (name, country_id)
-VALUES('Auckland', 5);
+VALUES ('Amsterdam', 5);
 
 INSERT INTO locations (name, country_id)
-VALUES('Wellington', 5);
+VALUES('Madrid', 6);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Copenhagen', 6);
+VALUES('Bilbao', 6);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Paris', 7);
+VALUES ('Örnsköldsvik', 7);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Bordeaux', 7);
+VALUES ('Buenos Aires', 8);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Mallorca', 10);
+VALUES ('Montevideo', 9);
 
 -- add table rows recording trips
 INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist)
-VALUES (1, '2020-01-10', 8, False);
+VALUES (1, '2018-10-10', 8, False);
 
 INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist)
-VALUES (7, '2020-02-10', 365, False);
+VALUES (2, '2021-06-07', 2, False);
 
 INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist)
-VALUES (2, '2020-02-07', 2, False);
+VALUES (3, '2022-04-01', 1, False);
 
 INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist)
-VALUES (3, '2020-02-01', 1, False);
+VALUES (7, '2017-09-25', 19, False);
 
 INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist)
-VALUES (11, '2022-07-14', 5, False);
+VALUES (9, '2019-12-30', 3, False);
 
 INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist)
-VALUES (9, '2022-11-01', 3, False);
+VALUES (11, '2019-03-14', 5, False);
 
 -- add table rows to wishlist
 INSERT INTO trips (location_id, wishlist)
