@@ -1,4 +1,3 @@
-# import flask
 from flask import Flask, render_template, Blueprint, request, redirect
 from models.location import Location
 from models.location import Country
@@ -23,10 +22,7 @@ def add_a_country():
     new_country_name =request.form['name']
     continent_id = request.form['continent_id']
     continent = continent_repo.select_one(continent_id)
-
-    #print(f'THIS IS NEW COUNTRY NAME: {new_country_name}')
     new_country = Country(new_country_name, continent)
-    #print(f'THIS IS NEW COUNTRY INSTANCE: {new_country.__dict__}')
     country_repo.save(new_country)
     return redirect('/countries')
 
@@ -75,7 +71,6 @@ def view_single_country(id):
         'days_travelled': days_travelled_counter
     }
     
-
     return render_template('/countries/single_country.jinja', input_locations = locations_with_visit_and_wishlist_data, input_country = current_country, trip_data = trip_data)
 
 #delete a country
@@ -96,9 +91,7 @@ def edit_country_name(id):
 @countries_blueprint.route('/countries/<id>/add_location', methods=['POST'])
 def add_location(id):
     new_location_name = request.form['name']
-    #print(f'THIS IS NEW COUNTRY NAME: {new_location_name}')
     new_country_id = (request.form['country_id'])
-    #print(f'THIS IS NEW COUNTRY INSTANCE: {new_country_id}')
     new_country = country_repo.select_one(new_country_id)
     new_location = Location(new_location_name, new_country)
     location_with_id = location_repo.save(new_location)

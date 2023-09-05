@@ -1,11 +1,7 @@
-#import run_sql function
 from db.run_sql import run_sql
-
-#import Location class
 from models.location import Location
-import repositories.location_repository as location_repo
-
 from models.trip import Trip
+import repositories.location_repository as location_repo
 
 #save new trip record to database
 def save (input_location: Location, input_date, input_length = None, input_wishlist = False):
@@ -59,7 +55,6 @@ def has_visited(input_location_id):
 def number_of_visits(input_location_id):
     sql = 'SELECT * FROM trips WHERE location_id = (%s) AND wishlist = FALSE'
     result = run_sql(sql, [str(input_location_id)])
-
     return len(result)
 
 #count how many days total travelled
@@ -103,7 +98,6 @@ def select_all_wishlist():
     results = run_sql(sql)
     wishlist = [ ]
     for row in results:
-        #print(f'ROW IS: {row}')
         location = location_repo.select_one(row['location_id'])
         wishlist.append(location)
 
@@ -114,7 +108,6 @@ def add_to_wishlist(input_location_id, input_date = None, input_length = None, i
     sql = 'INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist) VALUES (%s, %s, %s, %s)'
     values = [input_location_id, input_date, input_length, input_wishlist]
     run_sql(sql, values)
-
 
 #delete a wishlist record by the location_id
 def delete_wishlist_by_location_id(input_location_id):
@@ -127,12 +120,8 @@ def get_single_trip(input_id):
     sql = 'SELECT * FROM trips where id = %s'
     value = [str(input_id)]
     return_from_sql = run_sql(sql, value)
-    # print(f'THIS IS THE RESULT FROM SELECT ONE TRIP {return_from_sql}')
-
     result = return_from_sql[0]
-
-    # print(result)
-
+    
     location = location_repo.select_one(result[1])
     date = result[2]
     length = result[3]

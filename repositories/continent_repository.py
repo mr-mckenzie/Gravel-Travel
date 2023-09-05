@@ -1,4 +1,3 @@
-# import run_sql function
 from db.run_sql import run_sql
 from models.continent import Continent
 from models.country import Country
@@ -8,11 +7,10 @@ import repositories.country_repository as country_repo
 def select_all():
     sql = 'SELECT * FROM continents'
     all_continents = run_sql(sql)
-    #print('THIS IS THE RETURN OF RUN_SQL ON SELECT ALL:')
     all_results = []
     for row in all_continents:
         all_results.append( Continent(row['name'], int(row['id'])) )
-    #returns instances of continent classes in a list format
+    #returns a list of continent class instances
     return all_results
 
 #select a single continent record by id
@@ -20,17 +18,13 @@ def select_one(input_continent_id):
     sql = 'SELECT * FROM continents WHERE id = (%s)'
     value = [str(input_continent_id)]
     selected_continent = (run_sql(sql, value))[0]
-    
-    #return_from_sql = run_sql(sql, value)
-    #selected_continent = return_from_sql[0]
-
     continent_instance = Continent(selected_continent['name'], int(selected_continent['id']))
     #returns an instance of a continent class
     return continent_instance
 
 #get all countries in a single continent
 def get_countries(input_continent_id):
-    sql = 'SELECT * FROM countries WHERE continent_id = %s ORDER BY name'
+    sql = 'SELECT * FROM countries WHERE continent_id = %s ORDER BY LOWER(name)'
     countries = run_sql(sql, [str(input_continent_id)])
     list_of_countries_in_continent = [ ]
 
@@ -45,9 +39,9 @@ def get_countries(input_continent_id):
 
         list_of_countries_in_continent.append(country_with_locations)
 
-    #print(list_of_locations_in_country)
     return list_of_countries_in_continent
 
+#get all countries ordered by continent
 def all_by_continent():
     countries_by_continent = []
     
@@ -59,6 +53,5 @@ def all_by_continent():
                 'countries' : get_countries(num)
             }
             countries_by_continent.append( dict_continent_countries )
-            print(countries_by_continent)
-    #returns a list containing lists of countries
+
     return countries_by_continent

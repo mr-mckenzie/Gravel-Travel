@@ -5,7 +5,7 @@ import repositories.location_repository as location_repo
 import repositories.country_repository as country_repo
 import repositories.trip_repository as trip_repo
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 locations_blueprint = Blueprint("locations", __name__)
 
@@ -21,13 +21,12 @@ def locations():
 
     for location in all_locations:
         has_visited = trip_repo.has_visited(location.id)
-        # on_wishlist = trip_repo.on_wishlist(location.id)
+
         location_with_visit_and_wishlist.append(
             {'name': location.name,
             'country':location.country,
             'id':location.id,
             'has_visited':has_visited,
-            # 'on_wishlist':on_wishlist,
             'rand_bg_pos_x': randint(0,100),
             'rand_bg_pos_y': randint(0,100)
             }
@@ -53,7 +52,6 @@ def single_location(id):
     on_wishlist = trip_repo.on_wishlist(id)
     all_trips = trip_repo.select_by_location(id)
 
-
     trips_with_random_position = []
         
     for trip in all_trips:
@@ -77,7 +75,6 @@ def single_location(id):
             'dates_list': dates_list
             }
         )
-    # print(f'THIS IS ONE LOCATION: {one_location}')
     return render_template('locations/single_location.jinja', input_location = one_location, has_visited = has_visited, on_wishlist = on_wishlist, trips = trips_with_random_position)
 
 #delete location record
@@ -88,19 +85,11 @@ def delete_location(id):
     path = '/countries/'+str(country_id)
     return redirect(path)
 
-#go to 'add location' form
-@locations_blueprint.route('/locations/add', methods=['GET'])
-def show_form():
-    all_countries = country_repo.select_all()
-    return render_template('/locations/add.jinja', input_countries = all_countries)
-
 #submit 'add location' form
 @locations_blueprint.route('/locations/add', methods=['POST'])
 def add_country():
     new_location_name = request.form['name']
-    #print(f'THIS IS NEW COUNTRY NAME: {new_location_name}')
     new_country_id = (request.form['country_id'])
-    #print(f'THIS IS NEW COUNTRY INSTANCE: {new_country_id}')
     new_country = country_repo.select_one(new_country_id)
     new_location = Location(new_location_name, new_country)
     location_repo.save(new_location)

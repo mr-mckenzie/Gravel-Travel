@@ -2,7 +2,7 @@ from flask import Flask, render_template, Blueprint, redirect, request
 import repositories.location_repository as location_repo
 import repositories.trip_repository as trip_repo
 from random import randint
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 trips_blueprint = Blueprint("trips", __name__)
 
@@ -83,8 +83,6 @@ def show_wishlist():
             'rand_bg_pos_x': randint(0,100),
             'rand_bg_pos_y': randint(0,100)}
         )
-    
-
     
     return render_template('wishlist/index.jinja', wishlist = wishlist_with_random_position, total_locations = total_locations)
 
