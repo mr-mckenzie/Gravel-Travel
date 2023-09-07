@@ -4,6 +4,7 @@ from random import randint
 import repositories.location_repository as location_repo
 import repositories.country_repository as country_repo
 import repositories.trip_repository as trip_repo
+import repositories.flag_repository as flag_repo
 
 from datetime import timedelta
 
@@ -28,7 +29,8 @@ def locations():
             'id':location.id,
             'has_visited':has_visited,
             'rand_bg_pos_x': randint(0,100),
-            'rand_bg_pos_y': randint(0,100)
+            'rand_bg_pos_y': randint(0,100),
+            'flag': flag_repo.get_flag(location.country.name)
             }
             )
         

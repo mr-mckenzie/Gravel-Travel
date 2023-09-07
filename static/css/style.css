@@ -93,6 +93,9 @@ header > p {
 
 /*      COUNTRIES      */
 
+.flag_span {
+    font-size:1.5rem;
+}
 
 #continent_flex {
     display: flex;
@@ -107,6 +110,14 @@ header > p {
 }
 
 /*      LOCATIONS      */
+
+.flag {
+    font-size: 1.75rem;
+    margin-right: 0.25rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
 .calendar {
     display: flex;

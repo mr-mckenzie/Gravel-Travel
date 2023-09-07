@@ -2,6 +2,7 @@ from db.run_sql import run_sql
 from models.continent import Continent
 from models.country import Country
 import repositories.country_repository as country_repo
+import repositories.flag_repository as flag_repo
 
 #select all continent records
 def select_all():
@@ -32,12 +33,13 @@ def get_countries(input_continent_id):
 
         country = Country(row['name'], select_one(input_continent_id), int(row['id']))
 
-        country_with_locations = {'name': country.name,
+        country_with_locations_and_flags = {'name': country.name,
                                   'continent': country.continent,
                                   'id': country.id,
+                                  'flag':flag_repo.get_flag(country.name),
                                   'locations': country_repo.get_locations(row['id'])}
 
-        list_of_countries_in_continent.append(country_with_locations)
+        list_of_countries_in_continent.append(country_with_locations_and_flags)
 
     return list_of_countries_in_continent
 

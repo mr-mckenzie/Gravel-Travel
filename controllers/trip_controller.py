@@ -1,6 +1,7 @@
 from flask import Flask, render_template, Blueprint, redirect, request
 import repositories.location_repository as location_repo
 import repositories.trip_repository as trip_repo
+import repositories.flag_repository as flag_repo
 from random import randint
 from datetime import timedelta
 
@@ -81,7 +82,9 @@ def show_wishlist():
              'country':location.country,
             'id': location.id,
             'rand_bg_pos_x': randint(0,100),
-            'rand_bg_pos_y': randint(0,100)}
+            'rand_bg_pos_y': randint(0,100),
+            'flag': flag_repo.get_flag(location.country.name)
+            }
         )
     
     return render_template('wishlist/index.jinja', wishlist = wishlist_with_random_position, total_locations = total_locations)

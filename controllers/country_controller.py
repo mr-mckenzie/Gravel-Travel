@@ -6,6 +6,7 @@ import repositories.continent_repository as continent_repo
 import repositories.location_repository as location_repo
 import repositories.country_repository as country_repo
 import repositories.trip_repository as trip_repo
+import repositories.flag_repository as flag_repo
 
 countries_blueprint = Blueprint("countries", __name__)
 
@@ -71,7 +72,9 @@ def view_single_country(id):
         'days_travelled': days_travelled_counter
     }
     
-    return render_template('/countries/single_country.jinja', input_locations = locations_with_visit_and_wishlist_data, input_country = current_country, trip_data = trip_data)
+    flag = flag_repo.get_flag(current_country.name)
+
+    return render_template('/countries/single_country.jinja', input_locations = locations_with_visit_and_wishlist_data, input_country = current_country, trip_data = trip_data, flag=flag)
 
 #delete a country
 @countries_blueprint.route('/countries/<id>/delete', methods=['POST'])
