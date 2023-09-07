@@ -32,6 +32,7 @@ def add_a_country():
 def view_single_country(id):
     current_country = country_repo.select_one(id)
     all_locations = country_repo.get_locations(id)
+    continents = continent_repo.select_all()
 
     locations_with_visit_and_wishlist_data = []
 
@@ -74,7 +75,7 @@ def view_single_country(id):
     
     flag = flag_repo.get_flag(current_country.name)
 
-    return render_template('/countries/single_country.jinja', input_locations = locations_with_visit_and_wishlist_data, input_country = current_country, trip_data = trip_data, flag=flag)
+    return render_template('/countries/single_country.jinja', input_locations = locations_with_visit_and_wishlist_data, input_country = current_country, trip_data = trip_data, flag=flag, continents = continents)
 
 #delete a country
 @countries_blueprint.route('/countries/<id>/delete', methods=['POST'])
@@ -82,11 +83,13 @@ def delete_country(id):
     country_repo.delete_by_id(id)
     return redirect('/countries')
 
-#change country name
+#update country name and/or continent
 @countries_blueprint.route('/countries/<id>/edit', methods=['POST'])
-def edit_country_name(id):
+def edit_country(id):
     new_name = request.form['name']
     country_repo.update_name(id, new_name)
+    new_continent_id = request.form['continent_id']
+    country_repo.update_continent(id, new_continent_id)
     path = '/countries/'+str(id)
     return redirect(path)
 

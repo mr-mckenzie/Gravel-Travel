@@ -108,26 +108,35 @@
 
 <hr>
 
+<form>
+    <label for="editButton">Edit details:</label>
+    <input class="button" type="button" id="editButton" value="Edit">
+</form>
+
 <dialog id="editDialog" class="editDialog">
     <form action="/countries/{{input_country.id}}/edit" method="post">
-        <label for="name">Edit name:</label>
-        <input type="text" value="{{input_country.name}}" name="name" id="name">
+        <label for="name">Name:</label>
+        <input type="text" value="{{input_country.name}}" name="name" id="name" required>
+        
+        <label for="continent">Continent:</label>
+        <select value="{{input_country.name}}" name="continent_id" id="continent-select" required>
+            <option value={{input_country.continent.id}}>{{input_country.continent.name}}</option>
+            {% for continent in continents%}
+                {%if continent.id != input_country.continent.id%}
+                <option value={{continent.id}}>{{continent.name}}</option>
+                {%endif%}
+            {% endfor %}
+        </select>
+
         <input class="button" type="submit" value="Cancel" formmethod="dialog">
         <input class="button" type="submit" value="Submit" >
     </form>
 </dialog>
 
-<form>
-    <label for="editButton">Edit name:</label>
-  <input class="button" type="button" id="editButton" value="Edit">
-</form>
-
-
 <form action="/countries/{{input_country.id}}/delete" method="post" id="deleteForm">
     <label for="deleteButton">Delete country:</label>
     <input class="button" id="deleteButton" type="button" value="Delete" >
 </form>
-
 
 <dialog id="deleteDialog" class="deleteDialog">
     <p>Are you sure you want to delete this country?</p>

@@ -56,3 +56,9 @@ def update_name(input_id, input_name):
     sql = 'UPDATE countries SET name = (%s) WHERE id = (%s)'
     value = [input_name, input_id]
     run_sql(sql, value)
+
+#update country continent
+def update_continent(input_id, input_continent_id):
+    sql = 'UPDATE countries SET continent_id = (%s) WHERE id = (%s)'
+    value = [input_continent_id, input_id]
+    run_sql(sql, value)
