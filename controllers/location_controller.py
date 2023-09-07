@@ -53,6 +53,7 @@ def single_location(id):
     has_visited = trip_repo.has_visited(id)
     on_wishlist = trip_repo.on_wishlist(id)
     all_trips = trip_repo.select_by_location(id)
+    flag = flag_repo.get_flag(one_location.country.name)
 
     trips_with_random_position = []
         
@@ -77,7 +78,7 @@ def single_location(id):
             'dates_list': dates_list
             }
         )
-    return render_template('locations/single_location.jinja', input_location = one_location, has_visited = has_visited, on_wishlist = on_wishlist, trips = trips_with_random_position)
+    return render_template('locations/single_location.jinja', input_location = one_location, has_visited = has_visited, on_wishlist = on_wishlist, trips = trips_with_random_position, flag = flag)
 
 #delete location record
 @locations_blueprint.route('/locations/<id>/delete', methods=['POST'])
