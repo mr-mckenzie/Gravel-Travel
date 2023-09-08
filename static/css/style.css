@@ -308,8 +308,8 @@ header > p {
 .cross {
     color: lightcoral;
     font-size: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .wiki_span, .wiki_anchor {

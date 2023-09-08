@@ -53,7 +53,7 @@ def delete_entry(id):
     trip_repo.delete_by_id(id)
 
     if trip_repo.number_of_trips(trip.location.id) == 0:
-        trip_repo.add_to_wishlist(trip.location.id)
+        trip_repo.save_without_trip_data(trip.location.id, False)
         
     return redirect('/trips')
 

@@ -7,7 +7,24 @@
 <br>
 <aside><span class="map_span">&#x1F30D</span> <a class="black_anchor" href="https://www.google.com/maps/place/{{input_location.name}},+{{input_location.country.name}}/" target="_blank" title="Discover {{input_location.name}} on the map"> Discover on map</a></aside>
 
-<h2> Trips:</h2>
+<h2>Visited?</h2>
+{% if has_visited == True%}
+    <p class="tick"> &#x2713 </p>
+{% else %}
+    <p class="cross"> &#x2718 </p>
+{% endif %}
+
+{% if has_logged_trip == False %}
+    <form action="/locations/{{input_location.id}}/toggle_visited" method="post">
+    {% if has_visited == False%}
+        <input class="button" type="submit" value="Set as visited">
+    {% else %}
+        <input class="button" type="submit" value="Set as not visited">
+    {% endif %}
+    </form>
+{% endif %}
+
+<h2>Trips:</h2>
 {% if has_visited == False %}
 <hr>
 <p>You have not yet gravelled to {{input_location.name}}.</p>

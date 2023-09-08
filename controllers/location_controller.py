@@ -36,7 +36,7 @@ def locations():
             'rand_bg_pos_y': randint(0,100),
             'flag': flag_repo.get_flag(location.country.name)
             }
-            )
+        )
         
         if has_visited == True:
             visited_locations_counter += 1
@@ -101,17 +101,19 @@ def add_country():
     new_country = country_repo.select_one(new_country_id)
     new_location = Location(new_location_name, new_country)
     location_repo.save(new_location)
-    trip_repo.add_to_wishlist(new_location.id)
+    trip_repo.save_without_trip_data(new_location.id, False)
     return redirect('/locations')
 
-#add/remove location from wishlist
-@locations_blueprint.route('/locations/<id>/toggle_wishlist', methods=['POST'])
-def toggle_wishlist(id):
+#mark location as visited / on wishlist
+@locations_blueprint.route('/locations/<id>/toggle_visited', methods=['POST'])
+def toggle_visited(id):
 
     if trip_repo.on_wishlist(id) == True:
         trip_repo.delete_wishlist_by_location_id(id)
+        trip_repo.save_without_trip_data(id, True)
     else:
-        trip_repo.add_to_wishlist(id)
+        trip_repo.delete_wishlist_by_location_id(id)
+        trip_repo.save_without_trip_data(id,False)
 
     path = '/locations/'+str(id)
     return redirect(path)
@@ -123,7 +125,7 @@ def delete_trip(location_id, trip_id):
     path = '/locations/'+str(location_id)
 
     if trip_repo.number_of_trips(location_id) == 0:
-        trip_repo.add_to_wishlist(location_id)
+        trip_repo.save_without_trip_data(location_id, False)
 
     return redirect(path)
 

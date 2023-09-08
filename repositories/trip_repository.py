@@ -60,7 +60,6 @@ def has_logged_trip(input_location_id):
     else:
         return False
 
-
 #count how many trips have been logged for a location
 def number_of_trips(input_location_id):
     sql = 'SELECT * FROM trips WHERE location_id = (%s) AND length_of_visit IS NOT NULL'
@@ -113,15 +112,15 @@ def select_all_wishlist():
 
     return wishlist
 
-#save a location to the wishlist db
-def add_to_wishlist(input_location_id, input_date = None, input_length = None, input_visited = False):
+#save a location to the trips db without date/length of trip data
+def save_without_trip_data(input_location_id, input_visited, input_date = None, input_length = None):
     sql = 'INSERT INTO trips (location_id, date_visited, length_of_visit, visited) VALUES (%s, %s, %s, %s)'
     values = [input_location_id, input_date, input_length, input_visited]
     run_sql(sql, values)
 
-#delete a wishlist record by the location_id
+#delete a record from the wishlist/visited by the location_id
 def delete_wishlist_by_location_id(input_location_id):
-    sql = 'DELETE FROM trips WHERE location_id = %s AND (visited = FALSE) OR (visited = TRUE AND length_of_visit IS NULL)'
+    sql = 'DELETE FROM trips WHERE location_id = (%s) AND (visited = FALSE OR (visited = TRUE AND length_of_visit IS NULL))'
     value = [str(input_location_id)]
     run_sql(sql, value)
 

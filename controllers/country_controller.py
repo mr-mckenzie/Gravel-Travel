@@ -45,7 +45,7 @@ def view_single_country(id):
         has_logged_trip = trip_repo.has_logged_trip(location.id)
         number_of_trips = trip_repo.number_of_trips(location.id)
         on_wishlist = trip_repo.on_wishlist(location.id)
-        
+
         locations_with_visit_and_wishlist_data.append(
             {'name':location.name,
             'country':location.country,
@@ -105,7 +105,7 @@ def add_location(id):
     new_country = country_repo.select_one(new_country_id)
     new_location = Location(new_location_name, new_country)
     location_with_id = location_repo.save(new_location)
-    trip_repo.add_to_wishlist(location_with_id.id)
+    trip_repo.save_without_trip_data(location_with_id.id, False)
     
     path = '/countries/'+str(id)
     return redirect(path)
