@@ -22,12 +22,16 @@ def locations():
 
     for location in all_locations:
         has_visited = trip_repo.has_visited(location.id)
+        has_logged_trip = trip_repo.has_logged_trip(location.id)
+        number_of_trips = trip_repo.number_of_trips(location.id)
 
         location_with_visit_and_wishlist.append(
             {'name': location.name,
             'country':location.country,
             'id':location.id,
             'has_visited':has_visited,
+            'has_logged_trip': has_logged_trip,
+            'number_of_trips': number_of_trips,
             'rand_bg_pos_x': randint(0,100),
             'rand_bg_pos_y': randint(0,100),
             'flag': flag_repo.get_flag(location.country.name)
@@ -35,7 +39,7 @@ def locations():
             )
         
         if has_visited == True:
-            visited_locations_counter += 1        
+            visited_locations_counter += 1
 
     visited_percentage = 0
 
@@ -51,6 +55,7 @@ def locations():
 def single_location(id):
     one_location = location_repo.select_one(id)
     has_visited = trip_repo.has_visited(id)
+    has_logged_trip = trip_repo.has_logged_trip(id)
     on_wishlist = trip_repo.on_wishlist(id)
     all_trips = trip_repo.select_by_location(id)
     flag = flag_repo.get_flag(one_location.country.name)
@@ -78,7 +83,7 @@ def single_location(id):
             'dates_list': dates_list
             }
         )
-    return render_template('locations/single_location.jinja', input_location = one_location, has_visited = has_visited, on_wishlist = on_wishlist, trips = trips_with_random_position, flag = flag)
+    return render_template('locations/single_location.jinja', input_location = one_location, has_visited = has_visited, has_logged_trip=has_logged_trip, on_wishlist = on_wishlist, trips = trips_with_random_position, flag = flag)
 
 #delete location record
 @locations_blueprint.route('/locations/<id>/delete', methods=['POST'])
@@ -117,7 +122,7 @@ def delete_trip(location_id, trip_id):
     trip_repo.delete_by_id(trip_id)
     path = '/locations/'+str(location_id)
 
-    if trip_repo.number_of_visits(location_id) == 0:
+    if trip_repo.number_of_trips(location_id) == 0:
         trip_repo.add_to_wishlist(location_id)
 
     return redirect(path)
@@ -129,7 +134,7 @@ def add_trip(location_id):
     date_visted = request.form['date']
     trip_length = request.form['length']
     location_visited = location_repo.select_one(location_id)
-    trip_repo.save(location_visited, date_visted, trip_length, False)
+    trip_repo.save(location_visited, date_visted, trip_length, True)
     
     trip_repo.delete_wishlist_by_location_id(location_id)
 

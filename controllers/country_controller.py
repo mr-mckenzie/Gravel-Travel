@@ -42,12 +42,17 @@ def view_single_country(id):
 
     for location in all_locations:
         has_visited = trip_repo.has_visited(location.id)
+        has_logged_trip = trip_repo.has_logged_trip(location.id)
+        number_of_trips = trip_repo.number_of_trips(location.id)
         on_wishlist = trip_repo.on_wishlist(location.id)
+        
         locations_with_visit_and_wishlist_data.append(
             {'name':location.name,
-             'country':location.country,
-             'id': location.id,
+            'country':location.country,
+            'id': location.id,
             'has_visited':has_visited,
+            'has_logged_trip': has_logged_trip,
+            'number_of_trips': number_of_trips,
             'on_wishlist':on_wishlist,
             'rand_bg_pos_x': randint(0,100),
             'rand_bg_pos_y': randint(0,100)
@@ -56,9 +61,8 @@ def view_single_country(id):
         if has_visited == True:
             locations_visited_counter += 1
             days_travelled_counter += trip_repo.days_travelled_in_location(location.id)
-            trips_counter += trip_repo.number_of_visits(location.id)
+            trips_counter += trip_repo.number_of_trips(location.id)
         
-
     total_locations = len(all_locations)
     percentage_visited = 0
 

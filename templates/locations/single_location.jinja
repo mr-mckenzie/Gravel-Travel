@@ -96,7 +96,7 @@
 
 <hr>
 
-<h3>Log {{"a" if has_visited == False else "another"}} trip:</h3>
+<h3>Log {{"a" if has_logged_trip == False else "another"}} trip:</h3>
 <form class="add_trip_form" action="/locations/{{input_location.id}}/trips/add" method="post">
     <select name="location_id" id="location-select" style="display: none;">
         <option value="{{input_location.id}}">{{input_location.name}}, {{input_location.country.name}}</option>   

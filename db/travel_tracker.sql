@@ -33,7 +33,7 @@ CREATE TABLE trips (
     location_id     INT REFERENCES locations(id) ON DELETE CASCADE NOT NULL,
     date_visited    DATE,
     length_of_visit INT,
-    wishlist        BOOLEAN
+    visited          BOOLEAN
 );
 
 -- add table rows containing continent records
@@ -121,39 +121,39 @@ INSERT INTO locations (name, country_id)
 VALUES ('Montevideo', 9);
 
 -- add table rows recording trips
-INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist)
-VALUES (1, '2018-10-10', 8, False);
+INSERT INTO trips (location_id, date_visited, length_of_visit, visited)
+VALUES (1, '2018-10-10', 8, True);
 
-INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist)
-VALUES (2, '2021-06-07', 2, False);
+INSERT INTO trips (location_id, date_visited, length_of_visit, visited)
+VALUES (2, '2021-06-07', 2, True);
 
-INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist)
-VALUES (3, '2022-04-01', 1, False);
+INSERT INTO trips (location_id, date_visited, length_of_visit, visited)
+VALUES (3, '2022-04-01', 1, True);
 
-INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist)
-VALUES (7, '2017-09-25', 19, False);
+INSERT INTO trips (location_id, date_visited, length_of_visit, visited)
+VALUES (7, '2017-09-25', 19, True);
 
-INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist)
-VALUES (9, '2019-12-30', 3, False);
+INSERT INTO trips (location_id, date_visited, length_of_visit, visited)
+VALUES (9, '2019-12-30', 3, True);
 
-INSERT INTO trips (location_id, date_visited, length_of_visit, wishlist)
-VALUES (11, '2019-03-14', 5, False);
+INSERT INTO trips (location_id, date_visited, length_of_visit, visited)
+VALUES (11, '2019-03-14', 5, True);
 
 -- add table rows to wishlist
-INSERT INTO trips (location_id, wishlist)
-VALUES (4, True);
+INSERT INTO trips (location_id, visited)
+VALUES (4, False);
 
-INSERT INTO trips (location_id, wishlist)
+INSERT INTO trips (location_id, visited)
 VALUES (5, True);
 
-INSERT INTO trips (location_id, wishlist)
-VALUES (6, True);
+INSERT INTO trips (location_id, visited)
+VALUES (6, False);
 
-INSERT INTO trips (location_id, wishlist)
+INSERT INTO trips (location_id, visited)
 VALUES (8, True);
 
-INSERT INTO trips (location_id, wishlist)
-VALUES (10, True);
+INSERT INTO trips (location_id, visited)
+VALUES (10, False);
 
-INSERT INTO trips (location_id, wishlist)
-VALUES (12, True);
+INSERT INTO trips (location_id, visited)
+VALUES (12, False);

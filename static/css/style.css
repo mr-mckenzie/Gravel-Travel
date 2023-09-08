@@ -269,7 +269,7 @@ header > p {
 
 .visit_wishlist_flex_box {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .country_span {
@@ -415,4 +415,9 @@ input, select {
     left: +165px;
     margin-top: -45px;
     margin-bottom: -45px;
+}
+
+.superscript {
+    vertical-align: super;
+    font-size: 0.85rem;
 }

@@ -52,7 +52,7 @@ def delete_entry(id):
     trip = trip_repo.get_single_trip(id)
     trip_repo.delete_by_id(id)
 
-    if trip_repo.number_of_visits(trip.location.id) == 0:
+    if trip_repo.number_of_trips(trip.location.id) == 0:
         trip_repo.add_to_wishlist(trip.location.id)
         
     return redirect('/trips')
@@ -65,7 +65,7 @@ def add_trip():
     date_visited = request.form['date']
     trip_length = request.form['length']
     location_visited = location_repo.select_one(location_id)
-    trip_repo.save(location_visited, date_visited, trip_length, False)
+    trip_repo.save(location_visited, date_visited, trip_length, True)
     trip_repo.delete_wishlist_by_location_id(location_id)
     return redirect('/trips')
 

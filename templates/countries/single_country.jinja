@@ -17,8 +17,10 @@
             <h3>{{input_country.name}} at a glance</h3>
             <p>Locations visited:</p> 
             <p>{{trip_data.locations_visited}} of {{trip_data.total_locations}} ({{trip_data.percentage_visited}}%)</p>
-            <p>Total trips: {{trip_data.trip_total}}</p>
+            <p>Trips logged: {{trip_data.trip_total}}</p>
+            {% if trip_data.trip_total > 0 %}
             <p>Days spent: {{trip_data.days_travelled}}</p>
+            {%endif%}
         </div>
     </div>
 
@@ -48,6 +50,19 @@
                             <p class="cross"> &#x2718 </p>
                         {% endif %}
                     </aside>
+
+                {% if location.has_visited == True%}
+                    <aside class="visited"> 
+                        <p>Trip Logged</p>
+                        {% if location.number_of_trips > 1%}
+                            <p class="tick"> &#x2713 <span class="superscript">({{location.number_of_trips}})</span> </p>
+                        {%elif location.has_logged_trip == True %}
+                            <p class="tick"> &#x2713</p>
+                        {% else %}
+                            <p class="cross"> &#x2718 </p>
+                        {% endif %}
+                    </aside>
+                {% endif %}
 
                 </div>
 
