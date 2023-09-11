@@ -39,7 +39,7 @@
 
                 {% if location.has_visited == True%}
                     <aside class="visited"> 
-                        <p>Trip Logged</p>
+                        <p>Trip Logged?</p>
                         {% if location.number_of_trips > 1%}
                             <p class="tick"> &#x2713 <span class="superscript">({{location.number_of_trips}})</span> </p>
                         {%elif location.has_logged_trip == True %}

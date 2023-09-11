@@ -49,13 +49,14 @@
     </div>
 
     <dialog id="delete-dialog-{{trip.id}}" class="deleteDialog">
-        <p>Are you sure you want to delete this trip?</p>
-        <form method="dialog">
-            <menu>
+        <div class="dialog_overlay"></div>
+        <div class="dialog-content">
+            <p>Are you sure you want to delete this trip?</p>
+            <form method="dialog">
                 <input class="button" id="cancel-{{trip.id}}" type="submit" value="Cancel" formmethod="dialog">
                 <input class="button" id="confirm-{{trip.id}}" type="submit" value="Confirm">
-            </menu>
-        </form>
+            </form>
+        </div>
     </dialog>
 
     <script>
