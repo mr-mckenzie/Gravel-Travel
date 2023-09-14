@@ -57,25 +57,19 @@ VALUES ('Oceania');
 
 -- add table rows containing country records
 INSERT INTO countries (name, continent_id)
-VALUES ('South Korea', 1);
+VALUES ('Mongolia', 1);
 
 INSERT INTO countries (name, continent_id)
-VALUES ('Vietnam', 1);
-
-INSERT INTO countries (name, continent_id)
-VALUES ('Austria', 3);
-
-INSERT INTO countries (name, continent_id)
-VALUES ('Belarus', 3);
+VALUES ('Belgium', 3);
 
 INSERT INTO countries (name, continent_id)
 VALUES ('Netherlands', 3);
 
 INSERT INTO countries (name, continent_id)
-VALUES ('Spain', 3);
+VALUES ('Sweden', 3);
 
 INSERT INTO countries (name, continent_id)
-VALUES ('Sweden', 3);
+VALUES ('Canada', 4);
 
 INSERT INTO countries (name, continent_id)
 VALUES ('Argentina', 5);
@@ -85,61 +79,46 @@ VALUES ('Uruguay', 5);
 
 -- add table entries containing locations 
 INSERT INTO locations (name, country_id)
-VALUES ('Busan', 1);
+VALUES ('Ulaanbaatar', 1);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Hanoi', 2);
+VALUES ('Ghent', 2);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Vienna', 3);
+VALUES ('Amsterdam', 3);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Graz', 3);
+VALUES ('Maastricht', 3);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Salihorsk', 4);
+VALUES ('Stockholm', 4);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Maastricht', 5);
+VALUES ('Vancouver', 5);
 
 INSERT INTO locations (name, country_id)
-VALUES ('Amsterdam', 5);
+VALUES ('Buenos Aires', 6);
 
 INSERT INTO locations (name, country_id)
-VALUES('Madrid', 6);
-
-INSERT INTO locations (name, country_id)
-VALUES('Bilbao', 6);
-
-INSERT INTO locations (name, country_id)
-VALUES ('Örnsköldsvik', 7);
-
-INSERT INTO locations (name, country_id)
-VALUES ('Buenos Aires', 8);
-
-INSERT INTO locations (name, country_id)
-VALUES ('Montevideo', 9);
+VALUES ('Montevideo', 7);
 
 -- add table rows recording trips
 INSERT INTO trips (location_id, date_visited, length_of_visit, visited)
-VALUES (1, '2018-10-10', 8, True);
+VALUES (6, '2022-12-28', 8, True);
 
 INSERT INTO trips (location_id, date_visited, length_of_visit, visited)
-VALUES (2, '2021-06-07', 2, True);
+VALUES (2, '2022-08-05', 4, True);
 
 INSERT INTO trips (location_id, date_visited, length_of_visit, visited)
-VALUES (3, '2022-04-01', 1, True);
+VALUES (3, '2022-08-04', 1, True);
 
 INSERT INTO trips (location_id, date_visited, length_of_visit, visited)
-VALUES (7, '2017-09-25', 19, True);
-
-INSERT INTO trips (location_id, date_visited, length_of_visit, visited)
-VALUES (9, '2019-12-30', 3, True);
-
-INSERT INTO trips (location_id, date_visited, length_of_visit, visited)
-VALUES (11, '2019-03-14', 5, True);
+VALUES (3, '2017-03-25', 7, True);
 
 -- add table rows to wishlist
+INSERT INTO trips (location_id, visited)
+VALUES (1, True);
+
 INSERT INTO trips (location_id, visited)
 VALUES (4, False);
 
@@ -147,13 +126,7 @@ INSERT INTO trips (location_id, visited)
 VALUES (5, True);
 
 INSERT INTO trips (location_id, visited)
-VALUES (6, False);
+VALUES (7, False);
 
 INSERT INTO trips (location_id, visited)
-VALUES (8, True);
-
-INSERT INTO trips (location_id, visited)
-VALUES (10, False);
-
-INSERT INTO trips (location_id, visited)
-VALUES (12, False);
+VALUES (8, False);
